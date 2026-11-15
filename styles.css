@@ -274,9 +274,9 @@ html.theme-light .brand-mark {
 
 .search-clear {
   position: absolute;
-  right: 8px;
-  width: 24px;
-  height: 24px;
+  right: 6px;
+  width: 30px;
+  height: 30px;
   border: 0;
   border-radius: 6px;
   background: var(--card-alt);
@@ -1698,14 +1698,48 @@ body.module-active.focus-mode .exit-focus-pill {
   }
 }
 
-@media (max-width: 979px) {
-  /* Below 980px, companion swaps cleanly without losing #primary-frame state */
+@media (max-width: 1180px) {
+  /* At 1180px and below, companion swaps cleanly without losing #primary-frame state */
   body.companion-open #primary-pane {
     display: none;
   }
 
   .companion-pane {
     border-left: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .stage-bar {
+    flex: 0 0 auto;
+    height: auto;
+    min-height: var(--stage-bar-h);
+    padding: 6px 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+    overflow-x: visible;
+  }
+
+  .stage-bar-left,
+  .stage-bar-center,
+  .stage-bar-right {
+    flex-wrap: wrap;
+  }
+
+  .stage-btn {
+    height: 34px;
+    padding: 0 10px;
+    font-size: 12.5px;
+  }
+
+  .stage-select {
+    height: 34px;
+    font-size: 12.5px;
+  }
+
+  .stage-btn-xs {
+    height: 30px;
+    padding: 0 9px;
   }
 }
 
@@ -1758,5 +1792,74 @@ body.module-active.focus-mode .exit-focus-pill {
 
   .stage-version-badge {
     display: none;
+  }
+
+  .unit-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+
+  .unit-tab {
+    flex: 0 0 auto;
+  }
+
+  .chapter-footer .btn-primary,
+  .btn-vocab-quick,
+  .icon-action-btn {
+    height: 38px;
+    min-width: 38px;
+  }
+
+  .stage-bar-left {
+    flex: 1 1 100%;
+    justify-content: space-between;
+  }
+
+  .stage-nav-group {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+  }
+
+  .stage-select {
+    flex: 1 1 140px;
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-btn-group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .header-btn-group .ctrl-btn {
+    justify-content: center;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  .telemetry-card {
+    padding: 9px 10px;
+  }
+
+  .telemetry-value {
+    font-size: 1.12rem;
+  }
+
+  .vocab-view-switch {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .view-switch-btn {
+    justify-content: center;
+    padding: 0 8px;
+    font-size: 12px;
   }
 }

@@ -383,13 +383,20 @@ button {
   grid-template-columns: minmax(430px, 1.38fr) minmax(320px, 0.92fr) 330px;
   gap: 12px;
   padding: 12px 16px;
-  height: calc(100vh - 104px);
-  min-height: 620px;
+  min-height: calc(100vh - 104px);
+  height: auto;
   transition: grid-template-columns 0.2s ease;
 }
 
 .workspace.bench-expanded {
   grid-template-columns: minmax(640px, 2.35fr) minmax(240px, 0.55fr) 320px;
+}
+
+@media (min-width: 1380px) {
+  .workspace {
+    height: calc(100vh - 104px);
+    min-height: 620px;
+  }
 }
 
 .panel-header {
@@ -591,6 +598,7 @@ button {
   display: flex;
   align-items: center;
   gap: 5px;
+  flex-wrap: wrap;
 }
 
 .probe-btn {
@@ -1359,9 +1367,11 @@ body.light-mode .wire-casing {
 
 /* Responsive */
 @media (max-width: 1180px) {
-  .workspace {
+  .workspace,
+  .workspace.bench-expanded {
     grid-template-columns: 1fr 1fr;
     height: auto;
+    min-height: 0;
   }
   .right-dock {
     grid-column: 1 / -1;
@@ -1371,11 +1381,66 @@ body.light-mode .wire-casing {
 }
 
 @media (max-width: 820px) {
-  .workspace {
+  .workspace,
+  .workspace.bench-expanded {
     grid-template-columns: 1fr;
+    padding: 8px 10px;
+    height: auto;
+    min-height: 0;
   }
   .right-dock {
     grid-template-columns: 1fr;
+  }
+  .svg-stage {
+    min-height: 360px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .svg-stage svg {
+    min-width: 640px;
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 640px) {
+  .top-header {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .module-tabs {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+  .module-tab {
+    flex: 0 0 auto;
+  }
+  .mode-bar {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .modal-backdrop {
+    padding: 8px;
+  }
+  .modal-dialog {
+    padding: 10px;
+  }
+  .certificate-sheet {
+    padding: 10px;
+  }
+  .cert-border {
+    padding: 12px;
+  }
+  .cert-student-row,
+  .cert-stats,
+  .cert-labs-grid {
+    grid-template-columns: 1fr;
+  }
+  .cert-footer {
+    flex-direction: column;
+    gap: 4px;
   }
 }
 
@@ -4879,8 +4944,12 @@ window.HVACLabs = (() => {
   function showTooltip(e, text) {
     const tip = $('#hover-tooltip');
     tip.textContent = text;
-    tip.style.left = `${e.clientX + 12}px`;
-    tip.style.top = `${e.clientY + 12}px`;
+    const maxX = Math.max(8, (window.innerWidth || 360) - 220);
+    const maxY = Math.max(8, (window.innerHeight || 640) - 56);
+    const clientX = typeof e.clientX === 'number' ? e.clientX : 16;
+    const clientY = typeof e.clientY === 'number' ? e.clientY : 16;
+    tip.style.left = `${Math.min(maxX, Math.max(8, clientX + 12))}px`;
+    tip.style.top = `${Math.min(maxY, Math.max(8, clientY + 12))}px`;
     tip.classList.remove('hidden');
   }
 

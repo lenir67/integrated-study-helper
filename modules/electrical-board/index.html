@@ -326,7 +326,7 @@ body {
 
 .visual-grid-2 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
   gap: 12px;
 }
 
@@ -474,6 +474,7 @@ body {
 
 .rotation-banner {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
@@ -635,7 +636,7 @@ body {
 /* Curriculum Matrix & Quiz */
 .chapter-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 10px;
 }
 
@@ -708,7 +709,7 @@ body {
 
 .quiz-choices {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 8px;
 }
 
@@ -1061,6 +1062,43 @@ html.projector-light .dmm-live-warn {
 @media (max-width: 1120px) {
   .cb-layout {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-bar {
+    position: static;
+    padding: 10px 12px;
+  }
+  .module-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 12px;
+    scrollbar-width: thin;
+  }
+  .module-tab {
+    flex: 0 0 auto;
+  }
+  .board-workspace {
+    padding: 10px 12px;
+    gap: 12px;
+  }
+  .dmm-lcd-value {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .ctrl-3col,
+  .ctrl-2col,
+  .cb-slot-row-2,
+  .cb-add-row {
+    grid-template-columns: 1fr;
+  }
+  .walkthrough-banner {
+    flex-wrap: wrap;
+    padding: 8px 12px;
   }
 }
 

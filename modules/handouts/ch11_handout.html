@@ -268,7 +268,60 @@
       line-height: 1.4;
       color: #1f2937;
     }
-    @media (max-width: 680px) {
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      .toolbar {
+        flex-wrap: wrap;
+        padding: 10px 12px;
+      }
+      .toolbar-actions {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 8px;
+      }
+      .toolbar-actions .btn {
+        flex: 1 1 auto;
+        min-height: 38px;
+        text-align: center;
+      }
+      .page {
+        padding: 16px 14px;
+      }
+      h1 {
+        font-size: 13pt;
+      }
+      .student-meta {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .blank,
+      .blank.short,
+      .blank.long {
+        min-width: 72px;
+        max-width: 100%;
+      }
+      table.match-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      table.match-table th:first-child,
+      table.match-table td:first-child {
+        width: 56px !important;
+        min-width: 56px;
+      }
+      table.match-table th:nth-child(2),
+      table.match-table td:nth-child(2) {
+        min-width: 180px;
+      }
+      table.match-table th:nth-child(3),
+      table.match-table td:nth-child(3) {
+        width: 150px !important;
+        min-width: 135px;
+      }
       .vocab-grid {
         grid-template-columns: 1fr;
       }
