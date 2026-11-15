@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-15T18:55:37Z",
+  "generated_at_utc": "2026-11-15T18:55:42Z",
   "hub_title": "Integrated HVAC/R Study Helper",
   "hub_subtitle": "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • Electrical Theory Board • Electrical Wiring Trainer • Refrigerant Cycle Lab",
   "totals": {
@@ -240,7 +240,7 @@
       "subtitle": "Point-to-Point Component Wiring, Live Ladder Schematics, Fluke DMM Diagnostics & 8 Guided Labs",
       "path": "./modules/electrical-simulator/index.html",
       "version": "00c542fdf9",
-      "updated_at_utc": "2026-11-15T18:54:54Z",
+      "updated_at_utc": "2026-11-15T18:55:41Z",
       "size_bytes": 220731,
       "storage_keys": [],
       "highlights": [
