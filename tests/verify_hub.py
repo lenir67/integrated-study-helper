@@ -14,6 +14,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 from typing import Any, Dict, List, Tuple
@@ -32,6 +33,20 @@ FORBIDDEN_FILENAME_RE = re.compile(r"(?i)(presentation|instructor|answer_key|ans
 MIN_MODULE_SIZE_BYTES = 10 * 1024
 MAX_REPO_SIZE_BYTES = 150 * 1024 * 1024
 MAX_SINGLE_FILE_BYTES = 50 * 1024 * 1024
+
+MIN_TOTAL_VOCAB_TERMS = 1300
+MIN_CHAPTER_VOCAB_TERMS = 12
+MIN_VOCAB_DEF_LEN = 20
+VOCAB_SPOTCHECK_CHAPTERS = ("ch01", "ch11", "ch24", "ch52")
+INLINE_JS_CHECK_HTMLS = (
+    "modules/chapters/ch01.html",
+    "modules/chapters/ch52.html",
+    "modules/epa608/index.html",
+)
+INLINE_SCRIPT_RE = re.compile(
+    r"<script(?![^>]*\bsrc\s*=)[^>]*>(.*?)</script>",
+    re.IGNORECASE | re.DOTALL,
+)
 
 EXPECTED_FEATURED_IDS = ["epa608", "electrical-board", "refrigerant-cycle"]
 HTTP_CHECK_ROUTES = [
@@ -374,6 +389,168 @@ def check_repo_size() -> None:
     )
 
 
+def _extract_js_json_var(html_text: str, var_name: str) -> Any:
+    """Decode JSON assigned to `window.<var_name> = ...` using JSONDecoder.raw_decode."""
+    decoder = json.JSONDecoder()
+    pattern = re.compile(rf"\bwindow\.{re.escape(var_name)}\s*=\s*")
+    for match in pattern.finditer(html_text):
+        try:
+            obj, _ = decoder.raw_decode(html_text, idx=match.end())
+            return obj
+        except json.JSONDecodeError:
+            continue
+    return None
+
+
+def _verify_inline_scripts_node_check(rel_paths: Tuple[str, ...]) -> int:
+    """Extract inline <script> blocks into temp JS files and validate syntax with node --check."""
+    node_bin = shutil.which("node") or "node"
+    checked_blocks = 0
+
+    with tempfile.TemporaryDirectory(prefix="ish_js_check_") as tmp_dir:
+        tmp_root = Path(tmp_dir)
+        for rel_path in rel_paths:
+            html_path = HUB_DIR / rel_path
+            assert html_path.is_file(), f"Missing HTML for inline JS check: {html_path}"
+            html_text = html_path.read_text(encoding="utf-8", errors="replace")
+            scripts = [
+                block
+                for block in INLINE_SCRIPT_RE.findall(html_text)
+                if block and block.strip()
+            ]
+            assert scripts, f"No inline <script> blocks found in {rel_path}"
+
+            safe_stem = rel_path.replace("/", "_").replace(".", "_")
+            for idx, script_body in enumerate(scripts, start=1):
+                temp_js = tmp_root / f"{safe_stem}_script_{idx}.js"
+                temp_js.write_text(script_body, encoding="utf-8")
+                proc = subprocess.run(
+                    [node_bin, "--check", str(temp_js)],
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                    errors="replace",
+                )
+                assert proc.returncode == 0, (
+                    f"node --check failed for {rel_path} inline <script> #{idx} "
+                    f"(exit {proc.returncode}): {proc.stderr or proc.stdout}"
+                )
+                checked_blocks += 1
+
+    return checked_blocks
+
+
+def check_vocabulary_integration(manifest: Dict[str, Any]) -> None:
+    """Check 9: Verify Chapters 1-52 vocabulary data, chapter UI, EPA 608 guard, inline JS, and hub UI."""
+    totals = manifest.get("totals", {})
+    total_vocab = totals.get("total_vocab_terms")
+    assert isinstance(total_vocab, int) and total_vocab >= MIN_TOTAL_VOCAB_TERMS, (
+        f"Expected total_vocab_terms >= {MIN_TOTAL_VOCAB_TERMS}, got {total_vocab!r}"
+    )
+
+    chapters = manifest.get("chapters", [])
+    sum_vocab = 0
+    min_vocab_ch = ("", 10**9)
+    max_vocab_ch = ("", -1)
+
+    for ch in chapters:
+        ch_id = str(ch.get("id") or "")
+        vocab_count = ch.get("vocab_count")
+        vocab_list = ch.get("vocabulary")
+        assert isinstance(vocab_count, int) and vocab_count >= MIN_CHAPTER_VOCAB_TERMS, (
+            f"{ch_id}: expected vocab_count >= {MIN_CHAPTER_VOCAB_TERMS}, got {vocab_count!r}"
+        )
+        assert isinstance(vocab_list, list) and len(vocab_list) == vocab_count, (
+            f"{ch_id}: len(vocabulary)={len(vocab_list) if isinstance(vocab_list, list) else type(vocab_list)} "
+            f"!= vocab_count={vocab_count}"
+        )
+        sum_vocab += vocab_count
+        if vocab_count < min_vocab_ch[1]:
+            min_vocab_ch = (ch_id, vocab_count)
+        if vocab_count > max_vocab_ch[1]:
+            max_vocab_ch = (ch_id, vocab_count)
+
+        for idx, entry in enumerate(vocab_list, start=1):
+            assert isinstance(entry, dict), f"{ch_id} vocab[{idx}] is not a dict"
+            vid = entry.get("id")
+            term = entry.get("term")
+            definition = entry.get("definition")
+            sec_id = entry.get("section_id")
+            sec_title = entry.get("section_title")
+
+            assert isinstance(vid, str) and vid.strip(), f"{ch_id} vocab[{idx}] missing id"
+            assert isinstance(term, str) and len(term.strip()) >= 2, (
+                f"{ch_id} vocab[{idx}] ({vid}) invalid term: {term!r}"
+            )
+            assert isinstance(definition, str) and len(definition.strip()) >= MIN_VOCAB_DEF_LEN, (
+                f"{ch_id} vocab[{idx}] ({vid}) definition too short (< {MIN_VOCAB_DEF_LEN}): {definition!r}"
+            )
+            assert "____" not in definition, (
+                f"{ch_id} vocab[{idx}] ({vid}) contains blank placeholder '____': {definition!r}"
+            )
+            assert isinstance(sec_id, str) and sec_id.strip(), (
+                f"{ch_id} vocab[{idx}] ({vid}) missing section_id"
+            )
+            assert isinstance(sec_title, str) and sec_title.strip(), (
+                f"{ch_id} vocab[{idx}] ({vid}) missing section_title"
+            )
+
+    assert total_vocab == sum_vocab, (
+        f"totals.total_vocab_terms ({total_vocab}) != sum of chapter vocab_count ({sum_vocab})"
+    )
+
+    for ch_id in VOCAB_SPOTCHECK_CHAPTERS:
+        ch_path = HUB_DIR / "modules" / "chapters" / f"{ch_id}.html"
+        assert ch_path.is_file(), f"Missing chapter HTML: {ch_path}"
+        ch_html = ch_path.read_text(encoding="utf-8", errors="replace")
+        for marker in ('id="subtab-vocab"', 'data-subtab="subtab-vocab"', "renderVocabulary"):
+            assert marker in ch_html, f"{ch_id}.html missing required vocabulary marker {marker!r}"
+        ch_data = _extract_js_json_var(ch_html, "CHAPTER_DATA")
+        assert isinstance(ch_data, dict), f"{ch_id}.html missing parseable window.CHAPTER_DATA"
+        ch_vocab = ch_data.get("vocabulary")
+        assert isinstance(ch_vocab, list) and len(ch_vocab) >= MIN_CHAPTER_VOCAB_TERMS, (
+            f"{ch_id}.html CHAPTER_DATA.vocabulary empty or < {MIN_CHAPTER_VOCAB_TERMS}"
+        )
+
+    epa_path = HUB_DIR / "modules" / "epa608" / "index.html"
+    assert epa_path.is_file(), f"Missing EPA 608 module: {epa_path}"
+    epa_html = epa_path.read_text(encoding="utf-8", errors="replace")
+    epa_editions = _extract_js_json_var(epa_html, "STUDY_EDITIONS")
+    assert isinstance(epa_editions, dict) and epa_editions, (
+        "modules/epa608/index.html missing parseable window.STUDY_EDITIONS"
+    )
+    for ed_key, ed_data in epa_editions.items():
+        assert isinstance(ed_data, dict), f"EPA 608 edition {ed_key!r} is not a dict"
+        ed_vocab = ed_data.get("vocabulary")
+        assert not ed_vocab, (
+            f"EPA 608 edition {ed_key!r} unexpectedly defines chapter-only vocabulary entries"
+        )
+    assert 'id="subtab-vocab"' not in epa_html, (
+        "modules/epa608/index.html unexpectedly includes chapter subtab-vocab"
+    )
+
+    inline_blocks = _verify_inline_scripts_node_check(INLINE_JS_CHECK_HTMLS)
+
+    index_path = HUB_DIR / "index.html"
+    assert index_path.is_file(), f"Missing {index_path}"
+    index_html = index_path.read_text(encoding="utf-8", errors="replace")
+    for elem_id in (
+        "btn-view-vocab",
+        "vocab-explorer-panel",
+        "vocab-explorer-list",
+        "vocab-chapter-select",
+    ):
+        assert f'id="{elem_id}"' in index_html, f"index.html missing #{elem_id}"
+
+    print(
+        f"[PASS] Check 9: Vocabulary verified across 52 chapters "
+        f"(total={total_vocab} terms, min={min_vocab_ch[0]}:{min_vocab_ch[1]}, "
+        f"max={max_vocab_ch[0]}:{max_vocab_ch[1]}), spotchecks={list(VOCAB_SPOTCHECK_CHAPTERS)}, "
+        f"EPA 608 clean, node --check passed on {inline_blocks} inline <script> blocks, "
+        f"and index.html vocabulary explorer controls present."
+    )
+
+
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Verify Integrated Study Helper manifests, modules, hooks, HTTP serving, and size."
@@ -408,6 +585,7 @@ def main(argv: List[str] | None = None) -> int:
 
     check_http_routes()
     check_repo_size()
+    check_vocabulary_integration(manifest)
 
     print("[SUCCESS] All Integrated Study Helper verification checks passed.")
     return 0
