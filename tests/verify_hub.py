@@ -24,6 +24,7 @@ import urllib.request
 HUB_DIR = Path(__file__).resolve().parent.parent
 PROJECTS_DIR = HUB_DIR.parent
 ELEC_DIR = PROJECTS_DIR / "Electrical Display Board"
+ELEC_SIM_DIR = PROJECTS_DIR / "Electrical Simulator"
 CYCLE_DIR = PROJECTS_DIR / "animated refrigerant cycle"
 TRACKER_DIR = PROJECTS_DIR / "cte-program-tracker-standalone"
 CURRICULUM_DIR = TRACKER_DIR / "Curiculium data"
@@ -60,7 +61,7 @@ INLINE_SCRIPT_RE = re.compile(
     re.IGNORECASE | re.DOTALL,
 )
 
-EXPECTED_FEATURED_IDS = ["epa608", "electrical-board", "refrigerant-cycle"]
+EXPECTED_FEATURED_IDS = ["epa608", "electrical-board", "electrical-simulator", "refrigerant-cycle"]
 HTTP_CHECK_ROUTES = [
     "/",
     "/manifest.json",
@@ -68,6 +69,7 @@ HTTP_CHECK_ROUTES = [
     "/js/catalog_manifest.js",
     "/modules/epa608/index.html",
     "/modules/electrical-board/index.html",
+    "/modules/electrical-simulator/index.html",
     "/modules/refrigerant-cycle/index.html",
     "/modules/chapters/ch01.html",
     "/modules/chapters/ch52.html",
@@ -142,10 +144,10 @@ def check_manifest_parity() -> Dict[str, Any]:
 
 
 def check_manifest_structure(manifest: Dict[str, Any]) -> None:
-    """Check 2: Verify featured_labs (3), chapters (52), and ch11 handout metadata."""
+    """Check 2: Verify featured_labs (4), chapters (52), and ch11 handout metadata."""
     featured = manifest.get("featured_labs")
-    assert isinstance(featured, list) and len(featured) == 3, (
-        f"Expected 3 featured_labs, got {len(featured) if isinstance(featured, list) else type(featured)}"
+    assert isinstance(featured, list) and len(featured) == 4, (
+        f"Expected 4 featured_labs, got {len(featured) if isinstance(featured, list) else type(featured)}"
     )
     featured_ids = [item.get("id") for item in featured]
     assert featured_ids == EXPECTED_FEATURED_IDS, (
@@ -173,7 +175,7 @@ def check_manifest_structure(manifest: Dict[str, Any]) -> None:
 
     totals = manifest.get("totals", {})
     print(
-        f"[PASS] Check 2: 3 featured_labs, 52 chapters (ch01..ch52), ch11 handout populated. "
+        f"[PASS] Check 2: 4 featured_labs, 52 chapters (ch01..ch52), ch11 handout populated. "
         f"Totals={json.dumps(totals)}"
     )
 
@@ -223,7 +225,7 @@ def check_module_files(manifest: Dict[str, Any]) -> None:
             handout_sizes.append((ch["id"], h_size, handout["version"]))
 
     print(
-        f"[PASS] Check 3: All 3 featured labs, 52 chapters, and {len(handout_sizes)} handout(s) "
+        f"[PASS] Check 3: All 4 featured labs, 52 chapters, and {len(handout_sizes)} handout(s) "
         f"verified (>10 KB & SHA-256 matched)."
     )
     print(f"       Featured labs: {', '.join(featured_summaries)}")
@@ -327,6 +329,11 @@ def check_live_auto_update_hooks() -> None:
         cwd=ELEC_DIR,
     )
     _run_hook_and_assert_manifest_updated(
+        "Electrical Simulator (build_classroom_bundle.js)",
+        [node_bin, "build_classroom_bundle.js"],
+        cwd=ELEC_SIM_DIR,
+    )
+    _run_hook_and_assert_manifest_updated(
         "CTE Tracker Ch 11 (scripts/build_chapter_study_games.py --chapters 11 --local-only)",
         [tracker_py, str(study_games_script), "--chapters", "11", "--local-only"],
         cwd=TRACKER_DIR,
@@ -336,7 +343,7 @@ def check_live_auto_update_hooks() -> None:
         [node_bin, "build_classroom_bundle.js"],
         cwd=CYCLE_DIR,
     )
-    print("[PASS] Check 6: All 3 live upstream auto-update hooks updated manifest.json.")
+    print("[PASS] Check 6: All 4 live upstream auto-update hooks updated manifest.json.")
 
 
 class _QuietHandler(SimpleHTTPRequestHandler):
@@ -882,7 +889,7 @@ def check_bidirectional_sync_and_handouts(
             f"sync_and_publish.py --local-only failed (exit {proc.returncode}):\n"
             f"STDOUT:\n{proc.stdout}\nSTDERR:\n{proc.stderr}"
         )
-        assert "[OK] All 55 modules and manifest up to date (0 file(s) changed)." in proc.stdout, (
+        assert "[OK] All 56 modules and manifest up to date (0 file(s) changed)." in proc.stdout, (
             f"No-op sync_and_publish.py changed unexpected module files:\n{proc.stdout}"
         )
         if MY_DRIVE_ROOT.exists():

@@ -24,6 +24,7 @@ PROJECTS_DIR = HUB_DIR.parent
 TRACKER_DIR = PROJECTS_DIR / "cte-program-tracker-standalone"
 CURRICULUM_DIR = TRACKER_DIR / "Curiculium data"
 ELEC_DIR = PROJECTS_DIR / "Electrical Display Board"
+ELEC_SIM_DIR = PROJECTS_DIR / "Electrical Simulator"
 CYCLE_DIR = PROJECTS_DIR / "animated refrigerant cycle"
 TRACKER_VENV_PYTHON = TRACKER_DIR / ".venv" / "Scripts" / "python.exe"
 
@@ -38,6 +39,7 @@ SYNCED_PROJECTS: List[Path] = [
     HUB_DIR,
     TRACKER_DIR,
     ELEC_DIR,
+    ELEC_SIM_DIR,
     CYCLE_DIR,
 ]
 
@@ -47,7 +49,7 @@ MANIFEST_JS_PATH = HUB_DIR / "js" / "catalog_manifest.js"
 HUB_TITLE = "Integrated HVAC/R Study Helper"
 HUB_SUBTITLE = (
     "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • "
-    "Electrical Theory Board • Refrigerant Cycle Lab"
+    "Electrical Theory Board • Electrical Wiring Trainer • Refrigerant Cycle Lab"
 )
 LIVE_HUB_URL = "https://lenir67.github.io/integrated-study-helper/"
 LIVE_CYCLE_LAB_URL = "https://lenir67.github.io/hvac-cycle-lab/"
@@ -128,6 +130,23 @@ SIMULATOR_SPECS: List[Dict[str, Any]] = [
         "dest_rel": "modules/electrical-board/index.html",
     },
     {
+        "id": "electrical-simulator",
+        "dir": ELEC_SIM_DIR,
+        "sources": [
+            "index.html",
+            "css/styles.css",
+            "js/modules.js",
+            "js/engine.js",
+            "js/multimeter.js",
+            "js/labs.js",
+            "js/app.js",
+        ],
+        "bundle": "HVAC_Electrical_Trainer_Standalone.html",
+        "test_script": "tests/verify_simulator.js",
+        "build_script": "build_classroom_bundle.js",
+        "dest_rel": "modules/electrical-simulator/index.html",
+    },
+    {
         "id": "refrigerant-cycle",
         "dir": CYCLE_DIR,
         "sources": [
@@ -164,6 +183,24 @@ ELECTRICAL_COMPANION_TABS: Dict[int, str] = {
     19: "tab=motors_caps",
     26: "tab=controls_starters",
     35: "tab=ohm_watt",
+}
+
+ELECTRICAL_SIM_COMPANION_MODULES: Dict[int, str] = {
+    13: "module=mod1_relay&mode=wiring",
+    14: "module=mod1_relay&mode=wiring",
+    15: "module=mod3_furnace&mode=sequence",
+    16: "module=mod2_split_ac&mode=wiring",
+    17: "module=mod1_relay&mode=wiring",
+    18: "module=mod1_relay&mode=troubleshoot",
+    19: "module=mod2_split_ac&mode=troubleshoot",
+    22: "module=mod2_split_ac&mode=wiring",
+    23: "module=mod2_split_ac&mode=wiring",
+    25: "module=mod4_commercial&mode=wiring",
+    26: "module=mod4_commercial&mode=wiring",
+    33: "module=mod3_furnace&mode=sequence",
+    34: "module=mod3_furnace&mode=sequence",
+    35: "module=mod4_commercial&mode=wiring",
+    49: "module=mod4_commercial&mode=troubleshoot",
 }
 
 FORBIDDEN_HANDOUT_RE = re.compile(r"(?i)(presentation|instructor|answer|teacher)")
@@ -1326,6 +1363,15 @@ def _build_chapter_companions(ch_num: int, epa_608_count: int) -> List[Dict[str,
             }
         )
 
+    if ch_num in ELECTRICAL_SIM_COMPANION_MODULES:
+        companions.append(
+            {
+                "target_id": "electrical-simulator",
+                "label": "🔌 Wiring Trainer",
+                "query": ELECTRICAL_SIM_COMPANION_MODULES[ch_num],
+            }
+        )
+
     if epa_608_count > 0:
         companions.append(
             {
@@ -1470,7 +1516,7 @@ def sync_hub(
 
     changed_files = sim_changed
 
-    # 1. Sync Featured Labs (EPA 608 bidirectional + Electrical Board + Cycle Lab metadata)
+    # 1. Sync Featured Labs (EPA 608 bidirectional + Electrical Board + Electrical Simulator + Cycle Lab metadata)
     epa_filename = "EPA 608 - Interactive Study & HVAC Game.html"
     epa_desktop = CURRICULUM_DIR / "608 Study Material" / epa_filename
     epa_dst = HUB_DIR / "modules" / "epa608" / "index.html"
@@ -1497,6 +1543,12 @@ def sync_hub(
     elec_stat = elec_dst.stat()
     elec_size = elec_stat.st_size
     elec_updated = _utc_iso_from_timestamp(elec_stat.st_mtime)
+
+    elec_sim_dst = HUB_DIR / "modules" / "electrical-simulator" / "index.html"
+    elec_sim_sha = _sha256_file(elec_sim_dst)
+    elec_sim_stat = elec_sim_dst.stat()
+    elec_sim_size = elec_sim_stat.st_size
+    elec_sim_updated = _utc_iso_from_timestamp(elec_sim_stat.st_mtime)
 
     cycle_dst = HUB_DIR / "modules" / "refrigerant-cycle" / "index.html"
     cycle_sha = _sha256_file(cycle_dst)
@@ -1590,6 +1642,65 @@ def sync_hub(
                 {"label": "Motors & Capacitors", "query": "tab=motors_caps"},
                 {"label": "Controls & NEC 430", "query": "tab=controls_starters"},
                 {"label": "Guided Walkthrough", "query": "tab=ohm_watt&walkthrough=1"},
+            ],
+        },
+        {
+            "id": "electrical-simulator",
+            "kind": "simulator",
+            "badge": "Wiring & DMM Trainer",
+            "icon": "🔌",
+            "accent": "cyan",
+            "title": "HVAC/R Interactive Electrical Trainer",
+            "subtitle": "Point-to-Point Component Wiring, Live Ladder Schematics, Fluke DMM Diagnostics & 8 Guided Labs",
+            "path": "./modules/electrical-simulator/index.html",
+            "version": elec_sim_sha[:10],
+            "updated_at_utc": elec_sim_updated,
+            "size_bytes": elec_sim_size,
+            "storage_keys": [],
+            "highlights": [
+                "4 Wiring Workbenches",
+                "Live Ladder Schematic",
+                "Virtual Fluke DMM",
+                "8 Guided Student Labs",
+            ],
+            "keywords": [
+                "electrical",
+                "simulator",
+                "trainer",
+                "wiring",
+                "workbench",
+                "ladder",
+                "schematic",
+                "relay",
+                "90-340",
+                "contactor",
+                "capacitor",
+                "dual run capacitor",
+                "compressor",
+                "furnace",
+                "ignition",
+                "hsi",
+                "flame sensor",
+                "pressure switch",
+                "rollout",
+                "high limit",
+                "sequencer",
+                "heat strip",
+                "time delay",
+                "tdr",
+                "ss2",
+                "dmm",
+                "multimeter",
+                "troubleshooting",
+                "labs",
+            ],
+            "quick_presets": [
+                {"label": "Mod 1: 24V Relay Logic", "query": "module=mod1_relay&mode=wiring"},
+                {"label": "Mod 2: Split A/C & Dual Cap", "query": "module=mod2_split_ac&mode=wiring"},
+                {"label": "Mod 3: Gas Furnace Sequence", "query": "module=mod3_furnace&mode=sequence"},
+                {"label": "Mod 4: Commercial & Heat Strip", "query": "module=mod4_commercial&mode=wiring"},
+                {"label": "Troubleshooting & Faults", "query": "module=mod2_split_ac&mode=troubleshoot"},
+                {"label": "8 Student Labs", "query": "module=mod1_relay&mode=labs"},
             ],
         },
         {
@@ -2202,7 +2313,7 @@ def run_watch_loop(
 ) -> int:
     """Poll upstream sources every 2.5s, debounce 1.5s, and run bidirectional sync + auto-hook on changes."""
     print(
-        f"[WATCH] Monitoring MRAC Ch 01–52, EPA 608, Electrical Board, Cycle Lab, Student Handouts, "
+        f"[WATCH] Monitoring MRAC Ch 01–52, EPA 608, Electrical Board, Electrical Simulator, Cycle Lab, Student Handouts, "
         f"Personal Drive & School Drive (poll={WATCH_POLL_INTERVAL_SEC}s, debounce={WATCH_DEBOUNCE_SEC}s)..."
     )
     print("[WATCH] Press Ctrl+C to stop.")
@@ -2277,7 +2388,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--force-rebuild",
         action="store_true",
-        help="Force rebuilding Electrical Display Board and Refrigerant Cycle bundles even if up to date.",
+        help="Force rebuilding Electrical Display Board, Electrical Simulator, and Refrigerant Cycle bundles even if up to date.",
     )
     parser.add_argument(
         "--skip-rebuild",
@@ -2288,7 +2399,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
         "--source",
         type=str,
         default=None,
-        help="Optional upstream source label (e.g. chapters, epa608, electrical-board, refrigerant-cycle).",
+        help="Optional upstream source label (e.g. chapters, epa608, electrical-board, electrical-simulator, refrigerant-cycle).",
     )
     parser.add_argument(
         "--no-h-drive",

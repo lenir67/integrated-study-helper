@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-15T16:10:12Z",
+  "generated_at_utc": "2026-11-15T18:55:37Z",
   "hub_title": "Integrated HVAC/R Study Helper",
-  "hub_subtitle": "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • Electrical Theory Board • Refrigerant Cycle Lab",
+  "hub_subtitle": "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • Electrical Theory Board • Electrical Wiring Trainer • Refrigerant Cycle Lab",
   "totals": {
-    "total_modules": 55,
+    "total_modules": 56,
     "chapter_count": 52,
     "handout_count": 1,
     "total_exam_questions": 2127,
@@ -171,7 +171,7 @@
       "subtitle": "Ohm's & Watt's Law, Series/Parallel Hopscotch, Circuit Builder & DMM, 3-Phase, Motors & NEC 430",
       "path": "./modules/electrical-board/index.html",
       "version": "7dbaa0cc14",
-      "updated_at_utc": "2026-11-15T16:09:58Z",
+      "updated_at_utc": "2026-11-15T18:55:36Z",
       "size_bytes": 249438,
       "storage_keys": [],
       "highlights": [
@@ -231,6 +231,83 @@
       ]
     },
     {
+      "id": "electrical-simulator",
+      "kind": "simulator",
+      "badge": "Wiring & DMM Trainer",
+      "icon": "🔌",
+      "accent": "cyan",
+      "title": "HVAC/R Interactive Electrical Trainer",
+      "subtitle": "Point-to-Point Component Wiring, Live Ladder Schematics, Fluke DMM Diagnostics & 8 Guided Labs",
+      "path": "./modules/electrical-simulator/index.html",
+      "version": "00c542fdf9",
+      "updated_at_utc": "2026-11-15T18:54:54Z",
+      "size_bytes": 220731,
+      "storage_keys": [],
+      "highlights": [
+        "4 Wiring Workbenches",
+        "Live Ladder Schematic",
+        "Virtual Fluke DMM",
+        "8 Guided Student Labs"
+      ],
+      "keywords": [
+        "electrical",
+        "simulator",
+        "trainer",
+        "wiring",
+        "workbench",
+        "ladder",
+        "schematic",
+        "relay",
+        "90-340",
+        "contactor",
+        "capacitor",
+        "dual run capacitor",
+        "compressor",
+        "furnace",
+        "ignition",
+        "hsi",
+        "flame sensor",
+        "pressure switch",
+        "rollout",
+        "high limit",
+        "sequencer",
+        "heat strip",
+        "time delay",
+        "tdr",
+        "ss2",
+        "dmm",
+        "multimeter",
+        "troubleshooting",
+        "labs"
+      ],
+      "quick_presets": [
+        {
+          "label": "Mod 1: 24V Relay Logic",
+          "query": "module=mod1_relay&mode=wiring"
+        },
+        {
+          "label": "Mod 2: Split A/C & Dual Cap",
+          "query": "module=mod2_split_ac&mode=wiring"
+        },
+        {
+          "label": "Mod 3: Gas Furnace Sequence",
+          "query": "module=mod3_furnace&mode=sequence"
+        },
+        {
+          "label": "Mod 4: Commercial & Heat Strip",
+          "query": "module=mod4_commercial&mode=wiring"
+        },
+        {
+          "label": "Troubleshooting & Faults",
+          "query": "module=mod2_split_ac&mode=troubleshoot"
+        },
+        {
+          "label": "8 Student Labs",
+          "query": "module=mod1_relay&mode=labs"
+        }
+      ]
+    },
+    {
       "id": "refrigerant-cycle",
       "kind": "simulator",
       "badge": "Cycle Simulator",
@@ -240,7 +317,7 @@
       "subtitle": "Live Subcooling & Superheat Physics, P-h Enthalpy Diagram, TXV/FXO/EEV Metering & Fault Lab",
       "path": "./modules/refrigerant-cycle/index.html",
       "version": "f162fc0ae8",
-      "updated_at_utc": "2026-11-15T16:10:11Z",
+      "updated_at_utc": "2026-11-15T18:54:54Z",
       "size_bytes": 219225,
       "storage_keys": [],
       "highlights": [
@@ -4890,6 +4967,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=ohm_watt"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod1_relay&mode=wiring"
         }
       ]
     },
@@ -5206,6 +5288,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=ac_3phase"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod1_relay&mode=wiring"
         }
       ]
     },
@@ -5522,6 +5609,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=controls_starters"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod3_furnace&mode=sequence"
         }
       ]
     },
@@ -5997,6 +6089,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=motors_caps"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod2_split_ac&mode=wiring"
         }
       ]
     },
@@ -6693,6 +6790,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=controls_starters"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod1_relay&mode=wiring"
         }
       ]
     },
@@ -6876,6 +6978,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=circuits_hopscotch"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod1_relay&mode=troubleshoot"
         }
       ]
     },
@@ -7082,6 +7189,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=motors_caps"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod2_split_ac&mode=troubleshoot"
         }
       ]
     },
@@ -7732,6 +7844,11 @@
           "query": "mode=cooling&ref=R410A&valve=txv"
         },
         {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod2_split_ac&mode=wiring"
+        },
+        {
           "target_id": "epa608",
           "label": "🛡️ EPA 608 Prep",
           "query": ""
@@ -7936,6 +8053,11 @@
           "target_id": "refrigerant-cycle",
           "label": "❄️ Cycle Lab",
           "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod2_split_ac&mode=wiring"
         },
         {
           "target_id": "epa608",
@@ -8680,6 +8802,11 @@
           "query": "mode=cooling&ref=R410A&valve=txv"
         },
         {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod4_commercial&mode=wiring"
+        },
+        {
           "target_id": "epa608",
           "label": "🛡️ EPA 608 Prep",
           "query": ""
@@ -9003,6 +9130,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=controls_starters"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod4_commercial&mode=wiring"
         }
       ]
     },
@@ -12082,7 +12214,13 @@
         "drip leg"
       ],
       "handout": null,
-      "companions": []
+      "companions": [
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod3_furnace&mode=sequence"
+        }
+      ]
     },
     {
       "id": "ch34",
@@ -12675,7 +12813,13 @@
         "blowback"
       ],
       "handout": null,
-      "companions": []
+      "companions": [
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod3_furnace&mode=sequence"
+        }
+      ]
     },
     {
       "id": "ch35",
@@ -12931,6 +13075,11 @@
           "target_id": "electrical-board",
           "label": "⚡ Electrical Board",
           "query": "tab=ohm_watt"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod4_commercial&mode=wiring"
         }
       ]
     },
@@ -17204,6 +17353,11 @@
           "target_id": "refrigerant-cycle",
           "label": "❄️ Cycle Lab",
           "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "electrical-simulator",
+          "label": "🔌 Wiring Trainer",
+          "query": "module=mod4_commercial&mode=troubleshoot"
         },
         {
           "target_id": "epa608",

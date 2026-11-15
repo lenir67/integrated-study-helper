@@ -821,6 +821,7 @@
   function getLabCtaLabel(lab) {
     if (lab.id === 'epa608') return 'Launch EPA 608 Hub →';
     if (lab.id === 'electrical-board') return 'Launch Electrical Board →';
+    if (lab.id === 'electrical-simulator') return 'Launch Electrical Trainer →';
     if (lab.id === 'refrigerant-cycle') return 'Launch Cycle Lab →';
     return 'Launch Lab →';
   }
@@ -946,6 +947,7 @@
 
   function getCompanionIcon(targetId) {
     if (targetId === 'electrical-board') return '⚡';
+    if (targetId === 'electrical-simulator') return '🔌';
     if (targetId === 'refrigerant-cycle') return '❄️';
     if (targetId === 'epa608') return '🛡️';
     return '🔬';

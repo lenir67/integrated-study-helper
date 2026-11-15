@@ -11,7 +11,7 @@ echo ===========================================================================
 echo Using Python: %PY_EXE%
 echo.
 echo Watching ^& syncing bidirectionally across:
-echo   - Desktop Projects: Integrated Study Helper, Tracker, Electrical Board, Cycle Lab
+echo   - Desktop Projects: Integrated Study Helper, Tracker, Electrical Board, Electrical Simulator, Cycle Lab
 echo   - Study Guides Ch 01-52 + EPA 608 + Student Handouts (with embedded Vocabulary)
 echo   - School Drive (G:\My Drive\HVAC Class Chapters)
 echo   - Personal Drive (H:\ / My Drive HVAC Class Chapters ^& Projects\*)

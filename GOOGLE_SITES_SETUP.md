@@ -75,7 +75,7 @@ git remote add origin https://github.com/lenir67/integrated-study-helper.git
 3. **EPA Section 608 Certification Hub (ESCO v10.1 / v9):**
    - Kept **exam-clean with no chapter vocabulary section**, preserving focused EPA 608 Core / Type I / Type II / Type III / Universal test prep.
 4. **Interactive Simulators:**
-   - **Electrical Theory Display Board** (`#electrical-board`) and **Animated Refrigerant Cycle Lab** (`#refrigerant-cycle`, also deployed standalone at `https://lenir67.github.io/hvac-cycle-lab/`).
+   - **Electrical Theory Display Board** (`#electrical-board`), **HVAC/R Interactive Electrical Trainer** (`#electrical-simulator`), and **Animated Refrigerant Cycle Lab** (`#refrigerant-cycle`, also deployed standalone at `https://lenir67.github.io/hvac-cycle-lab/`).
 
 ---
 
@@ -89,6 +89,9 @@ You can embed or link directly to any module or pre-configured simulator state u
 | **EPA Section 608 Certification Hub (v10 / v9)** | `https://lenir67.github.io/integrated-study-helper/#epa608` |
 | **Electrical Theory Display Board** | `https://lenir67.github.io/integrated-study-helper/#electrical-board` |
 | **Electrical Board — Motors, C-S-R & Capacitors** | `https://lenir67.github.io/integrated-study-helper/#electrical-board?tab=motors_caps` |
+| **HVAC/R Interactive Electrical Trainer** | `https://lenir67.github.io/integrated-study-helper/#electrical-simulator` |
+| **Electrical Trainer — Split A/C & Dual Cap Wiring** | `https://lenir67.github.io/integrated-study-helper/#electrical-simulator?module=mod2_split_ac&mode=wiring` |
+| **Electrical Trainer — Gas Furnace Sequence** | `https://lenir67.github.io/integrated-study-helper/#electrical-simulator?module=mod3_furnace&mode=sequence` |
 | **Refrigerant Cycle Lab** | `https://lenir67.github.io/integrated-study-helper/#refrigerant-cycle` |
 | **Cycle Lab — Heat Pump Heating (R-410A)** | `https://lenir67.github.io/integrated-study-helper/#refrigerant-cycle?mode=heating&ref=R410A` |
 | **Chapter 11 Study & Game (Example)** | `https://lenir67.github.io/integrated-study-helper/#ch11` |
@@ -102,7 +105,7 @@ You can embed or link directly to any module or pre-configured simulator state u
 `sync_and_publish.py` is a **bidirectional, idempotent, non-destructive** orchestrator:
 
 1. **Edit Anywhere — Upstream or Classroom Copy:**
-   - Edit source files in `cte-program-tracker-standalone` (`scripts/`, `.xlsx`, `.docx`), `Electrical Display Board`, `animated refrigerant cycle`, or `Integrated Study Helper`, **or** edit any synced HTML module / Student Handout directly on:
+   - Edit source files in `cte-program-tracker-standalone` (`scripts/`, `.xlsx`, `.docx`), `Electrical Display Board`, `Electrical Simulator`, `animated refrigerant cycle`, or `Integrated Study Helper`, **or** edit any synced HTML module / Student Handout directly on:
      - Desktop `Curiculium data\chXX\` or `Curiculium data\608 Study Material\`
      - Integrated Study Helper `modules\`
      - **Personal Google Drive** (`H:\My Drive\HVAC Class Chapters\...` and `H:\My Drive\Projects\...`)
@@ -111,7 +114,7 @@ You can embed or link directly to any module or pre-configured simulator state u
    - When Python study-game generators, chapter `.xlsx`/`.docx` files, or simulator `js/`/`css/`/`index.html` sources are newer than their rendered HTML bundles, `sync_and_publish.py` automatically runs unit tests / rebuilds only what is stale (pass `--skip-rebuild` to bypass rebuild checks).
    - Otherwise, the newest `st_mtime` across Desktop, Hub, Personal Drive, and School Drive wins and propagates cleanly using SHA-256 + timestamp checks (`0` ping-pong on repeated runs).
 3. **Safe Drive & Project Mirroring (`H:\My Drive\Projects\*`):**
-   - Automatically syncs `Integrated Study Helper`, `cte-program-tracker-standalone`, `Electrical Display Board`, and `animated refrigerant cycle` non-destructively (excluding `.venv`, `node_modules`, `.git`, `__pycache__`, `.db-wal`, etc., and never deleting existing Drive files).
+   - Automatically syncs `Integrated Study Helper`, `cte-program-tracker-standalone`, `Electrical Display Board`, `Electrical Simulator`, and `animated refrigerant cycle` non-destructively (excluding `.venv`, `node_modules`, `.git`, `__pycache__`, `.db-wal`, etc., and never deleting existing Drive files).
    - School Drive `_Backup_*` folders and student `Block *` / `_Completed*` folders are never touched.
 4. **Live Watcher & One-Click Dual Publish:**
    - **`watch_for_updates.bat`** (`sync_and_publish.py --watch`): Polls every 2.5 seconds (1.5s debounce), rebuilds stale bundles, injects/updates handout vocabulary, syncs `G:`, `H:`, `Projects\*`, and auto-pushes both `integrated-study-helper` and `hvac-cycle-lab`.
