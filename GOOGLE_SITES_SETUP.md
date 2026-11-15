@@ -59,7 +59,7 @@ git remote add origin https://github.com/lenir67/integrated-study-helper.git
    https://lenir67.github.io/integrated-study-helper/
    ```
 4. Select **Whole Page** (recommended instead of Preview card) and click **Insert**.
-5. Drag the embed container edges full-width across the page grid and stretch its height vertically so students have ample viewport space (the hub automatically enters a locked full-height stage when a module is open to avoid nested scrollbars, and includes a **⤢ Focus** mode plus a **↗ Full Tab** button).
+5. Drag the embed container edges full-width across the page grid and stretch its height vertically (by default, the embedded hub runs in **Full Tab Default** mode: it attempts to open in a full browser tab and routes any card click or first click directly to a full browser tab, while also offering a banner toggle to stay inline if desired; inline mode includes a locked full-height stage, **⤢ Focus** mode, and a **↗ Full Tab** button).
 6. Click **Publish** in Google Sites.
 
 ---

@@ -80,6 +80,46 @@
     };
   }
 
+  function detectEmbeddedIframe() {
+    try {
+      if (new URLSearchParams(window.location.search).get('embed') === '1') {
+        return true;
+      }
+    } catch (err) {
+      // Ignore malformed query strings
+    }
+    try {
+      return window.self !== window.top;
+    } catch (err) {
+      return true;
+    }
+  }
+
+  function buildHubHashUrl(id, rawQuery) {
+    const q = rawQuery ? ('?' + String(rawQuery).replace(/^\?/, '')) : '';
+    const hash = '#' + encodeURIComponent(id) + q;
+    const base = window.location.href.split('#')[0];
+    return base + hash;
+  }
+
+  function openInFullBrowserTab(targetUrl) {
+    const url = targetUrl || window.location.href;
+    let opened = null;
+    try {
+      opened = window.open(url, '_blank');
+      if (opened) {
+        try {
+          opened.opener = null;
+        } catch (err) {
+          // Ignore opener guard restriction
+        }
+      }
+    } catch (err) {
+      opened = null;
+    }
+    return opened;
+  }
+
   const state = {
     prefs: loadPrefs(),
     manifest: null,
@@ -87,6 +127,9 @@
     moduleById: new Map(),
     orderedModules: [],
     unitById: new Map(),
+    isEmbedded: detectEmbeddedIframe(),
+    embedFullTabDefault: true,
+    embedAutoPopAttempted: false,
     filters: {
       search: '',
       unitId: 'all',
@@ -139,6 +182,10 @@
     dom.telEpaPct = document.getElementById('tel-epa608-pct');
     dom.telEpaSub = document.getElementById('tel-epa608-sub');
 
+    dom.embedBanner = document.getElementById('embed-fulltab-banner');
+    dom.embedBannerText = document.getElementById('embed-banner-text');
+    dom.embedLaunchFullBtn = document.getElementById('btn-embed-launch-full');
+    dom.embedStayInlineBtn = document.getElementById('btn-embed-stay-inline');
     dom.continueBanner = document.getElementById('continue-banner');
     dom.continueTitle = document.getElementById('continue-title');
     dom.continueResumeBtn = document.getElementById('btn-continue-resume');
@@ -651,8 +698,41 @@
     return { id: id, rawQuery: rawQuery };
   }
 
+  function renderEmbedBanner() {
+    if (!dom.embedBanner) return;
+    if (!state.isEmbedded) {
+      dom.embedBanner.classList.add('hidden');
+      return;
+    }
+    dom.embedBanner.classList.remove('hidden');
+    if (dom.embedLaunchFullBtn) {
+      dom.embedLaunchFullBtn.href = window.location.href;
+    }
+    if (dom.embedBannerText) {
+      dom.embedBannerText.textContent = state.embedFullTabDefault
+        ? 'Full Tab is the default in Google Sites — click any chapter, lab, or anywhere here to open in a full browser tab.'
+        : 'Inline embed mode enabled — chapters and labs will open inside this embedded frame.';
+    }
+    if (dom.embedStayInlineBtn) {
+      dom.embedStayInlineBtn.textContent = state.embedFullTabDefault
+        ? 'Stay in Embed'
+        : 'Use Full Tab Default';
+    }
+  }
+
   function navigateToModule(id, rawQuery) {
-    const q = rawQuery ? ('?' + rawQuery.replace(/^\?/, '')) : '';
+    const cleanQuery = rawQuery ? String(rawQuery).replace(/^\?/, '') : '';
+    if (state.isEmbedded && state.embedFullTabDefault) {
+      savePrefs({
+        lastModuleId: id,
+        lastModuleQuery: cleanQuery
+      });
+      renderContinueBanner();
+      state.embedAutoPopAttempted = true;
+      openInFullBrowserTab(buildHubHashUrl(id, cleanQuery));
+      return;
+    }
+    const q = cleanQuery ? ('?' + cleanQuery) : '';
     const nextHash = '#' + encodeURIComponent(id) + q;
     if (window.location.hash === nextHash) {
       handleRoute();
@@ -883,7 +963,7 @@
         : '';
 
       return (
-        '<article class="lab-card accent-' + escapeHtml(accent) + '">' +
+        '<article class="lab-card accent-' + escapeHtml(accent) + '" data-nav-id="' + escapeHtml(lab.id) + '">' +
           '<div class="lab-top">' +
             '<div class="lab-icon-wrap">' +
               '<div class="lab-icon" aria-hidden="true">' + escapeHtml(lab.icon || '⚡') + '</div>' +
@@ -1034,7 +1114,7 @@
       const vocabQuickBtn = '<button type="button" class="btn-secondary btn-vocab-quick" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="subtab=vocab" title="Open ' + escapeHtml(chCode) + ' Key Vocabulary" aria-label="Open ' + escapeHtml(chCode) + ' Key Vocabulary">📖 Vocab</button>';
 
       return (
-        '<article class="chapter-card">' +
+        '<article class="chapter-card" data-nav-id="' + escapeHtml(ch.id) + '">' +
           '<div class="chapter-top">' +
             '<div class="chapter-badges-left">' +
               '<span class="ch-code-pill">' + escapeHtml(chCode) + '</span>' +
@@ -1797,7 +1877,23 @@
 
     if (dom.fullTabBtn) {
       dom.fullTabBtn.addEventListener('click', function () {
-        window.open(window.location.href, '_blank', 'noopener');
+        state.embedAutoPopAttempted = true;
+        openInFullBrowserTab(window.location.href);
+      });
+    }
+
+    if (dom.embedLaunchFullBtn) {
+      dom.embedLaunchFullBtn.addEventListener('click', function () {
+        state.embedAutoPopAttempted = true;
+        dom.embedLaunchFullBtn.href = window.location.href;
+      });
+    }
+
+    if (dom.embedStayInlineBtn) {
+      dom.embedStayInlineBtn.addEventListener('click', function () {
+        state.embedFullTabDefault = !state.embedFullTabDefault;
+        state.embedAutoPopAttempted = true;
+        renderEmbedBanner();
       });
     }
 
@@ -1917,9 +2013,24 @@
     // Delegated card click launcher for both Featured Labs and Chapter Cards
     if (dom.hubView) {
       dom.hubView.addEventListener('click', function (e) {
-        const btn = e.target.closest('[data-nav-id]');
-        if (!btn) return;
-        navigateToModule(btn.dataset.navId, btn.dataset.navQuery || '');
+        if (e.target.closest('a[href]')) return;
+        const interactiveBtn = e.target.closest('button');
+        const targetEl = interactiveBtn
+          ? (interactiveBtn.dataset.navId ? interactiveBtn : null)
+          : e.target.closest('[data-nav-id]');
+        if (!targetEl) return;
+        navigateToModule(targetEl.dataset.navId, targetEl.dataset.navQuery || '');
+      });
+    }
+
+    if (state.isEmbedded) {
+      document.addEventListener('click', function (e) {
+        if (!state.embedFullTabDefault || state.embedAutoPopAttempted) return;
+        if (e.target.closest('#btn-embed-stay-inline, #btn-embed-launch-full, #btn-full-tab, [data-nav-id], a[href]')) {
+          return;
+        }
+        state.embedAutoPopAttempted = true;
+        openInFullBrowserTab(window.location.href);
       });
     }
 
@@ -2110,10 +2221,18 @@
     }
 
     renderHubHeaderMeta();
+    renderEmbedBanner();
     renderVocabChapterSelect();
     renderStageModuleSelect();
     renderHubContent();
     handleRoute();
+
+    if (state.isEmbedded && state.embedFullTabDefault) {
+      const opened = openInFullBrowserTab(window.location.href);
+      if (opened) {
+        state.embedAutoPopAttempted = true;
+      }
+    }
 
     // Asynchronously fetch latest manifest.json without blocking startup.
     checkUpdates(false);

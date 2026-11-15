@@ -408,8 +408,9 @@ html.theme-light .brand-mark {
   gap: 26px;
 }
 
-/* Continue Studying Banner */
-.continue-banner {
+/* Continue Studying & Embedded Full-Tab Banners */
+.continue-banner,
+.embed-fulltab-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -420,6 +421,20 @@ html.theme-light .brand-mark {
   background: linear-gradient(90deg, rgba(56, 189, 248, 0.14), rgba(16, 185, 129, 0.1));
   border: 1px solid rgba(56, 189, 248, 0.45);
   box-shadow: var(--shadow-sm);
+}
+
+.embed-fulltab-banner {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.16), rgba(56, 189, 248, 0.14));
+  border-color: rgba(245, 158, 11, 0.55);
+}
+
+.embed-fulltab-banner .btn-primary {
+  text-decoration: none;
+}
+
+.embed-pill {
+  background: var(--amber, #f59e0b);
+  color: #061224;
 }
 
 .continue-copy {
@@ -603,6 +618,7 @@ html.theme-light .btn-primary.tone-emerald {
   flex-direction: column;
   gap: 12px;
   min-width: 0;
+  cursor: pointer;
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
@@ -859,6 +875,7 @@ html.theme-light .btn-primary.tone-emerald {
   flex-direction: column;
   gap: 10px;
   min-width: 0;
+  cursor: pointer;
   transition: transform 0.14s ease, border-color 0.14s ease;
 }
 
