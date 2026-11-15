@@ -1865,11 +1865,26 @@ def _run_git(
     repo_dir: Path = HUB_DIR,
     check: bool = True,
     timeout: int = 120,
+    extra_env: Optional[Dict[str, str]] = None,
 ) -> subprocess.CompletedProcess[str]:
     git_bin = shutil.which("git") or "git"
+    env = os.environ.copy()
+    for var in (
+        "GIT_DIR",
+        "GIT_WORK_TREE",
+        "GIT_INDEX_FILE",
+        "GIT_OBJECT_DIRECTORY",
+        "GIT_ALTERNATE_OBJECT_DIRECTORIES",
+        "GIT_QUARANTINE_PATH",
+        "GIT_AUTHOR_DATE",
+    ):
+        env.pop(var, None)
+    if extra_env:
+        env.update(extra_env)
     return subprocess.run(
         [git_bin, *args],
         cwd=str(repo_dir),
+        env=env,
         capture_output=True,
         text=True,
         encoding="utf-8",
@@ -1902,9 +1917,13 @@ def _git_stage_and_commit(
 
 
 def _sync_cycle_lab_git(*, auto_hook: bool = False) -> int:
-    """Commit and push animated refrigerant cycle lab changes to origin/main if modified."""
+    """Commit and push animated refrigerant cycle lab changes to origin/main if modified or ahead."""
     if not (CYCLE_DIR / ".git").exists():
         print(f"[INFO] Cycle lab .git not found ({CYCLE_DIR}); skipping hvac-cycle-lab push.")
+        return 0
+
+    if auto_hook and ((CYCLE_DIR / ".git" / "index.lock").exists() or "GIT_INDEX_FILE" in os.environ):
+        print("[INFO] Cycle Lab commit already in progress; skipping nested Cycle Lab git sync.")
         return 0
 
     try:
@@ -1917,24 +1936,37 @@ def _sync_cycle_lab_git(*, auto_hook: bool = False) -> int:
         print(f"[WARN] Cycle Lab git status returned {status_proc.returncode}: {status_proc.stderr.strip()}")
         return 0 if auto_hook else 1
 
-    if not status_proc.stdout.strip():
-        print("[INFO] Cycle Lab git working tree clean; nothing to push.")
-        return 0
-
     remote_check = _run_git(["remote", "get-url", "origin"], repo_dir=CYCLE_DIR, check=False)
     if remote_check.returncode != 0:
         print("[INFO] Cycle Lab remote 'origin' not configured; skipping push.")
         return 0
 
+    dirty = bool(status_proc.stdout.strip())
+    ahead_count = 0
+    if not dirty:
+        ahead_proc = _run_git(
+            ["rev-list", "--count", "origin/main..HEAD"],
+            repo_dir=CYCLE_DIR,
+            check=False,
+        )
+        if ahead_proc.returncode == 0 and ahead_proc.stdout.strip().isdigit():
+            ahead_count = int(ahead_proc.stdout.strip())
+
+    if not dirty and ahead_count == 0:
+        print("[INFO] Cycle Lab git working tree clean; nothing to push.")
+        return 0
+
     try:
-        _run_git(["add", "-A"], repo_dir=CYCLE_DIR)
-        diff_proc = _run_git(["diff", "--cached", "--quiet"], repo_dir=CYCLE_DIR, check=False)
-        if diff_proc.returncode == 1:
-            _run_git(
-                ["commit", "-m", "chore: sync animated refrigerant cycle lab"],
-                repo_dir=CYCLE_DIR,
-            )
-            print("[OK] Committed changes in animated refrigerant cycle.")
+        if dirty:
+            _run_git(["add", "-A"], repo_dir=CYCLE_DIR)
+            diff_proc = _run_git(["diff", "--cached", "--quiet"], repo_dir=CYCLE_DIR, check=False)
+            if diff_proc.returncode == 1:
+                _run_git(
+                    ["commit", "-m", "chore: sync animated refrigerant cycle lab"],
+                    repo_dir=CYCLE_DIR,
+                    extra_env={"SKIP_HUB_SYNC": "1"},
+                )
+                print("[OK] Committed changes in animated refrigerant cycle.")
 
         push_proc = _run_git(
             ["push", "origin", "main"],
