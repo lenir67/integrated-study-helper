@@ -1,0 +1,4134 @@
+window.INTEGRATED_STUDY_MANIFEST = {
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-15T14:26:10Z",
+  "hub_title": "Integrated HVAC/R Study Helper",
+  "hub_subtitle": "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • Electrical Theory Board • Refrigerant Cycle Lab",
+  "totals": {
+    "total_modules": 55,
+    "chapter_count": 52,
+    "handout_count": 1,
+    "total_exam_questions": 2127,
+    "total_study_items": 2566,
+    "total_epa608_tagged": 319
+  },
+  "units": [
+    {
+      "id": "unit1",
+      "label": "Unit 1: Trade, Safety & Tools",
+      "short_label": "Ch 1–5",
+      "chapters": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "unit2",
+      "label": "Unit 2: Thermodynamics, Gases & Refrigerants",
+      "short_label": "Ch 6–12",
+      "chapters": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": "unit3",
+      "label": "Unit 3: Electricity, Electronics, Motors & Controls",
+      "short_label": "Ch 13–19",
+      "chapters": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "id": "unit4",
+      "label": "Unit 4: Domestic Refrigeration & Residential A/C",
+      "short_label": "Ch 20–24",
+      "chapters": [
+        20,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "id": "unit5",
+      "label": "Unit 5: Commercial A/C, Airflow & Load Calc",
+      "short_label": "Ch 25–32",
+      "chapters": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    {
+      "id": "unit6",
+      "label": "Unit 6: Heating Systems, Heat Pumps & Energy",
+      "short_label": "Ch 33–40",
+      "chapters": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40
+      ]
+    },
+    {
+      "id": "unit7",
+      "label": "Unit 7: Commercial Refrigeration Systems & Service",
+      "short_label": "Ch 41–52",
+      "chapters": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52
+      ]
+    }
+  ],
+  "featured_labs": [
+    {
+      "id": "epa608",
+      "kind": "certification",
+      "badge": "Certification Prep",
+      "icon": "🛡️",
+      "accent": "amber",
+      "title": "EPA Section 608 Certification Hub",
+      "subtitle": "Switchable ESCO 10th Edition (v10.1) & 9th Edition (V2) — Core, Type I, II, III & Universal",
+      "path": "./modules/epa608/index.html",
+      "version": "38b951293a",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 2559676,
+      "storage_keys": [
+        "cte_epa608_esco_v10",
+        "cte_epa608_esco_v9"
+      ],
+      "card_totals": {
+        "cte_epa608_esco_v10": 100,
+        "cte_epa608_esco_v9": 100
+      },
+      "highlights": [
+        "ESCO v10.1 & v9",
+        "200 Study Cards",
+        "Core + Type I/II/III",
+        "Blooket & Podium Arena"
+      ],
+      "keywords": [
+        "epa",
+        "608",
+        "epa 608",
+        "certification",
+        "esco",
+        "v10",
+        "v9",
+        "core",
+        "type i",
+        "type ii",
+        "type iii",
+        "universal",
+        "recovery",
+        "a2l",
+        "aim act"
+      ],
+      "quick_presets": []
+    },
+    {
+      "id": "electrical-board",
+      "kind": "simulator",
+      "badge": "Interactive Board",
+      "icon": "⚡",
+      "accent": "cyan",
+      "title": "HVAC/R Electrical Theory Board",
+      "subtitle": "Ohm's & Watt's Law, Series/Parallel Hopscotch, Circuit Builder & DMM, 3-Phase, Motors & NEC 430",
+      "path": "./modules/electrical-board/index.html",
+      "version": "7dbaa0cc14",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 249438,
+      "storage_keys": [],
+      "highlights": [
+        "7 Interactive Boards",
+        "Live DMM Probes",
+        "10-Slide Walkthrough",
+        "MRAC Ch. 13–19"
+      ],
+      "keywords": [
+        "electrical",
+        "ohm",
+        "watt",
+        "series",
+        "parallel",
+        "hopscotch",
+        "circuit builder",
+        "dmm",
+        "multimeter",
+        "3-phase",
+        "three phase",
+        "motors",
+        "capacitors",
+        "megger",
+        "starters",
+        "nec 430",
+        "controls"
+      ],
+      "quick_presets": [
+        {
+          "label": "Ohm & Watt's Law",
+          "query": "tab=ohm_watt"
+        },
+        {
+          "label": "Hopscotch Circuits",
+          "query": "tab=circuits_hopscotch"
+        },
+        {
+          "label": "Circuit Builder & DMM",
+          "query": "tab=circuit_builder"
+        },
+        {
+          "label": "AC & 3-Phase",
+          "query": "tab=ac_3phase"
+        },
+        {
+          "label": "Motors & Capacitors",
+          "query": "tab=motors_caps"
+        },
+        {
+          "label": "Controls & NEC 430",
+          "query": "tab=controls_starters"
+        },
+        {
+          "label": "Guided Walkthrough",
+          "query": "tab=ohm_watt&walkthrough=1"
+        }
+      ]
+    },
+    {
+      "id": "refrigerant-cycle",
+      "kind": "simulator",
+      "badge": "Cycle Simulator",
+      "icon": "❄️",
+      "accent": "emerald",
+      "title": "HVAC/R Interactive Refrigerant Cycle Lab",
+      "subtitle": "Live Subcooling & Superheat Physics, P-h Enthalpy Diagram, TXV/FXO/EEV Metering & Fault Lab",
+      "path": "./modules/refrigerant-cycle/index.html",
+      "version": "f162fc0ae8",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 219225,
+      "storage_keys": [],
+      "highlights": [
+        "6 Refrigerants (A2L/A1)",
+        "Live P-h Diagram",
+        "Cooling & Heating Modes",
+        "Mystery Fault Trainer"
+      ],
+      "keywords": [
+        "refrigerant",
+        "cycle",
+        "superheat",
+        "subcooling",
+        "enthalpy",
+        "p-h diagram",
+        "txv",
+        "fxo",
+        "eev",
+        "r410a",
+        "r-410a",
+        "r454b",
+        "r-454b",
+        "r32",
+        "r22",
+        "r134a",
+        "r404a",
+        "heat pump",
+        "fault"
+      ],
+      "quick_presets": [
+        {
+          "label": "R-410A Cooling (TXV)",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "label": "R-454B A2L Cooling",
+          "query": "mode=cooling&ref=R454B&valve=txv"
+        },
+        {
+          "label": "Heat Pump Heating",
+          "query": "mode=heating&ref=R410A&valve=txv"
+        },
+        {
+          "label": "Fixed Orifice (FXO)",
+          "query": "mode=cooling&ref=R410A&valve=fxo"
+        },
+        {
+          "label": "Commercial R-404A",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "label": "Guided Cycle Tour",
+          "query": "mode=cooling&ref=R410A&valve=txv&tour=1"
+        }
+      ],
+      "standalone_live_url": "https://lenir67.github.io/hvac-cycle-lab/"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "ch01",
+      "chapter_num": 1,
+      "chapter_code": "Ch 01",
+      "title": "Careers and Certification",
+      "unit_id": "unit1",
+      "engine_id": "dispatch_bench",
+      "engine_label": "Dispatch & Bench Sim",
+      "path": "./modules/chapters/ch01.html",
+      "version": "f7a384d78f",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 804138,
+      "storage_key": "mrac_study_ch01_v1",
+      "exam_question_count": 28,
+      "study_item_count": 28,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "1.1",
+          "title": "Career Planning"
+        },
+        {
+          "id": "1.2",
+          "title": "Beginning Your Career Search"
+        },
+        {
+          "id": "1.3",
+          "title": "Success in the HVACR Industry"
+        }
+      ],
+      "keywords": [
+        "careers and certification",
+        "careers",
+        "and",
+        "certification",
+        "dispatch & bench sim",
+        "career planning",
+        "beginning your career search",
+        "success in the hvacr industry",
+        "opportunities",
+        "system repair",
+        "specifications",
+        "leadership",
+        "energy auditor",
+        "entry-level",
+        "performed",
+        "technician",
+        "air-conditioning",
+        "rses"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch02",
+      "chapter_num": 2,
+      "chapter_code": "Ch 02",
+      "title": "Safety",
+      "unit_id": "unit1",
+      "engine_id": "dispatch_bench",
+      "engine_label": "Dispatch & Bench Sim",
+      "path": "./modules/chapters/ch02.html",
+      "version": "2bfeb8a82e",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 1358649,
+      "storage_key": "mrac_study_ch02_v1",
+      "exam_question_count": 28,
+      "study_item_count": 32,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 2,
+      "sections": [
+        {
+          "id": "2.1",
+          "title": "Safety Hazards"
+        },
+        {
+          "id": "2.2",
+          "title": "Personal Protective Equipment (PPE)"
+        },
+        {
+          "id": "2.3",
+          "title": "Safe Work Practices"
+        }
+      ],
+      "keywords": [
+        "safety",
+        "dispatch & bench sim",
+        "safety hazards",
+        "personal protective equipment (ppe)",
+        "safe work practices",
+        "a body becomes part of an electrical circuit",
+        "in a vertical position with the valve up",
+        "pull, aim, squeeze, and sweep",
+        "shield",
+        "acetylene",
+        "safety data sheets (sds)",
+        "one-quarter",
+        "limited airflow",
+        "workplace",
+        "whenever"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch03",
+      "chapter_num": 3,
+      "chapter_code": "Ch 03",
+      "title": "Service Calls",
+      "unit_id": "unit1",
+      "engine_id": "dispatch_bench",
+      "engine_label": "Dispatch & Bench Sim",
+      "path": "./modules/chapters/ch03.html",
+      "version": "2977756b50",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 787950,
+      "storage_key": "mrac_study_ch03_v1",
+      "exam_question_count": 21,
+      "study_item_count": 21,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "3.1",
+          "title": "Customer Service"
+        },
+        {
+          "id": "3.2",
+          "title": "Troubleshooting"
+        }
+      ],
+      "keywords": [
+        "service calls",
+        "service",
+        "calls",
+        "dispatch & bench sim",
+        "customer service",
+        "troubleshooting",
+        "problems",
+        "causes",
+        "remedies",
+        "trouble code",
+        "twice-a-year",
+        "model number",
+        "breakdowns",
+        "helps",
+        "responding",
+        "estimates"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch04",
+      "chapter_num": 4,
+      "chapter_code": "Ch 04",
+      "title": "Tools and Supplies",
+      "unit_id": "unit1",
+      "engine_id": "dispatch_bench",
+      "engine_label": "Dispatch & Bench Sim",
+      "path": "./modules/chapters/ch04.html",
+      "version": "f834df27b3",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 817002,
+      "storage_key": "mrac_study_ch04_v1",
+      "exam_question_count": 36,
+      "study_item_count": 43,
+      "match_pair_count": 10,
+      "blitz_question_count": 45,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "4.1",
+          "title": "Hand Tools"
+        },
+        {
+          "id": "4.2",
+          "title": "Power Tools"
+        },
+        {
+          "id": "4.3",
+          "title": "Instruments"
+        },
+        {
+          "id": "4.4",
+          "title": "Standard Supplies"
+        }
+      ],
+      "keywords": [
+        "tools and supplies",
+        "tools",
+        "and",
+        "supplies",
+        "dispatch & bench sim",
+        "hand tools",
+        "power tools",
+        "instruments",
+        "standard supplies",
+        "drift punch",
+        "slip-joint pliers",
+        "flare nut wrench",
+        "manometer",
+        "lineman's pliers",
+        "multimeter",
+        "prick punch",
+        "box end wrench",
+        "drift",
+        "0000"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch05",
+      "chapter_num": 5,
+      "chapter_code": "Ch 05",
+      "title": "Working with Tubing and Piping",
+      "unit_id": "unit1",
+      "engine_id": "dispatch_bench",
+      "engine_label": "Dispatch & Bench Sim",
+      "path": "./modules/chapters/ch05.html",
+      "version": "3f79087015",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 815438,
+      "storage_key": "mrac_study_ch05_v1",
+      "exam_question_count": 32,
+      "study_item_count": 38,
+      "match_pair_count": 10,
+      "blitz_question_count": 41,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "5.1",
+          "title": "Types of Refrigerant Tubing"
+        },
+        {
+          "id": "5.2",
+          "title": "Non-Refrigerant Tubing and Pipe"
+        },
+        {
+          "id": "5.3",
+          "title": "Cutting Tubing"
+        },
+        {
+          "id": "5.4",
+          "title": "Bending Tubing"
+        },
+        {
+          "id": "5.5",
+          "title": "Connecting Tubing"
+        },
+        {
+          "id": "5.6",
+          "title": "Connecting Pipe"
+        }
+      ],
+      "keywords": [
+        "working with tubing and piping",
+        "working",
+        "with",
+        "tubing",
+        "and",
+        "piping",
+        "dispatch & bench sim",
+        "types of refrigerant tubing",
+        "non-refrigerant tubing and pipe",
+        "cutting tubing",
+        "bending tubing",
+        "connecting tubing",
+        "connecting pipe",
+        "aluminum tubing",
+        "pvc pipe",
+        "acr tubing",
+        "stainless steel tubing",
+        "copper water tubing",
+        "steel pipe",
+        "cpvc pipe",
+        "95/5 tin-antimony solder",
+        "one-quarter turn",
+        "gas"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch06",
+      "chapter_num": 6,
+      "chapter_code": "Ch 06",
+      "title": "Energy and Matter",
+      "unit_id": "unit2",
+      "engine_id": "refrig_manifold",
+      "engine_label": "Manifold & Refrigerant Sim",
+      "path": "./modules/chapters/ch06.html",
+      "version": "7b431a682b",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 787188,
+      "storage_key": "mrac_study_ch06_v1",
+      "exam_question_count": 15,
+      "study_item_count": 24,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "6.1",
+          "title": "Matter and Energy"
+        },
+        {
+          "id": "6.2",
+          "title": "Force, Work, and Power"
+        },
+        {
+          "id": "6.3",
+          "title": "Heat"
+        },
+        {
+          "id": "6.4",
+          "title": "Measuring Refrigeration Effect"
+        }
+      ],
+      "keywords": [
+        "energy and matter",
+        "energy",
+        "and",
+        "matter",
+        "manifold & refrigerant sim",
+        "matter and energy",
+        "force, work, and power",
+        "heat",
+        "measuring refrigeration effect",
+        "absolute zero",
+        "relative density",
+        "density",
+        "saturated vapor",
+        "one ton of refrigeration effect",
+        "enthalpy",
+        "latent heat",
+        "ambient temperature",
+        "specific gravity"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        }
+      ]
+    },
+    {
+      "id": "ch07",
+      "chapter_num": 7,
+      "chapter_code": "Ch 07",
+      "title": "Gases",
+      "unit_id": "unit2",
+      "engine_id": "refrig_manifold",
+      "engine_label": "Manifold & Refrigerant Sim",
+      "path": "./modules/chapters/ch07.html",
+      "version": "865d0b6b81",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 794541,
+      "storage_key": "mrac_study_ch07_v1",
+      "exam_question_count": 23,
+      "study_item_count": 28,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "7.1",
+          "title": "Pressure"
+        },
+        {
+          "id": "7.2",
+          "title": "Gas Laws"
+        }
+      ],
+      "keywords": [
+        "gases",
+        "manifold & refrigerant sim",
+        "pressure",
+        "gas laws",
+        "gay-lussac's law",
+        "dalton's law",
+        "boyle's law",
+        "pascal's law",
+        "charles' law",
+        "avogadro's law",
+        "volume",
+        "pressure increases",
+        "pressure decreases",
+        "heat is added to"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        }
+      ]
+    },
+    {
+      "id": "ch08",
+      "chapter_num": 8,
+      "chapter_code": "Ch 08",
+      "title": "Basic Compression Refrigeration and Air-Conditioning Systems",
+      "unit_id": "unit2",
+      "engine_id": "refrig_manifold",
+      "engine_label": "Manifold & Refrigerant Sim",
+      "path": "./modules/chapters/ch08.html",
+      "version": "0550f662fe",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 1595466,
+      "storage_key": "mrac_study_ch08_v1",
+      "exam_question_count": 24,
+      "study_item_count": 31,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 15,
+      "sections": [
+        {
+          "id": "8.1",
+          "title": "Compression Refrigeration Cycle"
+        },
+        {
+          "id": "8.2",
+          "title": "Compression"
+        },
+        {
+          "id": "8.3",
+          "title": "Condensing"
+        },
+        {
+          "id": "8.4",
+          "title": "Metering Device"
+        },
+        {
+          "id": "8.5",
+          "title": "Evaporating"
+        }
+      ],
+      "keywords": [
+        "basic compression refrigeration and air-conditioning systems",
+        "basic",
+        "compression",
+        "refrigeration",
+        "and",
+        "air-conditioning",
+        "systems",
+        "manifold & refrigerant sim",
+        "compression refrigeration cycle",
+        "condensing",
+        "metering device",
+        "evaporating",
+        "insulated",
+        "flash gas",
+        "low-pressure vapor",
+        "absorb",
+        "high-pressure vapor",
+        "high-pressure liquid",
+        "surface area",
+        "above",
+        "high",
+        "refrigerants"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch09",
+      "chapter_num": 9,
+      "chapter_code": "Ch 09",
+      "title": "Basic Refrigeration and Air-Conditioning System Components",
+      "unit_id": "unit2",
+      "engine_id": "refrig_manifold",
+      "engine_label": "Manifold & Refrigerant Sim",
+      "path": "./modules/chapters/ch09.html",
+      "version": "ca98cdd0e0",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 829045,
+      "storage_key": "mrac_study_ch09_v1",
+      "exam_question_count": 36,
+      "study_item_count": 45,
+      "match_pair_count": 10,
+      "blitz_question_count": 45,
+      "sim_mission_count": 7,
+      "epa_608_count": 13,
+      "sections": [
+        {
+          "id": "9.1",
+          "title": "Compressors"
+        },
+        {
+          "id": "9.2",
+          "title": "Metering Devices"
+        },
+        {
+          "id": "9.3",
+          "title": "Evaporators"
+        },
+        {
+          "id": "9.4",
+          "title": "Condensers"
+        },
+        {
+          "id": "9.5",
+          "title": "Other Basic System Components"
+        }
+      ],
+      "keywords": [
+        "basic refrigeration and air-conditioning system components",
+        "basic",
+        "refrigeration",
+        "and",
+        "air-conditioning",
+        "system",
+        "components",
+        "manifold & refrigerant sim",
+        "compressors",
+        "metering devices",
+        "evaporators",
+        "condensers",
+        "other basic system components",
+        "rotary compressor",
+        "thermostatic expansion valve (txv)",
+        "air-cooled condenser",
+        "reciprocating compressor",
+        "liquid line filter-drier",
+        "capillary tube",
+        "plate evaporator",
+        "scroll compressor",
+        "microchannel evaporator",
+        "fin-and-tube evaporator"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch10",
+      "chapter_num": 10,
+      "chapter_code": "Ch 10",
+      "title": "Introduction to Refrigerants",
+      "unit_id": "unit2",
+      "engine_id": "refrig_manifold",
+      "engine_label": "Manifold & Refrigerant Sim",
+      "path": "./modules/chapters/ch10.html",
+      "version": "4c203bad16",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 826292,
+      "storage_key": "mrac_study_ch10_v1",
+      "exam_question_count": 33,
+      "study_item_count": 42,
+      "match_pair_count": 10,
+      "blitz_question_count": 42,
+      "sim_mission_count": 7,
+      "epa_608_count": 34,
+      "sections": [
+        {
+          "id": "10.1",
+          "title": "Classifying Refrigerants"
+        },
+        {
+          "id": "10.2",
+          "title": "Refrigerants and the Environment"
+        },
+        {
+          "id": "10.3",
+          "title": "Identifying Refrigerants"
+        },
+        {
+          "id": "10.4",
+          "title": "Refrigerant Properties"
+        },
+        {
+          "id": "10.5",
+          "title": "Refrigerant Applications"
+        },
+        {
+          "id": "10.6",
+          "title": "Inorganic Refrigerants"
+        },
+        {
+          "id": "10.7",
+          "title": "Refrigeration Lubricants"
+        }
+      ],
+      "keywords": [
+        "introduction to refrigerants",
+        "introduction",
+        "to",
+        "refrigerants",
+        "manifold & refrigerant sim",
+        "classifying refrigerants",
+        "refrigerants and the environment",
+        "identifying refrigerants",
+        "refrigerant properties",
+        "refrigerant applications",
+        "inorganic refrigerants",
+        "refrigeration lubricants",
+        "r-134a",
+        "temperature glide",
+        "light green",
+        "r-717",
+        "cryogenics",
+        "r-454b",
+        "azeotropic",
+        "hfos",
+        "hcs",
+        "silver"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R454B&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch11",
+      "chapter_num": 11,
+      "chapter_code": "Ch 11",
+      "title": "Equipment and Instruments for Refrigerant Handling and Service",
+      "unit_id": "unit2",
+      "engine_id": "refrig_manifold",
+      "engine_label": "Manifold & Refrigerant Sim",
+      "path": "./modules/chapters/ch11.html",
+      "version": "ede283f21b",
+      "updated_at_utc": "2026-11-15T14:26:08Z",
+      "size_bytes": 844539,
+      "storage_key": "mrac_study_ch11_v1",
+      "exam_question_count": 30,
+      "study_item_count": 39,
+      "match_pair_count": 10,
+      "blitz_question_count": 39,
+      "sim_mission_count": 7,
+      "epa_608_count": 21,
+      "sections": [
+        {
+          "id": "11.1",
+          "title": "Refrigerant Cylinders"
+        },
+        {
+          "id": "11.2",
+          "title": "Pressure Gauges"
+        },
+        {
+          "id": "11.3",
+          "title": "Service Valves"
+        },
+        {
+          "id": "11.4",
+          "title": "Gauge Manifolds"
+        },
+        {
+          "id": "11.5",
+          "title": "Leak Detection Methods"
+        },
+        {
+          "id": "11.6",
+          "title": "Vacuum Pumps"
+        },
+        {
+          "id": "11.7",
+          "title": "Recovery, Recycling, and Reclaiming Equipment"
+        }
+      ],
+      "keywords": [
+        "equipment and instruments for refrigerant handling and service",
+        "equipment",
+        "and",
+        "instruments",
+        "for",
+        "refrigerant",
+        "handling",
+        "service",
+        "manifold & refrigerant sim",
+        "refrigerant cylinders",
+        "pressure gauges",
+        "service valves",
+        "gauge manifolds",
+        "leak detection methods",
+        "vacuum pumps",
+        "recovery, recycling, and reclaiming equipment",
+        "fusible plug",
+        "refrigerant dye",
+        "free air displacement",
+        "recovery",
+        "gauge manifold",
+        "vacuum pump",
+        "ultimate vacuum",
+        "compound gauge",
+        "valve core",
+        "liquid receiver service valve"
+      ],
+      "handout": {
+        "title": "Ch. 11 Exam Study Guide — Equipment & Instruments for Refrigerant Handling and Service",
+        "path": "./modules/handouts/ch11_handout.html",
+        "version": "d1c6e94979"
+      },
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch12",
+      "chapter_num": 12,
+      "chapter_code": "Ch 12",
+      "title": "Working with Refrigerants",
+      "unit_id": "unit2",
+      "engine_id": "refrig_manifold",
+      "engine_label": "Manifold & Refrigerant Sim",
+      "path": "./modules/chapters/ch12.html",
+      "version": "7b6f8668d5",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 818365,
+      "storage_key": "mrac_study_ch12_v1",
+      "exam_question_count": 30,
+      "study_item_count": 30,
+      "match_pair_count": 10,
+      "blitz_question_count": 40,
+      "sim_mission_count": 7,
+      "epa_608_count": 25,
+      "sections": [
+        {
+          "id": "12.1",
+          "title": "Checking Refrigerant Charge"
+        },
+        {
+          "id": "12.2",
+          "title": "Redistributing Refrigerant"
+        },
+        {
+          "id": "12.3",
+          "title": "Locating and Repairing Refrigerant Leaks"
+        },
+        {
+          "id": "12.4",
+          "title": "Evacuating a System"
+        },
+        {
+          "id": "12.5",
+          "title": "Charging a System"
+        }
+      ],
+      "keywords": [
+        "working with refrigerants",
+        "working",
+        "with",
+        "refrigerants",
+        "manifold & refrigerant sim",
+        "checking refrigerant charge",
+        "redistributing refrigerant",
+        "locating and repairing refrigerant leaks",
+        "evacuating a system",
+        "charging a system",
+        "80% water capacity by weight",
+        "recovery cylinder",
+        "inert gas",
+        "mid-position",
+        "pump-down",
+        "condenser",
+        "liquid level switch",
+        "sensible heat",
+        "positive",
+        "hardener"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch13",
+      "chapter_num": 13,
+      "chapter_code": "Ch 13",
+      "title": "Basic Electricity",
+      "unit_id": "unit3",
+      "engine_id": "electrical_meter",
+      "engine_label": "Electrical & Meter Sim",
+      "path": "./modules/chapters/ch13.html",
+      "version": "6461fc8cc9",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 807320,
+      "storage_key": "mrac_study_ch13_v1",
+      "exam_question_count": 24,
+      "study_item_count": 33,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "13.1",
+          "title": "Fundamental Principles of Electricity"
+        },
+        {
+          "id": "13.2",
+          "title": "Types of Electricity and Electrical Materials"
+        },
+        {
+          "id": "13.3",
+          "title": "Circuit Fundamentals"
+        },
+        {
+          "id": "13.4",
+          "title": "Magnetism"
+        },
+        {
+          "id": "13.5",
+          "title": "Electrical Generators"
+        },
+        {
+          "id": "13.6",
+          "title": "Transformer Basics"
+        }
+      ],
+      "keywords": [
+        "basic electricity",
+        "basic",
+        "electricity",
+        "electrical & meter sim",
+        "fundamental principles of electricity",
+        "types of electricity and electrical materials",
+        "circuit fundamentals",
+        "magnetism",
+        "electrical generators",
+        "transformer basics",
+        "electromagnetism",
+        "induction",
+        "open circuit",
+        "dielectric",
+        "closed circuit",
+        "magnetic flux",
+        "direct current",
+        "alternating current",
+        "commutator",
+        "increases"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=ohm_watt"
+        }
+      ]
+    },
+    {
+      "id": "ch14",
+      "chapter_num": 14,
+      "chapter_code": "Ch 14",
+      "title": "Electrical Power",
+      "unit_id": "unit3",
+      "engine_id": "electrical_meter",
+      "engine_label": "Electrical & Meter Sim",
+      "path": "./modules/chapters/ch14.html",
+      "version": "24e0a9b5b1",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 831877,
+      "storage_key": "mrac_study_ch14_v1",
+      "exam_question_count": 43,
+      "study_item_count": 52,
+      "match_pair_count": 10,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "14.1",
+          "title": "Electrical Power"
+        },
+        {
+          "id": "14.2",
+          "title": "Power Circuits"
+        },
+        {
+          "id": "14.3",
+          "title": "Electrical Problems"
+        }
+      ],
+      "keywords": [
+        "electrical power",
+        "electrical",
+        "power",
+        "electrical & meter sim",
+        "power circuits",
+        "electrical problems",
+        "bonding",
+        "grounding",
+        "ungrounded conductors",
+        "grounded conductors",
+        "ground",
+        "inductance",
+        "true power",
+        "power factor",
+        "apparent power",
+        "polyphase"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=ac_3phase"
+        }
+      ]
+    },
+    {
+      "id": "ch15",
+      "chapter_num": 15,
+      "chapter_code": "Ch 15",
+      "title": "Basic Electronics",
+      "unit_id": "unit3",
+      "engine_id": "electrical_meter",
+      "engine_label": "Electrical & Meter Sim",
+      "path": "./modules/chapters/ch15.html",
+      "version": "1ecf9766e3",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 825859,
+      "storage_key": "mrac_study_ch15_v1",
+      "exam_question_count": 41,
+      "study_item_count": 47,
+      "match_pair_count": 10,
+      "blitz_question_count": 50,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "15.1",
+          "title": "Semiconductor Basics"
+        },
+        {
+          "id": "15.2",
+          "title": "Control Circuits and Electronic Devices"
+        }
+      ],
+      "keywords": [
+        "basic electronics",
+        "basic",
+        "electronics",
+        "electrical & meter sim",
+        "semiconductor basics",
+        "control circuits and electronic devices",
+        "diac",
+        "solid-state inverter",
+        "transistor",
+        "photovoltaic (pv)",
+        "photoemissive",
+        "photoconductor",
+        "microprocessor",
+        "electrons",
+        "holes",
+        "semiconductors"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=controls_starters"
+        }
+      ]
+    },
+    {
+      "id": "ch16",
+      "chapter_num": 16,
+      "chapter_code": "Ch 16",
+      "title": "Electric Motors",
+      "unit_id": "unit3",
+      "engine_id": "electrical_meter",
+      "engine_label": "Electrical & Meter Sim",
+      "path": "./modules/chapters/ch16.html",
+      "version": "bcee44a92b",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 852596,
+      "storage_key": "mrac_study_ch16_v1",
+      "exam_question_count": 46,
+      "study_item_count": 60,
+      "match_pair_count": 16,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "16.1",
+          "title": "The Elementary Electric Motor"
+        },
+        {
+          "id": "16.2",
+          "title": "AC Induction Motors"
+        },
+        {
+          "id": "16.3",
+          "title": "Electronically Commutated Motors (ECMs)"
+        },
+        {
+          "id": "16.4",
+          "title": "Standard Motor Data"
+        },
+        {
+          "id": "16.5",
+          "title": "Motor Applications in HVACR Systems"
+        }
+      ],
+      "keywords": [
+        "electric motors",
+        "electric",
+        "motors",
+        "electrical & meter sim",
+        "the elementary electric motor",
+        "ac induction motors",
+        "electronically commutated motors (ecms)",
+        "standard motor data",
+        "motor applications in hvacr systems",
+        "counter electromotive force",
+        "synchronous speed",
+        "unloader",
+        "full-load amperage (fla)",
+        "rated full-load speed (rpm)",
+        "centrifugal switch",
+        "rated horsepower (hp)",
+        "variable frequency drive",
+        "slip",
+        "power factor",
+        "locked rotor amperage (lra)",
+        "time rating",
+        "locked rotor code",
+        "rated ambient temperature",
+        "insulation class",
+        "inherent protection"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=motors_caps"
+        }
+      ]
+    },
+    {
+      "id": "ch17",
+      "chapter_num": 17,
+      "chapter_code": "Ch 17",
+      "title": "Electrical Control Systems",
+      "unit_id": "unit3",
+      "engine_id": "electrical_meter",
+      "engine_label": "Electrical & Meter Sim",
+      "path": "./modules/chapters/ch17.html",
+      "version": "ff8b2fad31",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 875684,
+      "storage_key": "mrac_study_ch17_v1",
+      "exam_question_count": 51,
+      "study_item_count": 68,
+      "match_pair_count": 20,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "17.1",
+          "title": "Electrical Control Devices"
+        },
+        {
+          "id": "17.2",
+          "title": "Control System Fundamentals"
+        },
+        {
+          "id": "17.3",
+          "title": "Thermostats"
+        },
+        {
+          "id": "17.4",
+          "title": "Motor Controls"
+        },
+        {
+          "id": "17.5",
+          "title": "Motor Protection Devices"
+        },
+        {
+          "id": "17.6",
+          "title": "Direct Digital Control (DDC)"
+        }
+      ],
+      "keywords": [
+        "electrical control systems",
+        "electrical",
+        "control",
+        "systems",
+        "electrical & meter sim",
+        "electrical control devices",
+        "control system fundamentals",
+        "thermostats",
+        "motor controls",
+        "motor protection devices",
+        "direct digital control (ddc)",
+        "relay",
+        "sensor",
+        "sensing bulb",
+        "thermocouple",
+        "actuator",
+        "controller",
+        "bimetal device",
+        "thermistor",
+        "solenoid",
+        "positive temperature coefficient (ptc)",
+        "motor starter",
+        "current",
+        "contactor",
+        "solid-state",
+        "potential",
+        "control point",
+        "feedback",
+        "pickup voltage",
+        "offset",
+        "set point"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=controls_starters"
+        }
+      ]
+    },
+    {
+      "id": "ch18",
+      "chapter_num": 18,
+      "chapter_code": "Ch 18",
+      "title": "Electrical Troubleshooting Fundamentals",
+      "unit_id": "unit3",
+      "engine_id": "electrical_meter",
+      "engine_label": "Electrical & Meter Sim",
+      "path": "./modules/chapters/ch18.html",
+      "version": "9a0c3bcd94",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 829168,
+      "storage_key": "mrac_study_ch18_v1",
+      "exam_question_count": 38,
+      "study_item_count": 43,
+      "match_pair_count": 10,
+      "blitz_question_count": 47,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "18.1",
+          "title": "Electrical Test Equipment"
+        },
+        {
+          "id": "18.2",
+          "title": "Electrical Diagrams"
+        },
+        {
+          "id": "18.3",
+          "title": "Electrical Troubleshooting Process"
+        },
+        {
+          "id": "18.4",
+          "title": "Electrical Troubleshooting Strategies"
+        }
+      ],
+      "keywords": [
+        "electrical troubleshooting fundamentals",
+        "electrical",
+        "troubleshooting",
+        "fundamentals",
+        "electrical & meter sim",
+        "electrical test equipment",
+        "electrical diagrams",
+        "electrical troubleshooting process",
+        "electrical troubleshooting strategies",
+        "ammeter",
+        "ohmmeter",
+        "wattmeter",
+        "voltmeter",
+        "megohmmeter",
+        "power factor meter",
+        "sequence of operation",
+        "circuit and load",
+        "polarity",
+        "continuity"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=circuits_hopscotch"
+        }
+      ]
+    },
+    {
+      "id": "ch19",
+      "chapter_num": 19,
+      "chapter_code": "Ch 19",
+      "title": "Servicing Electric Motors and Controls",
+      "unit_id": "unit3",
+      "engine_id": "electrical_meter",
+      "engine_label": "Electrical & Meter Sim",
+      "path": "./modules/chapters/ch19.html",
+      "version": "b3c3a23c84",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 793837,
+      "storage_key": "mrac_study_ch19_v1",
+      "exam_question_count": 27,
+      "study_item_count": 27,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "19.1",
+          "title": "Troubleshooting Electric Motors"
+        },
+        {
+          "id": "19.2",
+          "title": "Servicing Hermetic Compressor Motors"
+        },
+        {
+          "id": "19.3",
+          "title": "Servicing Fan Motors"
+        },
+        {
+          "id": "19.4",
+          "title": "Servicing External Motors"
+        },
+        {
+          "id": "19.5",
+          "title": "Servicing Motor Control Systems"
+        }
+      ],
+      "keywords": [
+        "servicing electric motors and controls",
+        "servicing",
+        "electric",
+        "motors",
+        "and",
+        "controls",
+        "electrical & meter sim",
+        "troubleshooting electric motors",
+        "servicing hermetic compressor motors",
+        "servicing fan motors",
+        "servicing external motors",
+        "servicing motor control systems",
+        "continuously",
+        "are used during motor start-up",
+        "disconnect the capacitor from the circuit",
+        "20°f",
+        "30 k ω resistor",
+        "resistance",
+        "low-voltage control circuit",
+        "ohmmeter",
+        "start capacitor",
+        "oilless bushing"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=motors_caps"
+        }
+      ]
+    },
+    {
+      "id": "ch20",
+      "chapter_num": 20,
+      "chapter_code": "Ch 20",
+      "title": "Overview of Domestic Refrigerators and Freezers",
+      "unit_id": "unit4",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch20.html",
+      "version": "552fca1a15",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 1863311,
+      "storage_key": "mrac_study_ch20_v1",
+      "exam_question_count": 67,
+      "study_item_count": 83,
+      "match_pair_count": 10,
+      "blitz_question_count": 60,
+      "sim_mission_count": 7,
+      "epa_608_count": 3,
+      "sections": [
+        {
+          "id": "20.1",
+          "title": "Domestic Refrigeration"
+        },
+        {
+          "id": "20.2",
+          "title": "Basic Components of Refrigerators and Freezers"
+        },
+        {
+          "id": "20.3",
+          "title": "Specialized Systems"
+        }
+      ],
+      "keywords": [
+        "overview of domestic refrigerators and freezers",
+        "overview",
+        "of",
+        "domestic",
+        "refrigerators",
+        "and",
+        "freezers",
+        "heating & cycle sequence",
+        "domestic refrigeration",
+        "basic components of refrigerators and freezers",
+        "specialized systems",
+        "continuous defrost timer",
+        "demand defrost",
+        "adaptive defrost",
+        "mullion heater",
+        "cumulative run-time defrost system",
+        "frost-free",
+        "defrost thermostat",
+        "drip pan",
+        "continuous",
+        "intermittent"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R134A&valve=fxo"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch21",
+      "chapter_num": 21,
+      "chapter_code": "Ch 21",
+      "title": "Installation and Service of Domestic Refrigerators and Freezers",
+      "unit_id": "unit4",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch21.html",
+      "version": "804a3ff579",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 907979,
+      "storage_key": "mrac_study_ch21_v1",
+      "exam_question_count": 89,
+      "study_item_count": 89,
+      "match_pair_count": 10,
+      "blitz_question_count": 60,
+      "sim_mission_count": 7,
+      "epa_608_count": 25,
+      "sections": [
+        {
+          "id": "21.1",
+          "title": "Installing a Refrigerator-Freezer"
+        },
+        {
+          "id": "21.2",
+          "title": "Troubleshooting Refrigerator-Freezer Symptoms"
+        },
+        {
+          "id": "21.3",
+          "title": "Checking External Circuits"
+        },
+        {
+          "id": "21.4",
+          "title": "Diagnosing Internal Troubles"
+        },
+        {
+          "id": "21.5",
+          "title": "External Service Operations"
+        },
+        {
+          "id": "21.6",
+          "title": "Internal Service Operations"
+        }
+      ],
+      "keywords": [
+        "installation and service of domestic refrigerators and freezers",
+        "installation",
+        "and",
+        "service",
+        "of",
+        "domestic",
+        "refrigerators",
+        "freezers",
+        "heating & cycle sequence",
+        "installing a refrigerator-freezer",
+        "troubleshooting refrigerator-freezer symptoms",
+        "checking external circuits",
+        "diagnosing internal troubles",
+        "external service operations",
+        "internal service operations",
+        "removed after the unit is installed",
+        "loosened after the unit is installed",
+        "heat shield",
+        "automatic",
+        "may cause an unacceptable voltage drop",
+        "it should be disconnected for a few minutes",
+        "mullion heater",
+        "green",
+        "5 v",
+        "test light or an ohmmeter"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R134A&valve=fxo"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch22",
+      "chapter_num": 22,
+      "chapter_code": "Ch 22",
+      "title": "Self-Contained Air-Conditioning Systems",
+      "unit_id": "unit4",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch22.html",
+      "version": "13cecf4fbb",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 3218521,
+      "storage_key": "mrac_study_ch22_v1",
+      "exam_question_count": 25,
+      "study_item_count": 33,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 4,
+      "sections": [
+        {
+          "id": "22.1",
+          "title": "Principles of Cooling and Humidity Control"
+        },
+        {
+          "id": "22.2",
+          "title": "Room Air Conditioners"
+        },
+        {
+          "id": "22.3",
+          "title": "Packaged Terminal Air Conditioners (PTACs)"
+        },
+        {
+          "id": "22.4",
+          "title": "Console Air Conditioners"
+        },
+        {
+          "id": "22.5",
+          "title": "Portable Air Conditioners"
+        }
+      ],
+      "keywords": [
+        "self-contained air-conditioning systems",
+        "self-contained",
+        "air-conditioning",
+        "systems",
+        "heating & cycle sequence",
+        "principles of cooling and humidity control",
+        "room air conditioners",
+        "packaged terminal air conditioners (ptacs)",
+        "console air conditioners",
+        "portable air conditioners",
+        "40°f to 50°f (4°c to 10°c)",
+        "lowered",
+        "filter",
+        "compressor and condenser",
+        "conditioner",
+        "suction line and liquid line",
+        "r-410a",
+        "evaporator",
+        "ptac",
+        "console"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch23",
+      "chapter_num": 23,
+      "chapter_code": "Ch 23",
+      "title": "Residential Split Air-Conditioning Systems",
+      "unit_id": "unit4",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch23.html",
+      "version": "61091d08b9",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 2741439,
+      "storage_key": "mrac_study_ch23_v1",
+      "exam_question_count": 37,
+      "study_item_count": 46,
+      "match_pair_count": 10,
+      "blitz_question_count": 46,
+      "sim_mission_count": 7,
+      "epa_608_count": 3,
+      "sections": [
+        {
+          "id": "23.1",
+          "title": "Split Air-Conditioning Systems"
+        },
+        {
+          "id": "23.2",
+          "title": "Comfort Cooling Controls"
+        },
+        {
+          "id": "23.3",
+          "title": "Central Air-Conditioning Systems"
+        },
+        {
+          "id": "23.4",
+          "title": "Installing Central Air-Conditioning"
+        },
+        {
+          "id": "23.5",
+          "title": "Servicing Central Air-Conditioning Systems"
+        },
+        {
+          "id": "23.6",
+          "title": "Ductless Split Systems"
+        }
+      ],
+      "keywords": [
+        "residential split air-conditioning systems",
+        "residential",
+        "split",
+        "air-conditioning",
+        "systems",
+        "heating & cycle sequence",
+        "split air-conditioning systems",
+        "comfort cooling controls",
+        "central air-conditioning systems",
+        "installing central air-conditioning",
+        "servicing central air-conditioning systems",
+        "ductless split systems",
+        "central air-conditioning",
+        "thermostats, motor starters, and relays",
+        "thermal overloads",
+        "blank-off",
+        "24 vac",
+        "clean or replace the air filter",
+        "assist in oil return",
+        "vrf",
+        "may interface with wi-fi to mobile devices",
+        "outdoor humidity"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch24",
+      "chapter_num": 24,
+      "chapter_code": "Ch 24",
+      "title": "Humidity Control",
+      "unit_id": "unit4",
+      "engine_id": "airflow_duct",
+      "engine_label": "Airflow & Duct Sim",
+      "path": "./modules/chapters/ch24.html",
+      "version": "e80af5b9c9",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 801111,
+      "storage_key": "mrac_study_ch24_v1",
+      "exam_question_count": 22,
+      "study_item_count": 31,
+      "match_pair_count": 11,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "24.1",
+          "title": "Humidity Levels and Comfort"
+        },
+        {
+          "id": "24.2",
+          "title": "Types of Humidifiers"
+        },
+        {
+          "id": "24.3",
+          "title": "Servicing and Installing Humidifiers"
+        },
+        {
+          "id": "24.4",
+          "title": "Dehumidifying Equipment"
+        }
+      ],
+      "keywords": [
+        "humidity control",
+        "humidity",
+        "control",
+        "airflow & duct sim",
+        "humidity levels and comfort",
+        "types of humidifiers",
+        "servicing and installing humidifiers",
+        "dehumidifying equipment",
+        "piezoelectric humidifier",
+        "vaporizing humidifier",
+        "plenum-mounted humidifier",
+        "under-duct humidifier",
+        "bypass humidifier",
+        "fixed filter humidifier",
+        "very hard water",
+        "demineralized water",
+        "soft water",
+        "medium hard water",
+        "softened water"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch25",
+      "chapter_num": 25,
+      "chapter_code": "Ch 25",
+      "title": "Commercial Air-Conditioning Systems",
+      "unit_id": "unit5",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch25.html",
+      "version": "85d11c272c",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 2082208,
+      "storage_key": "mrac_study_ch25_v1",
+      "exam_question_count": 40,
+      "study_item_count": 57,
+      "match_pair_count": 10,
+      "blitz_question_count": 48,
+      "sim_mission_count": 7,
+      "epa_608_count": 11,
+      "sections": [
+        {
+          "id": "25.1",
+          "title": "Rooftop and Outdoor Units"
+        },
+        {
+          "id": "25.2",
+          "title": "Variable Refrigerant Flow (VRF) Systems"
+        },
+        {
+          "id": "25.3",
+          "title": "Chillers"
+        },
+        {
+          "id": "25.4",
+          "title": "Cooling Towers"
+        }
+      ],
+      "keywords": [
+        "commercial air-conditioning systems",
+        "commercial",
+        "air-conditioning",
+        "systems",
+        "heating & cycle sequence",
+        "rooftop and outdoor units",
+        "variable refrigerant flow (vrf) systems",
+        "chillers",
+        "cooling towers",
+        "basin heater",
+        "enthalpy control",
+        "air-side economizer",
+        "cooling tower",
+        "packaged outdoor air-conditioning unit",
+        "chiller system",
+        "purge unit",
+        "rooftop unit",
+        "fill",
+        "secondary emission-collection device"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch26",
+      "chapter_num": 26,
+      "chapter_code": "Ch 26",
+      "title": "Commercial Air-Conditioning Controls",
+      "unit_id": "unit5",
+      "engine_id": "electrical_meter",
+      "engine_label": "Electrical & Meter Sim",
+      "path": "./modules/chapters/ch26.html",
+      "version": "e8ea39e1d1",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 798204,
+      "storage_key": "mrac_study_ch26_v1",
+      "exam_question_count": 28,
+      "study_item_count": 28,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "26.1",
+          "title": "Comfort Cooling Controls"
+        },
+        {
+          "id": "26.2",
+          "title": "Zoned Systems"
+        },
+        {
+          "id": "26.3",
+          "title": "Building Automation Systems"
+        },
+        {
+          "id": "26.4",
+          "title": "Direct Digital Control (DDC)"
+        },
+        {
+          "id": "26.5",
+          "title": "Building Control Protocols"
+        },
+        {
+          "id": "26.6",
+          "title": "Building Control System Diagnostics and Repair"
+        }
+      ],
+      "keywords": [
+        "commercial air-conditioning controls",
+        "commercial",
+        "air-conditioning",
+        "controls",
+        "electrical & meter sim",
+        "comfort cooling controls",
+        "zoned systems",
+        "building automation systems",
+        "direct digital control (ddc)",
+        "building control protocols",
+        "building control system diagnostics and repair",
+        "evaporator",
+        "pressure-sensing",
+        "one zone control panel",
+        "outdoor temperature sensor for outdoor reset",
+        "total energy management",
+        "pneumatic controls",
+        "efficiency",
+        "thermostats",
+        "pressure",
+        "automation"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=controls_starters"
+        }
+      ]
+    },
+    {
+      "id": "ch27",
+      "chapter_num": 27,
+      "chapter_code": "Ch 27",
+      "title": "Absorption and Evaporative Cooling Systems",
+      "unit_id": "unit5",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch27.html",
+      "version": "abc709b625",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 2175202,
+      "storage_key": "mrac_study_ch27_v1",
+      "exam_question_count": 48,
+      "study_item_count": 61,
+      "match_pair_count": 10,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 8,
+      "sections": [
+        {
+          "id": "27.1",
+          "title": "Absorption Refrigeration Systems"
+        },
+        {
+          "id": "27.2",
+          "title": "Absorption Cooling Systems"
+        },
+        {
+          "id": "27.3",
+          "title": "Absorption System Service"
+        },
+        {
+          "id": "27.4",
+          "title": "Evaporative Cooling"
+        }
+      ],
+      "keywords": [
+        "absorption and evaporative cooling systems",
+        "absorption",
+        "and",
+        "evaporative",
+        "cooling",
+        "systems",
+        "heating & cycle sequence",
+        "absorption refrigeration systems",
+        "absorption cooling systems",
+        "absorption system service",
+        "evaporative cooling",
+        "absorbant",
+        "affinity",
+        "strong solution",
+        "weak solution",
+        "adsorption",
+        "compression",
+        "heat",
+        "refrigerant",
+        "an affinity for"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch28",
+      "chapter_num": 28,
+      "chapter_code": "Ch 28",
+      "title": "Air Movement and Measurement",
+      "unit_id": "unit5",
+      "engine_id": "airflow_duct",
+      "engine_label": "Airflow & Duct Sim",
+      "path": "./modules/chapters/ch28.html",
+      "version": "f2fc60e471",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 957865,
+      "storage_key": "mrac_study_ch28_v1",
+      "exam_question_count": 49,
+      "study_item_count": 72,
+      "match_pair_count": 27,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "28.1",
+          "title": "Atmosphere and Air"
+        },
+        {
+          "id": "28.2",
+          "title": "Comfort Conditions"
+        },
+        {
+          "id": "28.3",
+          "title": "Air Movement"
+        }
+      ],
+      "keywords": [
+        "air movement and measurement",
+        "air",
+        "movement",
+        "and",
+        "measurement",
+        "airflow & duct sim",
+        "atmosphere and air",
+        "comfort conditions",
+        "air movement",
+        "thermosphere",
+        "stratosphere",
+        "equivalent temperature",
+        "humidity",
+        "troposphere",
+        "exosphere",
+        "nitrogen",
+        "oxygen",
+        "argon",
+        "carbon dioxide",
+        "hydrogen",
+        "sulfur dioxide",
+        "desiccant",
+        "sensible heat ratio",
+        "hygrometer",
+        "degree days",
+        "specific heat",
+        "enthalpy",
+        "make-up air",
+        "heat sink",
+        "windchill index",
+        "swinging-vane anemometer",
+        "hot-wire anemometer",
+        "manometer"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch29",
+      "chapter_num": 29,
+      "chapter_code": "Ch 29",
+      "title": "Air Quality",
+      "unit_id": "unit5",
+      "engine_id": "airflow_duct",
+      "engine_label": "Airflow & Duct Sim",
+      "path": "./modules/chapters/ch29.html",
+      "version": "f47047c06e",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 870532,
+      "storage_key": "mrac_study_ch29_v1",
+      "exam_question_count": 59,
+      "study_item_count": 73,
+      "match_pair_count": 17,
+      "blitz_question_count": 56,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "29.1",
+          "title": "Air Pollutants"
+        },
+        {
+          "id": "29.2",
+          "title": "Indoor Air Quality"
+        },
+        {
+          "id": "29.3",
+          "title": "Airborne Pathogen Mitigation and COVID-19"
+        },
+        {
+          "id": "29.4",
+          "title": "Air Cleaning"
+        },
+        {
+          "id": "29.5",
+          "title": "Indoor Air Quality Systems"
+        }
+      ],
+      "keywords": [
+        "air quality",
+        "air",
+        "quality",
+        "airflow & duct sim",
+        "air pollutants",
+        "indoor air quality",
+        "airborne pathogen mitigation and covid-19",
+        "air cleaning",
+        "indoor air quality systems",
+        "smoke",
+        "pollutant",
+        "bacteria",
+        "dust",
+        "fumes",
+        "mold",
+        "bioaerosols",
+        "sulfur dioxide",
+        "carbon monoxide",
+        "radon",
+        "dioxide",
+        "ozone",
+        "disposable",
+        "washable",
+        "electrostatic",
+        "carbon",
+        "hepa"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch30",
+      "chapter_num": 30,
+      "chapter_code": "Ch 30",
+      "title": "Air Distribution",
+      "unit_id": "unit5",
+      "engine_id": "airflow_duct",
+      "engine_label": "Airflow & Duct Sim",
+      "path": "./modules/chapters/ch30.html",
+      "version": "b3bed09cfe",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 1330431,
+      "storage_key": "mrac_study_ch30_v1",
+      "exam_question_count": 47,
+      "study_item_count": 58,
+      "match_pair_count": 10,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "30.1",
+          "title": "Air Properties and Behavior"
+        },
+        {
+          "id": "30.2",
+          "title": "Air Circulation"
+        },
+        {
+          "id": "30.3",
+          "title": "Basic Ventilation Requirements"
+        },
+        {
+          "id": "30.4",
+          "title": "Air Ducts"
+        },
+        {
+          "id": "30.5",
+          "title": "Duct Sizing"
+        },
+        {
+          "id": "30.6",
+          "title": "Fans"
+        },
+        {
+          "id": "30.7",
+          "title": "Air Curtains"
+        }
+      ],
+      "keywords": [
+        "air distribution",
+        "air",
+        "distribution",
+        "airflow & duct sim",
+        "air properties and behavior",
+        "air circulation",
+        "basic ventilation requirements",
+        "air ducts",
+        "duct sizing",
+        "fans",
+        "air curtains",
+        "friction loss",
+        "eternal static pressure (esp)",
+        "device pressure losses (dpl)",
+        "friction rate",
+        "available static pressure (asp)",
+        "aspect ratio",
+        "elbow",
+        "latent",
+        "75°f (24°c) db",
+        "primary air"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch31",
+      "chapter_num": 31,
+      "chapter_code": "Ch 31",
+      "title": "Ventilation System Service",
+      "unit_id": "unit5",
+      "engine_id": "airflow_duct",
+      "engine_label": "Airflow & Duct Sim",
+      "path": "./modules/chapters/ch31.html",
+      "version": "04d01c9656",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 793596,
+      "storage_key": "mrac_study_ch31_v1",
+      "exam_question_count": 25,
+      "study_item_count": 25,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "31.1",
+          "title": "Airflow Measurement"
+        },
+        {
+          "id": "31.2",
+          "title": "Special Duct Problems and Duct Maintenance"
+        },
+        {
+          "id": "31.3",
+          "title": "Filter Service"
+        }
+      ],
+      "keywords": [
+        "ventilation system service",
+        "ventilation",
+        "system",
+        "service",
+        "airflow & duct sim",
+        "airflow measurement",
+        "special duct problems and duct maintenance",
+        "filter service",
+        "25 fpm",
+        "reflectors",
+        "absorbers",
+        "access tools",
+        "close exterior windows and doors",
+        "500",
+        "blower door",
+        "duct blaster",
+        "air handler flowmeter",
+        "flow hood"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch32",
+      "chapter_num": 32,
+      "chapter_code": "Ch 32",
+      "title": "Heating and Cooling Loads",
+      "unit_id": "unit5",
+      "engine_id": "airflow_duct",
+      "engine_label": "Airflow & Duct Sim",
+      "path": "./modules/chapters/ch32.html",
+      "version": "dd5a4a74b1",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 827184,
+      "storage_key": "mrac_study_ch32_v1",
+      "exam_question_count": 35,
+      "study_item_count": 41,
+      "match_pair_count": 10,
+      "blitz_question_count": 44,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "32.1",
+          "title": "Heat Transfer and Heat Loads"
+        },
+        {
+          "id": "32.2",
+          "title": "Calculating Heat Leakage"
+        },
+        {
+          "id": "32.3",
+          "title": "Other Factors Affecting Heat Loads"
+        },
+        {
+          "id": "32.4",
+          "title": "Heating and Cooling Load - Manual J Method"
+        }
+      ],
+      "keywords": [
+        "heating and cooling loads",
+        "heating",
+        "and",
+        "cooling",
+        "loads",
+        "airflow & duct sim",
+        "heat transfer and heat loads",
+        "calculating heat leakage",
+        "other factors affecting heat loads",
+        "heating and cooling load - manual j method",
+        "heat transfer rate",
+        "heat lag",
+        "thermal resistance",
+        "sustainable design",
+        "emissivity",
+        "indoor design temperature",
+        "outdoor design temperature",
+        "heat gain",
+        "transferring",
+        "heat load"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch33",
+      "chapter_num": 33,
+      "chapter_code": "Ch 33",
+      "title": "Gas-Fired Heating Systems",
+      "unit_id": "unit6",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch33.html",
+      "version": "a75b144621",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 919686,
+      "storage_key": "mrac_study_ch33_v1",
+      "exam_question_count": 79,
+      "study_item_count": 96,
+      "match_pair_count": 17,
+      "blitz_question_count": 60,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "33.1",
+          "title": "Gas Furnace Operation Overview"
+        },
+        {
+          "id": "33.2",
+          "title": "Combustion"
+        },
+        {
+          "id": "33.3",
+          "title": "Gas Valves"
+        },
+        {
+          "id": "33.4",
+          "title": "Gas Burners"
+        },
+        {
+          "id": "33.5",
+          "title": "Ignition Systems"
+        },
+        {
+          "id": "33.6",
+          "title": "Gas Furnace Controls"
+        },
+        {
+          "id": "33.7",
+          "title": "Gas Furnace Efficiency"
+        },
+        {
+          "id": "33.8",
+          "title": "Gas Furnace Venting Categories"
+        },
+        {
+          "id": "33.9",
+          "title": "Gas-Fired Radiant Heat"
+        },
+        {
+          "id": "33.10",
+          "title": "Gas-Fired Heating System Service"
+        }
+      ],
+      "keywords": [
+        "gas-fired heating systems",
+        "gas-fired",
+        "heating",
+        "systems",
+        "heating & cycle sequence",
+        "gas furnace operation overview",
+        "combustion",
+        "gas valves",
+        "gas burners",
+        "ignition systems",
+        "gas furnace controls",
+        "gas furnace efficiency",
+        "gas furnace venting categories",
+        "gas-fired radiant heat",
+        "gas-fired heating system service",
+        "flammability limits",
+        "hydrocarbon",
+        "incomplete combustion",
+        "primary air",
+        "stoichiometric combustion",
+        "secondary air",
+        "complete combustion",
+        "stack temperature",
+        "excess air",
+        "flame rectification",
+        "bonnet",
+        "high-limit switch",
+        "flame rollout",
+        "sail switch",
+        "pressure switch",
+        "rollout switch",
+        "end switch"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch34",
+      "chapter_num": 34,
+      "chapter_code": "Ch 34",
+      "title": "Oil-Fired Heating Systems",
+      "unit_id": "unit6",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch34.html",
+      "version": "280fe41dcf",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 912540,
+      "storage_key": "mrac_study_ch34_v1",
+      "exam_question_count": 76,
+      "study_item_count": 93,
+      "match_pair_count": 19,
+      "blitz_question_count": 60,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "34.1",
+          "title": "Basic Oil Furnace Operation"
+        },
+        {
+          "id": "34.2",
+          "title": "Fuel Oil"
+        },
+        {
+          "id": "34.3",
+          "title": "Combustion Efficiency"
+        },
+        {
+          "id": "34.4",
+          "title": "Fuel Line Components"
+        },
+        {
+          "id": "34.5",
+          "title": "Oil Burners"
+        },
+        {
+          "id": "34.6",
+          "title": "Primary Control Units"
+        },
+        {
+          "id": "34.7",
+          "title": "Oil Furnace Exhaust"
+        },
+        {
+          "id": "34.8",
+          "title": "Oil-Fired Heating System Service"
+        }
+      ],
+      "keywords": [
+        "oil-fired heating systems",
+        "oil-fired",
+        "heating",
+        "systems",
+        "heating & cycle sequence",
+        "basic oil furnace operation",
+        "fuel oil",
+        "combustion efficiency",
+        "fuel line components",
+        "oil burners",
+        "primary control units",
+        "oil furnace exhaust",
+        "oil-fired heating system service",
+        "oil deaerator",
+        "bypass plug",
+        "fuel line filter",
+        "booster pump",
+        "fuel unit",
+        "adjustable air band",
+        "oil burner nozzle",
+        "atomization",
+        "patterning",
+        "stack relay",
+        "recycle limit",
+        "interrupted ignition",
+        "cad cell",
+        "standby",
+        "intermittent ignition",
+        "ignition carryover",
+        "ignition transformer",
+        "solid-state igniter",
+        "reset limit"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch35",
+      "chapter_num": 35,
+      "chapter_code": "Ch 35",
+      "title": "Electric Heating Systems",
+      "unit_id": "unit6",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch35.html",
+      "version": "54ee770cf9",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 833978,
+      "storage_key": "mrac_study_ch35_v1",
+      "exam_question_count": 35,
+      "study_item_count": 43,
+      "match_pair_count": 10,
+      "blitz_question_count": 44,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "35.1",
+          "title": "Principles of Electric Resistance Heating"
+        },
+        {
+          "id": "35.2",
+          "title": "Electric Heating Elements"
+        },
+        {
+          "id": "35.3",
+          "title": "Electric Heating Systems"
+        },
+        {
+          "id": "35.4",
+          "title": "Electric Furnace and Duct Heater Controls"
+        },
+        {
+          "id": "35.5",
+          "title": "Electric Baseboard Heating Unit Controls"
+        },
+        {
+          "id": "35.6",
+          "title": "Electric Heat Construction Practices"
+        },
+        {
+          "id": "35.7",
+          "title": "Electric Heating System Service"
+        }
+      ],
+      "keywords": [
+        "electric heating systems",
+        "electric",
+        "heating",
+        "systems",
+        "heating & cycle sequence",
+        "principles of electric resistance heating",
+        "electric heating elements",
+        "electric furnace and duct heater controls",
+        "electric baseboard heating unit controls",
+        "electric heat construction practices",
+        "electric heating system service",
+        "direct radiant heat",
+        "fan heater",
+        "electric baseboard heating unit",
+        "indirect radiant heat",
+        "electric furnace",
+        "duct heater",
+        "sail switch",
+        "fan interlock relay",
+        "heat stage",
+        "open wire"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "electrical-board",
+          "label": "⚡ Electrical Board",
+          "query": "tab=ohm_watt"
+        }
+      ]
+    },
+    {
+      "id": "ch36",
+      "chapter_num": 36,
+      "chapter_code": "Ch 36",
+      "title": "Air-Source Heat Pumps",
+      "unit_id": "unit6",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch36.html",
+      "version": "025e7fc269",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 832675,
+      "storage_key": "mrac_study_ch36_v1",
+      "exam_question_count": 36,
+      "study_item_count": 42,
+      "match_pair_count": 10,
+      "blitz_question_count": 44,
+      "sim_mission_count": 7,
+      "epa_608_count": 7,
+      "sections": [
+        {
+          "id": "36.1",
+          "title": "Heat Pump Basics"
+        },
+        {
+          "id": "36.2",
+          "title": "Types of Heat Pumps"
+        },
+        {
+          "id": "36.3",
+          "title": "Heat Pump Efficiency"
+        },
+        {
+          "id": "36.4",
+          "title": "Heat Pump System Components"
+        },
+        {
+          "id": "36.5",
+          "title": "Heat Pump Controls"
+        },
+        {
+          "id": "36.6",
+          "title": "Heat Pumps and Solar Heating Systems"
+        },
+        {
+          "id": "36.7",
+          "title": "Heat Pump System Service"
+        }
+      ],
+      "keywords": [
+        "air-source heat pumps",
+        "air-source",
+        "heat",
+        "pumps",
+        "heating & cycle sequence",
+        "heat pump basics",
+        "types of heat pumps",
+        "heat pump efficiency",
+        "heat pump system components",
+        "heat pump controls",
+        "heat pumps and solar heating systems",
+        "heat pump system service",
+        "reversing valve",
+        "flow check piston",
+        "biflow bypass txv",
+        "charge compensator tank",
+        "auxiliary heat",
+        "air coil",
+        "electric heat defrost",
+        "balance point",
+        "evaporator",
+        "ground-source"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=heating&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch37",
+      "chapter_num": 37,
+      "chapter_code": "Ch 37",
+      "title": "Geothermal Heat Pumps",
+      "unit_id": "unit6",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch37.html",
+      "version": "86d32b460a",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 823604,
+      "storage_key": "mrac_study_ch37_v1",
+      "exam_question_count": 38,
+      "study_item_count": 45,
+      "match_pair_count": 10,
+      "blitz_question_count": 46,
+      "sim_mission_count": 7,
+      "epa_608_count": 1,
+      "sections": [
+        {
+          "id": "37.1",
+          "title": "Types of Geothermal Heat Pumps"
+        },
+        {
+          "id": "37.2",
+          "title": "Geothermal Heat Pump System Components"
+        },
+        {
+          "id": "37.3",
+          "title": "Geothermal Heat Pump Installation"
+        },
+        {
+          "id": "37.4",
+          "title": "Geothermal Heat Pump Service and Troubleshooting"
+        }
+      ],
+      "keywords": [
+        "geothermal heat pumps",
+        "geothermal",
+        "heat",
+        "pumps",
+        "heating & cycle sequence",
+        "types of geothermal heat pumps",
+        "geothermal heat pump system components",
+        "geothermal heat pump installation",
+        "geothermal heat pump service and troubleshooting",
+        "direct-exchange",
+        "water-source",
+        "closed-loop",
+        "open-loop",
+        "air coil",
+        "ground coil",
+        "water coil",
+        "water loop",
+        "ground loop",
+        "ground-source"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=heating&ref=R410A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch38",
+      "chapter_num": 38,
+      "chapter_code": "Ch 38",
+      "title": "Hydronic Heating Fundamentals",
+      "unit_id": "unit6",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch38.html",
+      "version": "c1edb818c6",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 843099,
+      "storage_key": "mrac_study_ch38_v1",
+      "exam_question_count": 48,
+      "study_item_count": 49,
+      "match_pair_count": 10,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "38.1",
+          "title": "Hydronic System Components"
+        },
+        {
+          "id": "38.2",
+          "title": "Hydronic System Designs"
+        },
+        {
+          "id": "38.3",
+          "title": "Hydronic System Controls"
+        },
+        {
+          "id": "38.4",
+          "title": "Hydronic System Installation"
+        },
+        {
+          "id": "38.5",
+          "title": "Troubleshooting and Servicing Hydronic Systems"
+        },
+        {
+          "id": "38.6",
+          "title": "Preparing a Boiler for the Heating System"
+        }
+      ],
+      "keywords": [
+        "hydronic heating fundamentals",
+        "hydronic",
+        "heating",
+        "fundamentals",
+        "heating & cycle sequence",
+        "hydronic system components",
+        "hydronic system designs",
+        "hydronic system controls",
+        "hydronic system installation",
+        "troubleshooting and servicing hydronic systems",
+        "preparing a boiler for the heating system",
+        "cast iron, copper, or steel",
+        "deaeration",
+        "release free air",
+        "four-pipe",
+        "steam traps",
+        "high-limit control",
+        "low-water cutoff",
+        "eccentric reducer fitting",
+        "pressure-relief",
+        "one-third"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch39",
+      "chapter_num": 39,
+      "chapter_code": "Ch 39",
+      "title": "Solar Power and Thermal Storage",
+      "unit_id": "unit6",
+      "engine_id": "heating_sequence",
+      "engine_label": "Heating & Cycle Sequence",
+      "path": "./modules/chapters/ch39.html",
+      "version": "d3032c40ce",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 1607887,
+      "storage_key": "mrac_study_ch39_v1",
+      "exam_question_count": 50,
+      "study_item_count": 69,
+      "match_pair_count": 10,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "39.1",
+          "title": "The Nature of Solar Energy"
+        },
+        {
+          "id": "39.2",
+          "title": "Solar Collectors"
+        },
+        {
+          "id": "39.3",
+          "title": "Solar Heating Systems"
+        },
+        {
+          "id": "39.4",
+          "title": "Applications for Solar Heating Systems"
+        },
+        {
+          "id": "39.5",
+          "title": "Supplementary Heat"
+        },
+        {
+          "id": "39.6",
+          "title": "Solar Energy Cooling Systems"
+        },
+        {
+          "id": "39.7",
+          "title": "Thermal Energy Storage (TES) Systems"
+        },
+        {
+          "id": "39.8",
+          "title": "Converting Solar Energy to Electricity"
+        }
+      ],
+      "keywords": [
+        "solar power and thermal storage",
+        "solar",
+        "power",
+        "and",
+        "thermal",
+        "storage",
+        "heating & cycle sequence",
+        "the nature of solar energy",
+        "solar collectors",
+        "solar heating systems",
+        "applications for solar heating systems",
+        "supplementary heat",
+        "solar energy cooling systems",
+        "thermal energy storage (tes) systems",
+        "converting solar energy to electricity",
+        "active solar energy system",
+        "solar domestic hot water system",
+        "hybrid solar energy system",
+        "passive air-based solar heating system",
+        "passive liquid-based solar heating system",
+        "solar mechanical a/c system",
+        "solar absorption a/c system",
+        "photons",
+        "water vapor and carbon dioxide",
+        "ozone"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch40",
+      "chapter_num": 40,
+      "chapter_code": "Ch 40",
+      "title": "Energy Management",
+      "unit_id": "unit6",
+      "engine_id": "airflow_duct",
+      "engine_label": "Airflow & Duct Sim",
+      "path": "./modules/chapters/ch40.html",
+      "version": "4e061351ad",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 813451,
+      "storage_key": "mrac_study_ch40_v1",
+      "exam_question_count": 30,
+      "study_item_count": 36,
+      "match_pair_count": 10,
+      "blitz_question_count": 39,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "40.1",
+          "title": "Building Performance and Building Science"
+        },
+        {
+          "id": "40.2",
+          "title": "Energy Auditing"
+        },
+        {
+          "id": "40.3",
+          "title": "Building Efficiency"
+        },
+        {
+          "id": "40.4",
+          "title": "HVAC Equipment Efficiency"
+        },
+        {
+          "id": "40.5",
+          "title": "HVAC Alternatives for Energy Conservation"
+        }
+      ],
+      "keywords": [
+        "energy management",
+        "energy",
+        "management",
+        "airflow & duct sim",
+        "building performance and building science",
+        "energy auditing",
+        "building efficiency",
+        "hvac equipment efficiency",
+        "hvac alternatives for energy conservation",
+        "combined heat and power (chp)",
+        "climate zones",
+        "seasonal average cop",
+        "energy efficiency ratio (eer)",
+        "heating seasonal performance factor (hspf)",
+        "seasonal energy efficiency ratio (seer)",
+        "coefficient of performance (cop)",
+        "ventilation",
+        "energy audit",
+        "blower door test"
+      ],
+      "handout": null,
+      "companions": []
+    },
+    {
+      "id": "ch41",
+      "chapter_num": 41,
+      "chapter_code": "Ch 41",
+      "title": "Overview of Commercial Refrigeration Systems",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch41.html",
+      "version": "842a7480dd",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 1752989,
+      "storage_key": "mrac_study_ch41_v1",
+      "exam_question_count": 32,
+      "study_item_count": 55,
+      "match_pair_count": 16,
+      "blitz_question_count": 39,
+      "sim_mission_count": 7,
+      "epa_608_count": 0,
+      "sections": [
+        {
+          "id": "41.1",
+          "title": "Commercial Refrigeration Applications"
+        },
+        {
+          "id": "41.2",
+          "title": "Commercial Refrigeration Systems"
+        },
+        {
+          "id": "41.3",
+          "title": "Industrial Applications"
+        }
+      ],
+      "keywords": [
+        "overview of commercial refrigeration systems",
+        "overview",
+        "of",
+        "commercial",
+        "refrigeration",
+        "systems",
+        "commercial walk-in sim",
+        "commercial refrigeration applications",
+        "commercial refrigeration systems",
+        "industrial applications",
+        "hot and cold merchandiser",
+        "ultraviolet lamps",
+        "walk-in cabinets",
+        "quick chiller",
+        "blast freezer",
+        "parallel compressor rack",
+        "ice bank",
+        "distributed system",
+        "tap water cooler",
+        "cryogenic food freezing",
+        "pressure dew point",
+        "self-contained water cooler",
+        "passively chilled beverage dispenser",
+        "locker plant",
+        "dispensing freezer",
+        "ice machines"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        }
+      ]
+    },
+    {
+      "id": "ch42",
+      "chapter_num": 42,
+      "chapter_code": "Ch 42",
+      "title": "Special Refrigeration Systems and Applications",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch42.html",
+      "version": "abf1a1aeac",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 803242,
+      "storage_key": "mrac_study_ch42_v1",
+      "exam_question_count": 24,
+      "study_item_count": 31,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 3,
+      "sections": [
+        {
+          "id": "42.1",
+          "title": "Transportation Refrigeration"
+        },
+        {
+          "id": "42.2",
+          "title": "Alternative Refrigeration Methods"
+        }
+      ],
+      "keywords": [
+        "special refrigeration systems and applications",
+        "special",
+        "refrigeration",
+        "systems",
+        "and",
+        "applications",
+        "commercial walk-in sim",
+        "transportation refrigeration",
+        "alternative refrigeration methods",
+        "stirling cycle refrigeration system",
+        "thermoelectric refrigeration",
+        "expendable refrigeration system",
+        "eutectic plate",
+        "vortex tube",
+        "sublimation",
+        "keel cooler",
+        "peltier effect",
+        "the suction and discharge lines",
+        "larger-capacity"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch43",
+      "chapter_num": 43,
+      "chapter_code": "Ch 43",
+      "title": "Commercial Compressors",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch43.html",
+      "version": "cfa9b78f04",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 1722476,
+      "storage_key": "mrac_study_ch43_v1",
+      "exam_question_count": 49,
+      "study_item_count": 66,
+      "match_pair_count": 12,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 5,
+      "sections": [
+        {
+          "id": "43.1",
+          "title": "Types of Commercial Refrigeration Compressors"
+        },
+        {
+          "id": "43.2",
+          "title": "General Compressor Components and Systems"
+        },
+        {
+          "id": "43.3",
+          "title": "Oil Control Systems"
+        }
+      ],
+      "keywords": [
+        "commercial compressors",
+        "commercial",
+        "compressors",
+        "commercial walk-in sim",
+        "types of commercial refrigeration compressors",
+        "general compressor components and systems",
+        "oil control systems",
+        "open-drive compressor",
+        "direct-drive compressor",
+        "belt-driven compressor",
+        "reciprocating compressor",
+        "screw compressor",
+        "centrifugal compressor",
+        "oil safety control",
+        "oil level regulator",
+        "crankcase pressure regulator (cpr)",
+        "oil reservoir",
+        "oil separator",
+        "vibration absorber"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch44",
+      "chapter_num": 44,
+      "chapter_code": "Ch 44",
+      "title": "Commercial Evaporators, Condensers, and Other Heat Exchangers",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch44.html",
+      "version": "42342d9dc8",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 2314125,
+      "storage_key": "mrac_study_ch44_v1",
+      "exam_question_count": 38,
+      "study_item_count": 48,
+      "match_pair_count": 10,
+      "blitz_question_count": 46,
+      "sim_mission_count": 7,
+      "epa_608_count": 11,
+      "sections": [
+        {
+          "id": "44.1",
+          "title": "Commercial Refrigeration Evaporators"
+        },
+        {
+          "id": "44.2",
+          "title": "Commercial Refrigeration Condensers"
+        },
+        {
+          "id": "44.3",
+          "title": "Other Heat Exchangers"
+        }
+      ],
+      "keywords": [
+        "commercial evaporators, condensers, and other heat exchangers",
+        "commercial",
+        "evaporators",
+        "condensers",
+        "and",
+        "other",
+        "heat",
+        "exchangers",
+        "commercial walk-in sim",
+        "commercial refrigeration evaporators",
+        "commercial refrigeration condensers",
+        "other heat exchangers",
+        "brine solution",
+        "sweet water",
+        "overdefrosting",
+        "pump-down solenoid",
+        "suction line-liquid line heat exchanger",
+        "plate heat exchanger",
+        "heat recovery system",
+        "time-initiated, time-terminated",
+        "pump condensate from the system to the drain",
+        "energizes electric heating coils"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch45",
+      "chapter_num": 45,
+      "chapter_code": "Ch 45",
+      "title": "Commercial Metering Devices and Valves",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch45.html",
+      "version": "e50e9bf9e7",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 906130,
+      "storage_key": "mrac_study_ch45_v1",
+      "exam_question_count": 82,
+      "study_item_count": 82,
+      "match_pair_count": 10,
+      "blitz_question_count": 60,
+      "sim_mission_count": 7,
+      "epa_608_count": 23,
+      "sections": [
+        {
+          "id": "45.1",
+          "title": "Thermostatic Expansion Valves (TXVs)"
+        },
+        {
+          "id": "45.2",
+          "title": "Automatic Expansion Valves (AXVs)"
+        },
+        {
+          "id": "45.3",
+          "title": "Electronic Expansion Valves (EEVs)"
+        },
+        {
+          "id": "45.4",
+          "title": "Float-Operated Refrigerant Controls"
+        },
+        {
+          "id": "45.5",
+          "title": "Solenoid Valves"
+        },
+        {
+          "id": "45.6",
+          "title": "Pressure-Regulating Valves"
+        },
+        {
+          "id": "45.7",
+          "title": "Head Pressure Control Valves"
+        }
+      ],
+      "keywords": [
+        "commercial metering devices and valves",
+        "commercial",
+        "metering",
+        "devices",
+        "and",
+        "valves",
+        "commercial walk-in sim",
+        "thermostatic expansion valves (txvs)",
+        "automatic expansion valves (axvs)",
+        "electronic expansion valves (eevs)",
+        "float-operated refrigerant controls",
+        "solenoid valves",
+        "pressure-regulating valves",
+        "head pressure control valves",
+        "a pressure drop",
+        "outlet",
+        "pressure of the refrigerant",
+        "superheat",
+        "slugging",
+        "automatic expansion valve",
+        "dry system",
+        "bellows-type",
+        "electric",
+        "eev"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch46",
+      "chapter_num": 46,
+      "chapter_code": "Ch 46",
+      "title": "Commercial Refrigeration System Configurations",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch46.html",
+      "version": "6c5cef6038",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 2031121,
+      "storage_key": "mrac_study_ch46_v1",
+      "exam_question_count": 28,
+      "study_item_count": 34,
+      "match_pair_count": 10,
+      "blitz_question_count": 38,
+      "sim_mission_count": 7,
+      "epa_608_count": 6,
+      "sections": [
+        {
+          "id": "46.1",
+          "title": "Commercial Systems Configuration Overview"
+        },
+        {
+          "id": "46.2",
+          "title": "Multiple-Evaporator Systems"
+        },
+        {
+          "id": "46.3",
+          "title": "Modulating Refrigeration Systems"
+        },
+        {
+          "id": "46.4",
+          "title": "Multistage Systems"
+        },
+        {
+          "id": "46.5",
+          "title": "Secondary Loop Refrigeration Systems"
+        }
+      ],
+      "keywords": [
+        "commercial refrigeration system configurations",
+        "commercial",
+        "refrigeration",
+        "system",
+        "configurations",
+        "commercial walk-in sim",
+        "commercial systems configuration overview",
+        "multiple-evaporator systems",
+        "modulating refrigeration systems",
+        "multistage systems",
+        "secondary loop refrigeration systems",
+        "packaged",
+        "split",
+        "evaporator pressure regulator (epr)",
+        "low-side floats",
+        "an oversized system will tend to short cycle",
+        "multistage system",
+        "compressors connected in series",
+        "cascade refrigeration system",
+        "temperatures",
+        "absorbs heat but does not evaporate"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch47",
+      "chapter_num": 47,
+      "chapter_code": "Ch 47",
+      "title": "Installing Commercial Systems",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch47.html",
+      "version": "bbd704e82a",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 877725,
+      "storage_key": "mrac_study_ch47_v1",
+      "exam_question_count": 62,
+      "study_item_count": 62,
+      "match_pair_count": 10,
+      "blitz_question_count": 60,
+      "sim_mission_count": 7,
+      "epa_608_count": 14,
+      "sections": [
+        {
+          "id": "47.1",
+          "title": "Overview of Commercial Installations"
+        },
+        {
+          "id": "47.2",
+          "title": "Installing Condensing Units"
+        },
+        {
+          "id": "47.3",
+          "title": "Installing Expansion Valves"
+        },
+        {
+          "id": "47.4",
+          "title": "Installing Evaporators"
+        },
+        {
+          "id": "47.5",
+          "title": "Installing Refrigerant Lines"
+        },
+        {
+          "id": "47.6",
+          "title": "Installing Electric Motors"
+        },
+        {
+          "id": "47.7",
+          "title": "Testing Installations"
+        },
+        {
+          "id": "47.8",
+          "title": "Charging Commercial Systems"
+        },
+        {
+          "id": "47.9",
+          "title": "Starting a Commercial Refrigeration System"
+        }
+      ],
+      "keywords": [
+        "installing commercial systems",
+        "installing",
+        "commercial",
+        "systems",
+        "commercial walk-in sim",
+        "overview of commercial installations",
+        "installing condensing units",
+        "installing expansion valves",
+        "installing evaporators",
+        "installing refrigerant lines",
+        "installing electric motors",
+        "testing installations",
+        "charging commercial systems",
+        "starting a commercial refrigeration system",
+        "split",
+        "position and secure the refrigerated cabinets",
+        "install the evaporators",
+        "install all the valves and controls",
+        "where it can be exposed to heat sources",
+        "mounting grommets",
+        "ice formation",
+        "solenoid valves",
+        "delicately",
+        "brackets"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch48",
+      "chapter_num": 48,
+      "chapter_code": "Ch 48",
+      "title": "Troubleshooting Commercial Systems - System Diagnosis",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch48.html",
+      "version": "9462e97a69",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 881044,
+      "storage_key": "mrac_study_ch48_v1",
+      "exam_question_count": 56,
+      "study_item_count": 56,
+      "match_pair_count": 10,
+      "blitz_question_count": 56,
+      "sim_mission_count": 7,
+      "epa_608_count": 25,
+      "sections": [
+        {
+          "id": "48.1",
+          "title": "Commercial Refrigeration Troubleshooting"
+        },
+        {
+          "id": "48.2",
+          "title": "Checking Refrigerant Charge"
+        },
+        {
+          "id": "48.3",
+          "title": "Diagnosing Common Symptoms"
+        },
+        {
+          "id": "48.4",
+          "title": "Troubleshooting Ice Machines"
+        }
+      ],
+      "keywords": [
+        "troubleshooting commercial systems - system diagnosis",
+        "troubleshooting",
+        "commercial",
+        "systems",
+        "system",
+        "diagnosis",
+        "commercial walk-in sim",
+        "commercial refrigeration troubleshooting",
+        "checking refrigerant charge",
+        "diagnosing common symptoms",
+        "troubleshooting ice machines",
+        "the system is undercharged",
+        "insufficient",
+        "a lack of refrigerant",
+        "txv",
+        "higher",
+        "reduce the evaporator's cooling capacity",
+        "increase head pressure",
+        "hissing",
+        "compressor failure",
+        "auger"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch49",
+      "chapter_num": 49,
+      "chapter_code": "Ch 49",
+      "title": "Troubleshooting Commercial Systems - Component Diagnosis",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch49.html",
+      "version": "eb2e4dddc4",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 869627,
+      "storage_key": "mrac_study_ch49_v1",
+      "exam_question_count": 57,
+      "study_item_count": 57,
+      "match_pair_count": 10,
+      "blitz_question_count": 57,
+      "sim_mission_count": 7,
+      "epa_608_count": 10,
+      "sections": [
+        {
+          "id": "49.1",
+          "title": "General Inspection Overview"
+        },
+        {
+          "id": "49.2",
+          "title": "Checking Electrical Circuits, Motors, and Compressors"
+        },
+        {
+          "id": "49.3",
+          "title": "Checking Condensers"
+        },
+        {
+          "id": "49.4",
+          "title": "Checking Evaporators"
+        },
+        {
+          "id": "49.5",
+          "title": "Checking Refrigerant Lines"
+        },
+        {
+          "id": "49.6",
+          "title": "Checking Refrigerant Valves"
+        }
+      ],
+      "keywords": [
+        "troubleshooting commercial systems - component diagnosis",
+        "troubleshooting",
+        "commercial",
+        "systems",
+        "component",
+        "diagnosis",
+        "commercial walk-in sim",
+        "general inspection overview",
+        "checking electrical circuits, motors, and compressors",
+        "checking condensers",
+        "checking evaporators",
+        "checking refrigerant lines",
+        "checking refrigerant valves",
+        "ohmmeter",
+        "starting capacitor",
+        "capacitor tester",
+        "low, steady hum",
+        "lubricated",
+        "sharp clicking noise",
+        "10% below and no more than 20% over",
+        "lower than normal",
+        "a dirty condenser surface area",
+        "chlorine-based solution"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch50",
+      "chapter_num": 50,
+      "chapter_code": "Ch 50",
+      "title": "Servicing Commercial Systems",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch50.html",
+      "version": "f1d4867611",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 2587055,
+      "storage_key": "mrac_study_ch50_v1",
+      "exam_question_count": 55,
+      "study_item_count": 78,
+      "match_pair_count": 10,
+      "blitz_question_count": 56,
+      "sim_mission_count": 7,
+      "epa_608_count": 37,
+      "sections": [
+        {
+          "id": "50.1",
+          "title": "System Service Fundamentals"
+        },
+        {
+          "id": "50.2",
+          "title": "Servicing Motors and Compressors"
+        },
+        {
+          "id": "50.3",
+          "title": "Servicing Condensers"
+        },
+        {
+          "id": "50.4",
+          "title": "Servicing Liquid Lines"
+        },
+        {
+          "id": "50.5",
+          "title": "Servicing Evaporators"
+        },
+        {
+          "id": "50.6",
+          "title": "Servicing Valves"
+        }
+      ],
+      "keywords": [
+        "servicing commercial systems",
+        "servicing",
+        "commercial",
+        "systems",
+        "commercial walk-in sim",
+        "system service fundamentals",
+        "servicing motors and compressors",
+        "servicing condensers",
+        "servicing liquid lines",
+        "servicing evaporators",
+        "servicing valves",
+        "twice a year",
+        "flywheel",
+        "insulation of an electric motor",
+        "refrigerant oil",
+        "will not remove as much heat as it should",
+        "outside diameter",
+        "filter-drier",
+        "adjust the txv to reduce refrigerant flow",
+        "intermittently",
+        "preparing"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch51",
+      "chapter_num": 51,
+      "chapter_code": "Ch 51",
+      "title": "Understanding Heat Loads and System Thermodynamics",
+      "unit_id": "unit7",
+      "engine_id": "refrig_manifold",
+      "engine_label": "Manifold & Refrigerant Sim",
+      "path": "./modules/chapters/ch51.html",
+      "version": "144d6a7706",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 851356,
+      "storage_key": "mrac_study_ch51_v1",
+      "exam_question_count": 45,
+      "study_item_count": 58,
+      "match_pair_count": 15,
+      "blitz_question_count": 52,
+      "sim_mission_count": 7,
+      "epa_608_count": 12,
+      "sections": [
+        {
+          "id": "51.1",
+          "title": "Heat Loads"
+        },
+        {
+          "id": "51.2",
+          "title": "Thermodynamics of the Basic Refrigeration Cycle"
+        }
+      ],
+      "keywords": [
+        "understanding heat loads and system thermodynamics",
+        "understanding",
+        "heat",
+        "loads",
+        "and",
+        "system",
+        "thermodynamics",
+        "manifold & refrigerant sim",
+        "heat loads",
+        "thermodynamics of the basic refrigeration cycle",
+        "product heat load",
+        "total heat load",
+        "miscellaneous heat load",
+        "specific heat capacity",
+        "usage heat load",
+        "heat leakage load",
+        "respiration heat load",
+        "superheated vapor",
+        "effective latent heat",
+        "refrigerant quality",
+        "saturated liquid",
+        "latent heat of vaporization",
+        "adiabatic compression",
+        "subcooled liquid",
+        "saturated vapor"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    },
+    {
+      "id": "ch52",
+      "chapter_num": 52,
+      "chapter_code": "Ch 52",
+      "title": "Commercial Refrigeration Component Selection",
+      "unit_id": "unit7",
+      "engine_id": "commercial_walkin",
+      "engine_label": "Commercial Walk-In Sim",
+      "path": "./modules/chapters/ch52.html",
+      "version": "404e1c299d",
+      "updated_at_utc": "2026-11-15T14:24:34Z",
+      "size_bytes": 823550,
+      "storage_key": "mrac_study_ch52_v1",
+      "exam_question_count": 30,
+      "study_item_count": 38,
+      "match_pair_count": 10,
+      "blitz_question_count": 39,
+      "sim_mission_count": 7,
+      "epa_608_count": 1,
+      "sections": [
+        {
+          "id": "52.1",
+          "title": "Sizing Compressors, Condensers, and Evaporators"
+        },
+        {
+          "id": "52.2",
+          "title": "Calculating Theoretical Compressor Volume"
+        },
+        {
+          "id": "52.3",
+          "title": "Designing Piping"
+        }
+      ],
+      "keywords": [
+        "commercial refrigeration component selection",
+        "commercial",
+        "refrigeration",
+        "component",
+        "selection",
+        "commercial walk-in sim",
+        "sizing compressors, condensers, and evaporators",
+        "calculating theoretical compressor volume",
+        "designing piping",
+        "operating cycle",
+        "stroke",
+        "bore",
+        "condenser condensate line",
+        "total heat of rejection (thr)",
+        "static loss",
+        "volumetric efficiency",
+        "equivalent length",
+        "compressor discharge line",
+        "24-hour"
+      ],
+      "handout": null,
+      "companions": [
+        {
+          "target_id": "refrigerant-cycle",
+          "label": "❄️ Cycle Lab",
+          "query": "mode=cooling&ref=R404A&valve=txv"
+        },
+        {
+          "target_id": "epa608",
+          "label": "🛡️ EPA 608 Prep",
+          "query": ""
+        }
+      ]
+    }
+  ]
+};

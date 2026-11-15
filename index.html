@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>MRAC 2025 &amp; HVAC/R Integrated Study Helper</title>
+  <script>
+    (function () {
+      try {
+        var raw = window.localStorage.getItem('ish_hub_prefs_v1');
+        if (raw) {
+          var prefs = JSON.parse(raw);
+          if (prefs && prefs.theme === 'light') {
+            document.documentElement.classList.add('theme-light');
+          }
+        }
+      } catch (_err) {
+        // Ignore storage errors inside cross-origin or restricted iframes.
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="./js/catalog_manifest.js" defer></script>
+  <script src="./js/app.js" defer></script>
+</head>
+<body>
+  <div id="app-root" class="app-shell">
+    <!-- ==================== MASTER HUB VIEW ==================== -->
+    <div id="hub-view" class="hub-view">
+      <header class="hub-header">
+        <div class="hub-header-top">
+          <div class="brand-wrap">
+            <div class="brand-mark" aria-hidden="true">HVAC/R</div>
+            <div class="brand-copy">
+              <div class="brand-kicker-row">
+                <span class="brand-kicker">MRAC 2025 Interactive Learning Hub</span>
+                <span id="sync-timestamp-pill" class="sync-pill" title="Catalog synchronization timestamp">Sync pending…</span>
+              </div>
+              <h1 id="hub-title" class="hub-title">Integrated Study Helper</h1>
+              <p id="hub-subtitle" class="hub-subtitle">52 Chapter Study Guides, EPA Section 608 Prep, &amp; Interactive HVAC Simulators</p>
+            </div>
+          </div>
+
+          <div class="header-actions">
+            <div class="search-wrap" role="search">
+              <span class="search-icon" aria-hidden="true">🔍</span>
+              <input
+                id="hub-search"
+                class="search-input"
+                type="search"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="Search Ch 11, superheat, EPA 608, motors..."
+                aria-label="Search chapters, sections, labs, and keywords"
+              />
+              <kbd id="search-kbd-hint" class="search-kbd" aria-hidden="true">/</kbd>
+              <button
+                id="btn-clear-search"
+                class="search-clear hidden"
+                type="button"
+                aria-label="Clear search"
+                title="Clear search (Esc)"
+              >×</button>
+            </div>
+
+            <div class="header-btn-group">
+              <button
+                id="btn-theme-toggle"
+                class="ctrl-btn"
+                type="button"
+                aria-pressed="false"
+                title="Switch between Dark Lab and Light Classroom Projector mode"
+              >☀️ Light</button>
+              <button
+                id="btn-check-updates"
+                class="ctrl-btn"
+                type="button"
+                title="Fetch latest manifest.json and refresh modules"
+              >↻ Check Updates</button>
+              <button
+                id="btn-full-tab"
+                class="ctrl-btn ctrl-btn-accent"
+                type="button"
+                title="Open this Integrated Study Helper in a full browser tab"
+              >↗ Full Tab</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Student Progress Telemetry Strip -->
+        <div class="telemetry-strip" aria-label="Student progress telemetry">
+          <div class="telemetry-card accent-amber">
+            <div class="telemetry-label">⚡ Total Bolts</div>
+            <div id="tel-total-bolts" class="telemetry-value">0</div>
+            <div id="tel-total-xp-sub" class="telemetry-sub">0 Lifetime XP</div>
+          </div>
+          <div class="telemetry-card accent-cyan">
+            <div class="telemetry-label">🏆 Career Rank</div>
+            <div id="tel-career-rank" class="telemetry-value">🛠️ Apprentice</div>
+            <div id="tel-rank-sub" class="telemetry-sub">Next: Field Tech at 500 XP</div>
+          </div>
+          <div class="telemetry-card accent-emerald">
+            <div class="telemetry-label">📚 Chapters Active</div>
+            <div id="tel-chapters-active" class="telemetry-value">0 / 52</div>
+            <div id="tel-chapters-sub" class="telemetry-sub">Start any chapter to log progress</div>
+          </div>
+          <div class="telemetry-card accent-amber">
+            <div class="telemetry-label">🛡️ EPA 608 Readiness</div>
+            <div id="tel-epa608-pct" class="telemetry-value">0%</div>
+            <div id="tel-epa608-sub" class="telemetry-sub">ESCO v10 &amp; v9 certification prep</div>
+          </div>
+        </div>
+      </header>
+
+      <main class="hub-main">
+        <!-- Continue Studying Banner -->
+        <section id="continue-banner" class="continue-banner hidden" aria-label="Continue studying">
+          <div class="continue-copy">
+            <span class="continue-pill">Continue Studying</span>
+            <strong id="continue-title" class="continue-title"></strong>
+          </div>
+          <div class="continue-actions">
+            <button id="btn-continue-resume" class="btn-primary" type="button">Resume →</button>
+            <button id="btn-continue-dismiss" class="btn-ghost" type="button" aria-label="Dismiss continue studying banner">Dismiss</button>
+          </div>
+        </section>
+
+        <!-- Empty / Missing Manifest Notice -->
+        <section id="manifest-missing-banner" class="empty-state hidden" role="status">
+          <h2>Catalog Manifest Not Loaded Yet</h2>
+          <p>Run <code>sync_and_publish.py</code> to generate <code>manifest.json</code> and <code>js/catalog_manifest.js</code>, then click <strong>↻ Check Updates</strong>.</p>
+        </section>
+
+        <!-- Featured Certification & Interactive Labs -->
+        <section id="featured-section" class="hub-section" aria-labelledby="featured-heading">
+          <div class="section-head">
+            <div>
+              <h2 id="featured-heading" class="section-title">Featured Certification &amp; Interactive Labs</h2>
+              <p class="section-desc">Core EPA Section 608 exam prep and live circuit &amp; refrigeration simulators</p>
+            </div>
+            <span id="featured-count-badge" class="count-badge">3 Labs</span>
+          </div>
+          <div id="featured-grid" class="featured-grid"></div>
+        </section>
+
+        <!-- MRAC 2025 Chapters 01–52 Curriculum Explorer -->
+        <section id="curriculum-section" class="hub-section" aria-labelledby="curriculum-heading">
+          <div class="section-head">
+            <div>
+              <h2 id="curriculum-heading" class="section-title">MRAC 2025 Chapters 01–52 Curriculum Explorer</h2>
+              <p id="curriculum-totals-line" class="section-desc">Organized by curriculum unit with live study mastery tracking</p>
+            </div>
+            <div id="search-match-status" class="match-status" role="status" aria-live="polite">52 of 52 chapters</div>
+          </div>
+
+          <div class="filter-toolbar">
+            <div id="unit-tabs" class="unit-tabs" role="tablist" aria-label="Filter chapters by curriculum unit"></div>
+            <div class="filter-chips" role="group" aria-label="Additional chapter filters">
+              <button id="chip-epa608" class="filter-chip" type="button" data-filter="epa608" aria-pressed="false">🛡️ EPA 608 Tagged</button>
+              <button id="chip-handout" class="filter-chip" type="button" data-filter="handout" aria-pressed="false">📄 Printable Handout</button>
+              <button id="chip-inprogress" class="filter-chip" type="button" data-filter="inprogress" aria-pressed="false">🔥 In Progress</button>
+            </div>
+          </div>
+
+          <div id="chapters-grid" class="chapters-grid"></div>
+
+          <div id="chapters-empty" class="empty-state hidden">
+            <h3>No matching chapters found</h3>
+            <p>Try clearing your search query or toggling off active unit/tag filters.</p>
+            <button id="btn-reset-filters" class="btn-primary" type="button">Reset All Filters</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ==================== ACTIVE MODULE STAGE VIEW ==================== -->
+    <div id="stage-view" class="stage-view hidden" aria-label="Active learning module stage">
+      <header id="stage-bar" class="stage-bar">
+        <div class="stage-bar-left">
+          <button id="btn-back-hub" class="stage-btn stage-btn-home" type="button" title="Return to Study Hub">← Study Hub</button>
+          <div class="stage-nav-group">
+            <button id="btn-prev-module" class="stage-btn stage-btn-icon" type="button" aria-label="Previous module" title="Previous module">‹ Prev</button>
+            <select id="stage-module-select" class="stage-select" aria-label="Quick module switcher"></select>
+            <button id="btn-next-module" class="stage-btn stage-btn-icon" type="button" aria-label="Next module" title="Next module">Next ›</button>
+          </div>
+        </div>
+
+        <div id="stage-context-controls" class="stage-bar-center"></div>
+
+        <div class="stage-bar-right">
+          <span id="stage-version-badge" class="stage-version-badge" title=""></span>
+          <button id="btn-stage-theme" class="stage-btn stage-btn-icon" type="button" title="Toggle Dark Lab / Light Classroom mode">☀️</button>
+          <button id="btn-focus-mode" class="stage-btn" type="button" title="Maximize module space (hides top bar)">⤢ Focus</button>
+          <a id="btn-open-new-tab" class="stage-btn stage-btn-accent" href="#" target="_blank" rel="noopener" title="Open active module in a new browser tab">↗ New Tab</a>
+        </div>
+      </header>
+
+      <div id="stage-panes" class="stage-panes">
+        <div id="primary-pane" class="stage-pane primary-pane">
+          <iframe
+            id="primary-frame"
+            class="stage-iframe"
+            title="Active HVAC/R Study Module"
+            src="about:blank"
+            allow="fullscreen"
+          ></iframe>
+        </div>
+
+        <div id="companion-pane" class="stage-pane companion-pane hidden">
+          <div class="companion-header">
+            <div class="companion-header-title">
+              <span class="companion-pill">Companion Lab</span>
+              <span id="companion-title" class="companion-name"></span>
+            </div>
+            <div class="companion-header-actions">
+              <a id="btn-companion-new-tab" class="stage-btn stage-btn-xs" href="#" target="_blank" rel="noopener" title="Open companion in new tab">↗</a>
+              <button id="btn-close-companion" class="stage-btn stage-btn-xs" type="button" aria-label="Close companion pane" title="Close companion pane">× Close</button>
+            </div>
+          </div>
+          <iframe
+            id="companion-frame"
+            class="stage-iframe"
+            title="Companion Interactive Lab"
+            src="about:blank"
+            allow="fullscreen"
+          ></iframe>
+        </div>
+      </div>
+
+      <button id="btn-exit-focus" class="exit-focus-pill" type="button" title="Exit focus mode and show controls">← Exit Focus</button>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

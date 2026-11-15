@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ch. 11 Exam Study Guide — Equipment & Instruments for Refrigerant Handling and Service</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #4b5563;
+      --accent: #0f4c81;
+      --border: #d1d5db;
+      --bg-soft: #f8fafc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: #e5e7eb;
+      margin: 0;
+      padding: 24px;
+      line-height: 1.55;
+      font-size: 10.5pt;
+    }
+    .toolbar {
+      max-width: 8.5in;
+      margin: 0 auto 16px auto;
+      background: #1e293b;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .toolbar-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      background: #38bdf8;
+      color: #0f172a;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .btn.secondary {
+      background: #334155;
+      color: #f8fafc;
+      border: 1px solid #475569;
+    }
+    .btn:hover { opacity: 0.92; }
+    .page {
+      max-width: 8.5in;
+      margin: 0 auto;
+      background: #fff;
+      padding: 0.55in 0.6in;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      border-radius: 4px;
+    }
+    .header-box {
+      border-bottom: 2.5px solid var(--accent);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    .course-tag {
+      font-size: 8.5pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 2px;
+    }
+    h1 {
+      font-size: 15pt;
+      margin: 0 0 10px 0;
+      color: #0f172a;
+    }
+    .student-meta {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+      font-size: 10pt;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+    .meta-line {
+      border-bottom: 1px solid #374151;
+      display: inline-block;
+      width: 75%;
+      height: 16px;
+    }
+    .directions {
+      background: var(--bg-soft);
+      border-left: 4px solid var(--accent);
+      padding: 8px 12px;
+      font-size: 9.5pt;
+      margin-bottom: 14px;
+      color: #1f2937;
+    }
+    h2 {
+      font-size: 11pt;
+      background: #f1f5f9;
+      border-left: 4px solid var(--accent);
+      padding: 5px 10px;
+      margin: 14px 0 8px 0;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    ol.questions {
+      margin: 0;
+      padding-left: 22px;
+    }
+    ol.questions li {
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+    .blank {
+      display: inline-block;
+      min-width: 125px;
+      border-bottom: 1.5px solid #111827;
+      text-align: center;
+      font-weight: 700;
+      color: transparent;
+      padding: 0 4px;
+      line-height: 1.2;
+      user-select: none;
+    }
+    .blank.short { min-width: 80px; }
+    .blank.long { min-width: 185px; }
+    body.show-key .blank {
+      color: #b91c1c;
+      background: #fef2f2;
+      user-select: auto;
+    }
+    table.match-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 9.5pt;
+    }
+    table.match-table th, table.match-table td {
+      border: 1px solid var(--border);
+      padding: 6px 8px;
+      vertical-align: top;
+    }
+    table.match-table th {
+      background: #f1f5f9;
+      text-align: left;
+      font-weight: 700;
+    }
+    .match-blank {
+      display: inline-block;
+      width: 34px;
+      border-bottom: 1.5px solid #111827;
+      text-align: center;
+      font-weight: 700;
+      color: transparent;
+    }
+    body.show-key .match-blank {
+      color: #b91c1c;
+    }
+    .word-bank {
+      margin-top: 16px;
+      border: 1.5px dashed #64748b;
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: #fafafa;
+      font-size: 8.8pt;
+    }
+    .word-bank-title {
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+      font-size: 9.5pt;
+    }
+    .word-bank-items {
+      line-height: 1.6;
+      color: #334155;
+    }
+    @media print {
+      body {
+        background: #fff;
+        padding: 0;
+      }
+      .toolbar {
+        display: none !important;
+      }
+      .page {
+        box-shadow: none;
+        padding: 0.35in 0.45in;
+        max-width: 100%;
+      }
+      h2 {
+        break-after: avoid;
+      }
+      ol.questions li, table.match-table tr {
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <div class="toolbar-title">
+      HVAC/R Study Guide Handout — Ch. 11: Equipment &amp; Instruments for Refrigerant Handling and Service
+    </div>
+    <div class="toolbar-actions">
+      <button class="btn secondary" onclick="document.body.classList.toggle('show-key')">Toggle Answer Key</button>
+      <button class="btn secondary" onclick="document.getElementById('wordBankBox').style.display = document.getElementById('wordBankBox').style.display === 'none' ? 'block' : 'none'">Toggle Word Bank</button>
+      <button class="btn" onclick="window.print()">Print Student Handout</button>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="header-box">
+      <div class="course-tag">Modern Refrigeration &amp; Air Conditioning (22e) • Chapter 11 Exam Study Guide</div>
+      <h1>Equipment and Instruments for Refrigerant Handling and Service</h1>
+      <div class="student-meta">
+        <div>Name: <span class="meta-line"></span></div>
+        <div>Date: <span class="meta-line"></span></div>
+        <div>Block: <span class="meta-line"></span></div>
+      </div>
+    </div>
+
+    <div class="directions">
+      <strong>Directions:</strong> Follow along with the classroom presentation and fill in each blank (<strong>#1–35</strong>) with the correct HVAC/R term or value. Then complete the <strong>Part 8 Terminology Match-Up</strong> at the end of the guide.
+    </div>
+
+    <h2>Section 1: Refrigerant Cylinders &amp; Safe Handling (11.1)</h2>
+    <ol class="questions" start="1">
+      <li>Refillable DOT tanks used to store used refrigerant taken out of a unit are called <span class="blank">recovery</span> cylinders and are painted <span class="blank short">gray</span> on the lower body with a <span class="blank short">yellow</span> top/shoulder.</li>
+      <li>Standard recovery tanks typically feature a dual-port Y-valve assembly with two separate hand wheels: one port labeled for <span class="blank short">vapor</span> and the other labeled for <span class="blank short">liquid</span>.</li>
+      <li>Non-refillable (<span class="blank">disposable</span>) cylinders are built strictly to ship virgin (new) refrigerant from the factory and must <span class="blank short">never</span> be used for <span class="blank">recovery</span>.</li>
+      <li>A <span class="blank">fusible plug</span> is a cylinder pressure-relief safety fitting filled with a special metal alloy engineered to have a <span class="blank long">low melting point</span> so it melts and vents pressure during a fire.</li>
+      <li>Because cylinder pressure and temperature move in the same direction, a <span class="blank">decrease</span> (drop) in surrounding temperature causes the pressure inside a cylinder to <span class="blank">decrease</span>—not rise.</li>
+      <li>When moving any cylinder heavier than <span class="blank short">35 lb</span> (16 kg) on a wheeled hand truck, safety rules require strapping the tank firmly to the cart using <span class="blank">a chain</span>.</li>
+    </ol>
+
+    <h2>Section 2: Pressure Gauges &amp; Vacuum Measurement (11.2)</h2>
+    <ol class="questions" start="7">
+      <li>Inside a mechanical dial gauge, a curved C-shaped metal <span class="blank">Bourdon tube</span> flexes and <span class="blank">straightens</span> out as internal pressure rises, moving the pointer needle higher on the scale.</li>
+      <li>The blue low-side <span class="blank">compound gauge</span> is unique because it reads two different pressure ranges: positive pressure <span class="blank short">above</span> atmospheric pressure (psig) and vacuum <span class="blank short">below</span> atmospheric pressure (in. Hg).</li>
+      <li>To monitor condensing/discharge pressures on the <span class="blank">high side</span> of a system, technicians use the red <span class="blank long">high-pressure gauge</span>, which reads along a <span class="blank long">single continuous</span> pressure scale.</li>
+      <li>To prevent permanent damage or loss of accuracy, a mechanical gauge should not be subjected to pressures exceeding <span class="blank short">75%</span> of its full-scale capacity for more than a few minutes.</li>
+      <li>On a standard low-side vacuum scale at sea level, a complete (<span class="blank short">perfect</span>) vacuum is represented by a reading of <span class="blank">29.92 in. Hg</span> (inches of mercury).</li>
+      <li>Because an <span class="blank">absolute</span> pressure gauge (such as a digital micron gauge) uses true zero vacuum as its baseline rather than local barometric pressure, it <span class="blank">does not</span> need to be adjusted for changes in <span class="blank">elevation</span>.</li>
+    </ol>
+
+    <h2>Section 3: Service Valves &amp; System Access (11.3)</h2>
+    <ol class="questions" start="13">
+      <li>Turning a three-way service valve stem all the way <span class="blank long">counterclockwise</span> places it in the <span class="blank">back-seated</span> position, which shuts off the gauge port and is the required position for <span class="blank long">normal system operation</span> (not front-seated).</li>
+      <li>A <span class="blank long">suction service valve</span> bolts directly onto the <span class="blank long">compressor at its inlet</span> and connects it to the incoming low-pressure suction line.</li>
+      <li>Mounted on the liquid storage tank outlet, the <span class="blank long">liquid receiver service valve</span> (king valve) controls refrigerant flow entering the <span class="blank long">inlet of a liquid line</span>.</li>
+      <li>When servicing small sealed (<span class="blank">hermetic</span>) appliances that do not have factory Schrader ports, the most widely used way to tap into the tubing is installing a <span class="blank">piercing valve</span>.</li>
+      <li>Because a Schrader <span class="blank">valve core</span> restricts gas flow inside a service fitting, technicians should remove it from the access port before <span class="blank">evacuating</span> a system.</li>
+    </ol>
+
+    <h2>Section 4: Gauge Manifolds &amp; Operation (11.4)</h2>
+    <ol class="questions" start="18">
+      <li>A complete <span class="blank">gauge manifold</span> set combines a low-pressure <span class="blank">compound gauge</span> and a <span class="blank long">high-pressure gauge</span> onto a single valved block with connecting hoses.</li>
+      <li>While using a manifold gauge set to read normal low-side and high-side system pressures, <span class="blank short">both</span> the low-side and high-side manifold hand valves must remain <span class="blank short">closed</span>.</li>
+      <li>When pulling a vacuum to <span class="blank">evacuate</span> an entire system through a gauge manifold, <span class="blank short">both</span> manifold hand valves must be turned <span class="blank short">open</span> (never closed) so both sides of the system can be evacuated together.</li>
+    </ol>
+
+    <h2>Section 5: Leak Detection Equipment &amp; Methods (11.5)</h2>
+    <ol class="questions" start="21">
+      <li>Modern <span class="blank long">electronic leak detectors</span> are designed to sense <span class="blank">multiple</span> refrigerant types (including HFCs, HCFCs, HFOs, and blends), so it is <span class="blank short">false</span> that they can only detect <span class="blank short">CFCs</span>.</li>
+      <li>In a halide torch leak detector, drawing <span class="blank">halogen</span> refrigerant vapors across a glowing <span class="blank short">copper</span> element causes the flame to change color to <span class="blank">light green</span>.</li>
+      <li>To pinpoint hard-to-find leaks visually, a technician can circulate <span class="blank">refrigerant dye</span> that has been <span class="blank">injected</span> into the system.</li>
+      <li>Finding leaks with fluorescent tracer dye requires shining an <span class="blank">ultraviolet (UV)</span> (or blue) inspection lamp—<span class="blank short">not</span> a <span class="blank">halogen</span> light—to make the escaping dye glow.</li>
+      <li>Because an <span class="blank">ultrasonic</span> leak detector listens for the high-pitched acoustic hiss of escaping gas, loud shop or mechanical <span class="blank">background noise</span> can trigger a <span class="blank">false alarm</span>.</li>
+    </ol>
+
+    <h2>Section 6: Vacuum Pumps &amp; System Evacuation (11.6)</h2>
+    <ol class="questions" start="26">
+      <li>Technicians connect a <span class="blank">vacuum pump</span> to pull an extremely deep vacuum (evacuating the system) so that trapped <span class="blank">moisture</span> (water) boils into vapor and is removed from the system.</li>
+      <li>The pumping speed or volume rate at which gas can be moved through a vacuum pump is called its <span class="blank long">free air displacement</span> (typically rated in CFM).</li>
+      <li>The deepest (highest) vacuum level that a specific vacuum pump is capable of pulling under sealed conditions is rated as its <span class="blank">ultimate vacuum</span>.</li>
+      <li>Inside a rotary-vane vacuum pump, the specialized vacuum pump <span class="blank short">oil</span> seals internal clearances and serves as a <span class="blank">lubricant</span> for moving parts.</li>
+      <li>If vacuum pump oil absorbs too much water (moisture) during system evacuation, the oil visibly turns <span class="blank">white and foamy</span> and must be replaced immediately.</li>
+    </ol>
+
+    <h2>Section 7: Recovery, Recycling, Reclaiming &amp; Charging Scales (11.7)</h2>
+    <ol class="questions" start="31">
+      <li>Refrigerant <span class="blank">recovery</span> is the process of extracting refrigerant from a cooling system and transferring it straight into an external storage <span class="blank">cylinder</span> (container).</li>
+      <li>To protect equipment and prevent mixing contaminants between jobs, the <span class="blank">filter-drier</span> on a recovery/recycling machine should be changed <span class="blank">each time</span> the machine is used.</li>
+      <li>Unlike recovery or recycling, refrigerant is <span class="blank short">never</span> (not) <span class="blank">reclaimed</span> on the <span class="blank">jobsite</span>; reclamation requires factory/laboratory processing and chemical testing to meet AHRI-700 new-refrigerant standards.</li>
+      <li>Before reprocessed refrigerant can be certified as <span class="blank">reclaimed</span>, <span class="blank short">100%</span> of all <span class="blank long">moisture and particulates</span> must be removed from it.</li>
+      <li>To calculate how much refrigerant is inside a tank using a digital charging scale, a technician must know the cylinder's <span class="blank short">tare</span> weight, which is how much the cylinder weighs when completely <span class="blank short">empty</span>.</li>
+    </ol>
+
+    <h2>Part 8: Key Terminology Match-Up Practice</h2>
+    <table class="match-table">
+      <thead>
+        <tr>
+          <th style="width: 65px; text-align: center;">Answer</th>
+          <th>Functional Description</th>
+          <th style="width: 240px;">Term Bank</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">C</span></td>
+          <td><strong>1.</strong> Safety relief plug made from a metal alloy that melts at a low temperature to prevent tank explosion.</td>
+          <td><strong>A.</strong> Compound gauge</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">G</span></td>
+          <td><strong>2.</strong> Fluorescent tracer fluid introduced into the refrigeration circuit to make leak points glow under UV light.</td>
+          <td><strong>B.</strong> Free air displacement</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">B</span></td>
+          <td><strong>3.</strong> Rating (in CFM) that indicates how rapidly a vacuum pump can move gas volume through its mechanism.</td>
+          <td><strong>C.</strong> Fusible plug</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">F</span></td>
+          <td><strong>4.</strong> Extracting refrigerant from an appliance and placing it into an approved external storage tank without reprocessing.</td>
+          <td><strong>D.</strong> Gauge manifold</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">D</span></td>
+          <td><strong>5.</strong> Service instrument assembly that pairs a low-side compound gauge and a high-side pressure gauge on one body.</td>
+          <td><strong>E.</strong> Liquid receiver service valve</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">I</span></td>
+          <td><strong>6.</strong> Shop machine connected to a sealed system to pull a deep vacuum and boil away trapped moisture and noncondensables.</td>
+          <td><strong>F.</strong> Recovery</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">H</span></td>
+          <td><strong>7.</strong> The deepest possible vacuum (lowest micron level) that a vacuum pump is capable of achieving.</td>
+          <td><strong>G.</strong> Refrigerant dye</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">A</span></td>
+          <td><strong>8.</strong> Low-side dial instrument capable of reading both positive pressure (psig) above atmosphere and vacuum (in. Hg) below it.</td>
+          <td><strong>H.</strong> Ultimate vacuum</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">J</span></td>
+          <td><strong>9.</strong> Spring-loaded Schrader insert inside an access fitting that should be pulled out before evacuation to maximize airflow.</td>
+          <td><strong>I.</strong> Vacuum pump</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><span class="match-blank">E</span></td>
+          <td><strong>10.</strong> Service shutoff valve mounted at the outlet of the liquid receiver tank where the liquid line begins.</td>
+          <td><strong>J.</strong> Valve core</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="word-bank" id="wordBankBox">
+      <div class="word-bank-title">Scrambled Word Bank (For Sections 1–7)</div>
+      <div class="word-bank-items">
+        100% &bull; 29.92 in. Hg &bull; 35 lb &bull; 75% &bull; a chain &bull; above &bull; absolute &bull; back-seated &bull; background noise &bull; below &bull; both &bull; Bourdon tube &bull; CFCs &bull; closed &bull; compound gauge &bull; compressor at its inlet &bull; copper &bull; counterclockwise &bull; cylinder &bull; decrease &bull; disposable &bull; does not &bull; each time &bull; electronic leak detectors &bull; elevation &bull; empty &bull; evacuate / evacuating &bull; false &bull; false alarm &bull; filter-drier &bull; free air displacement &bull; fusible plug &bull; gauge manifold &bull; gray &bull; halogen &bull; hermetic &bull; high side &bull; high-pressure gauge &bull; injected &bull; inlet of a liquid line &bull; jobsite &bull; light green &bull; liquid &bull; liquid receiver service valve &bull; low melting point &bull; lubricant &bull; moisture &bull; moisture and particulates &bull; multiple &bull; never &bull; normal system operation &bull; not &bull; oil &bull; open &bull; perfect &bull; piercing valve &bull; reclaimed &bull; recovery &bull; refrigerant dye &bull; single continuous &bull; straightens &bull; suction service valve &bull; tare &bull; ultimate vacuum &bull; ultrasonic &bull; ultraviolet (UV) &bull; vacuum pump &bull; valve core &bull; vapor &bull; white and foamy &bull; yellow
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
