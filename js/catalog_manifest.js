@@ -1,6 +1,6 @@
 window.INTEGRATED_STUDY_MANIFEST = {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-15T21:35:16Z",
+  "generated_at_utc": "2026-11-15T21:35:30Z",
   "hub_title": "Integrated HVAC/R Study Helper",
   "hub_subtitle": "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • Electrical Theory Board • Electrical Wiring Trainer • Refrigerant Cycle Lab",
   "totals": {
@@ -240,7 +240,7 @@ window.INTEGRATED_STUDY_MANIFEST = {
       "subtitle": "Point-to-Point Component Wiring, Live Ladder Schematics, Fluke DMM Diagnostics & 8 Guided Labs",
       "path": "./modules/electrical-simulator/index.html",
       "version": "ea3f0f1b7b",
-      "updated_at_utc": "2026-11-15T21:35:03Z",
+      "updated_at_utc": "2026-11-15T21:35:29Z",
       "size_bytes": 222136,
       "storage_keys": [],
       "highlights": [
@@ -317,7 +317,7 @@ window.INTEGRATED_STUDY_MANIFEST = {
       "subtitle": "Live Subcooling & Superheat Physics, P-h Enthalpy Diagram, TXV/FXO/EEV Metering & Fault Lab",
       "path": "./modules/refrigerant-cycle/index.html",
       "version": "3b26983166",
-      "updated_at_utc": "2026-11-15T21:35:03Z",
+      "updated_at_utc": "2026-11-15T21:35:17Z",
       "size_bytes": 220872,
       "storage_keys": [],
       "highlights": [
