@@ -154,6 +154,23 @@
             <div id="search-match-status" class="match-status" role="status" aria-live="polite">52 of 52 chapters</div>
           </div>
 
+          <div id="vocab-view-switch" class="vocab-view-switch" role="group" aria-label="Curriculum Explorer View">
+            <button
+              id="btn-view-chapters"
+              class="view-switch-btn active"
+              type="button"
+              data-curriculum-view="chapters"
+              aria-pressed="true"
+            >📚 Chapter Guides (52)</button>
+            <button
+              id="btn-view-vocab"
+              class="view-switch-btn"
+              type="button"
+              data-curriculum-view="vocab"
+              aria-pressed="false"
+            >📖 Vocabulary (Ch 1–52)</button>
+          </div>
+
           <div class="filter-toolbar">
             <div id="unit-tabs" class="unit-tabs" role="tablist" aria-label="Filter chapters by curriculum unit"></div>
             <div class="filter-chips" role="group" aria-label="Additional chapter filters">
@@ -169,6 +186,25 @@
             <h3>No matching chapters found</h3>
             <p>Try clearing your search query or toggling off active unit/tag filters.</p>
             <button id="btn-reset-filters" class="btn-primary" type="button">Reset All Filters</button>
+          </div>
+
+          <div id="vocab-explorer-panel" class="vocab-explorer-panel hidden">
+            <div class="vocab-controls-bar">
+              <select id="vocab-chapter-select" class="vocab-select" aria-label="Filter vocabulary by chapter">
+                <option value="all">All Chapters (Ch 01–52)</option>
+              </select>
+              <button id="btn-vocab-sort" class="ctrl-btn" type="button">📑 Group by Chapter</button>
+              <button id="btn-vocab-selfcheck" class="ctrl-btn" type="button" aria-pressed="false">👁️ Self-Check: Hide Definitions</button>
+              <span id="vocab-match-status" class="match-status" role="status" aria-live="polite">0 of 0 terms</span>
+            </div>
+
+            <div id="vocab-explorer-list" class="vocab-explorer-list"></div>
+
+            <div id="vocab-empty" class="empty-state hidden">
+              <h3>No matching vocabulary terms found</h3>
+              <p>Try clearing your search query or changing the selected chapter/unit filter.</p>
+              <button id="btn-reset-vocab-filters" class="btn-primary" type="button">Show All Chapters 1–52 Vocabulary</button>
+            </div>
           </div>
         </section>
       </main>

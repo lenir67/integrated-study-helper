@@ -409,13 +409,45 @@ def _extract_html_title(html_path: Path, fallback: str) -> str:
     return fallback
 
 
+def _normalize_vocabulary(raw_vocab: Any) -> List[Dict[str, Any]]:
+    """Normalize chapter vocabulary items preserving hub manifest fields."""
+    if not isinstance(raw_vocab, list):
+        return []
+    normalized: List[Dict[str, Any]] = []
+    for idx, item in enumerate(raw_vocab, start=1):
+        if not isinstance(item, dict):
+            continue
+        term = str(item.get("term") or "").strip()
+        if not term:
+            continue
+        definition = str(item.get("definition") or "").strip()
+        raw_page = item.get("page")
+        try:
+            page = int(raw_page) if raw_page not in (None, "") else 0
+        except (TypeError, ValueError):
+            page = 0
+        normalized.append(
+            {
+                "id": str(item.get("id") or f"v{idx}").strip(),
+                "term": term,
+                "definition": definition,
+                "section_id": str(item.get("section_id") or "").strip(),
+                "section_title": str(item.get("section_title") or "").strip(),
+                "page": page,
+                "is_epa_608": bool(item.get("is_epa_608")),
+            }
+        )
+    return normalized
+
+
 def _build_chapter_keywords(
     title: str,
     sections: List[Dict[str, str]],
     engine_label: str,
     match_pairs: List[Any],
+    vocabulary: Optional[List[Dict[str, Any]]] = None,
 ) -> List[str]:
-    """Build deduplicated lowercase search keywords from title, sections, engine, and terms."""
+    """Build deduplicated lowercase search keywords from title, sections, engine, terms, and vocabulary."""
     seen: set[str] = set()
     keywords: List[str] = []
 
@@ -447,6 +479,14 @@ def _build_chapter_keywords(
         if raw_term:
             _add(raw_term)
             term_count += 1
+
+    if vocabulary:
+        for vocab_item in vocabulary:
+            if not isinstance(vocab_item, dict):
+                continue
+            raw_vocab_term = vocab_item.get("term")
+            if isinstance(raw_vocab_term, str) and raw_vocab_term.strip():
+                _add(raw_vocab_term)
 
     return keywords
 
@@ -824,6 +864,7 @@ def sync_hub(
         sim_missions = (
             data.get("sim_missions") if isinstance(data.get("sim_missions"), list) else []
         )
+        vocabulary = _normalize_vocabulary(data.get("vocabulary"))
         study_items = _first_card_list(data)
         epa_608_count = int(data.get("epa_608_count") or 0)
 
@@ -847,8 +888,12 @@ def sync_hub(
                 "blitz_question_count": len(blitz_questions),
                 "sim_mission_count": len(sim_missions),
                 "epa_608_count": epa_608_count,
+                "vocab_count": len(vocabulary),
                 "sections": sections,
-                "keywords": _build_chapter_keywords(title, sections, engine_label, match_pairs),
+                "vocabulary": vocabulary,
+                "keywords": _build_chapter_keywords(
+                    title, sections, engine_label, match_pairs, vocabulary
+                ),
                 "handout": synced_handouts.get(ch_num),
                 "companions": _build_chapter_companions(ch_num, epa_608_count),
             }
@@ -867,6 +912,7 @@ def sync_hub(
             "total_exam_questions": sum(c["exam_question_count"] for c in chapters),
             "total_study_items": sum(c["study_item_count"] for c in chapters),
             "total_epa608_tagged": sum(c["epa_608_count"] for c in chapters),
+            "total_vocab_terms": sum(c["vocab_count"] for c in chapters),
         },
         "units": UNIT_DEFINITIONS,
         "featured_labs": featured_labs,

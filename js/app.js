@@ -94,6 +94,14 @@
       handout: false,
       inprogress: false
     },
+    curriculumView: 'chapters',
+    vocab: {
+      chapterId: 'all',
+      sort: 'chapter',
+      selfCheck: false,
+      revealedKeys: new Set(),
+      showAllLimit: 240
+    },
     stage: {
       activeId: null,
       moduleQuery: '',
@@ -144,6 +152,9 @@
     dom.curriculumSection = document.getElementById('curriculum-section');
     dom.curriculumTotals = document.getElementById('curriculum-totals-line');
     dom.matchStatus = document.getElementById('search-match-status');
+    dom.vocabViewSwitch = document.getElementById('vocab-view-switch');
+    dom.btnViewChapters = document.getElementById('btn-view-chapters');
+    dom.btnViewVocab = document.getElementById('btn-view-vocab');
     dom.unitTabs = document.getElementById('unit-tabs');
     dom.chipEpa = document.getElementById('chip-epa608');
     dom.chipHandout = document.getElementById('chip-handout');
@@ -151,6 +162,14 @@
     dom.chaptersGrid = document.getElementById('chapters-grid');
     dom.chaptersEmpty = document.getElementById('chapters-empty');
     dom.resetFiltersBtn = document.getElementById('btn-reset-filters');
+    dom.vocabExplorerPanel = document.getElementById('vocab-explorer-panel');
+    dom.vocabChapterSelect = document.getElementById('vocab-chapter-select');
+    dom.btnVocabSort = document.getElementById('btn-vocab-sort');
+    dom.btnVocabSelfCheck = document.getElementById('btn-vocab-selfcheck');
+    dom.vocabMatchStatus = document.getElementById('vocab-match-status');
+    dom.vocabExplorerList = document.getElementById('vocab-explorer-list');
+    dom.vocabEmpty = document.getElementById('vocab-empty');
+    dom.btnResetVocabFilters = document.getElementById('btn-reset-vocab-filters');
 
     dom.backHubBtn = document.getElementById('btn-back-hub');
     dom.prevModuleBtn = document.getElementById('btn-prev-module');
@@ -268,16 +287,22 @@
 
   function readModuleProgress(storageKey) {
     if (!storageKey) {
-      return { bolts: 0, totalXp: 0, masteredIds: [] };
+      return { bolts: 0, totalXp: 0, masteredIds: [], masteredVocabIds: [] };
     }
     const parsed = safeParseJson(safeGetItem(storageKey), null);
     if (!parsed) {
-      return { bolts: 0, totalXp: 0, masteredIds: [] };
+      return { bolts: 0, totalXp: 0, masteredIds: [], masteredVocabIds: [] };
     }
     const bolts = Math.max(0, Number(parsed.bolts) || 0);
     const totalXp = Math.max(bolts, Number(parsed.totalXp) || 0);
     const masteredIds = Array.isArray(parsed.masteredIds) ? parsed.masteredIds : [];
-    return { bolts: bolts, totalXp: totalXp, masteredIds: masteredIds };
+    const masteredVocabIds = Array.isArray(parsed.masteredVocabIds) ? parsed.masteredVocabIds : [];
+    return {
+      bolts: bolts,
+      totalXp: totalXp,
+      masteredIds: masteredIds,
+      masteredVocabIds: masteredVocabIds
+    };
   }
 
   function resolveCareerRank(totalXp) {
@@ -339,7 +364,7 @@
     chapters.forEach(function (ch) {
       const key = ch.storage_key;
       const prog = readModuleProgress(key);
-      if (prog.bolts > 0 || prog.masteredIds.length > 0 || prog.totalXp > 0) {
+      if (prog.bolts > 0 || prog.masteredIds.length > 0 || prog.masteredVocabIds.length > 0 || prog.totalXp > 0) {
         chaptersActive += 1;
       }
       if (key && !seenKeys.has(key)) {
@@ -553,6 +578,7 @@
 
   function onManifestUpdated() {
     renderHubHeaderMeta();
+    renderVocabChapterSelect();
     renderStageModuleSelect();
     if (state.stage.activeId) {
       const activeEntry = state.moduleById.get(state.stage.activeId);
@@ -740,6 +766,9 @@
 
     if (dom.curriculumTotals) {
       const t = m.totals || {};
+      const totalVocabTerms = Number(t.total_vocab_terms) || m.chapters.reduce(function (acc, c) {
+        return acc + (Number(c.vocab_count) || (Array.isArray(c.vocabulary) ? c.vocabulary.length : 0));
+      }, 0);
       const parts = [];
       if (t.chapter_count || m.chapters.length) {
         parts.push((t.chapter_count || m.chapters.length) + ' Chapters');
@@ -750,6 +779,9 @@
       if (t.total_study_items) {
         parts.push(Number(t.total_study_items).toLocaleString() + ' Study Cards');
       }
+      if (totalVocabTerms > 0) {
+        parts.push(totalVocabTerms.toLocaleString() + ' Key Vocabulary Terms');
+      }
       if (t.handout_count) {
         parts.push(Number(t.handout_count) + ' Printable Handouts');
       }
@@ -759,6 +791,15 @@
       dom.curriculumTotals.textContent = parts.length
         ? parts.join(' • ')
         : 'Organized by curriculum unit with live study mastery tracking';
+
+      if (dom.btnViewChapters) {
+        dom.btnViewChapters.textContent = '📚 Chapter Guides (' + (t.chapter_count || m.chapters.length || 52) + ')';
+      }
+      if (dom.btnViewVocab) {
+        dom.btnViewVocab.textContent = totalVocabTerms > 0
+          ? ('📖 Vocabulary (' + totalVocabTerms.toLocaleString() + ' Terms)')
+          : '📖 Vocabulary (Ch 1–52)';
+      }
     }
   }
 
@@ -922,7 +963,7 @@
       if (state.filters.handout && !ch.handout) return;
 
       const prog = readModuleProgress(ch.storage_key);
-      const isInProgress = prog.bolts > 0 || prog.masteredIds.length > 0 || prog.totalXp > 0;
+      const isInProgress = prog.bolts > 0 || prog.masteredIds.length > 0 || prog.masteredVocabIds.length > 0 || prog.totalXp > 0;
       if (state.filters.inprogress && !isInProgress) return;
 
       const res = matchesEntrySearch(Object.assign({ isLab: false }, ch), q);
@@ -938,13 +979,16 @@
       });
     }
 
-    if (dom.matchStatus) {
+    const isVocabView = state.curriculumView === 'vocab';
+    if (!isVocabView && dom.matchStatus) {
       dom.matchStatus.textContent = matched.length + ' of ' + chapters.length + ' chapters';
     }
 
+    if (dom.chaptersGrid) dom.chaptersGrid.classList.toggle('hidden', isVocabView);
+
     if (matched.length === 0) {
       dom.chaptersGrid.innerHTML = '';
-      if (dom.chaptersEmpty) dom.chaptersEmpty.classList.remove('hidden');
+      if (dom.chaptersEmpty) dom.chaptersEmpty.classList.toggle('hidden', isVocabView);
       return;
     }
 
@@ -984,11 +1028,14 @@
         ? '<button type="button" class="icon-action-btn" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="handout=1" title="Open Printable Handout: ' + escapeHtml(ch.handout.title || 'Student Handout') + '" aria-label="Open Printable Handout">📄</button>'
         : '';
 
+      const chCode = ch.chapter_code || ('Ch ' + ch.chapter_num);
+      const vocabQuickBtn = '<button type="button" class="btn-secondary btn-vocab-quick" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="subtab=vocab" title="Open ' + escapeHtml(chCode) + ' Key Vocabulary" aria-label="Open ' + escapeHtml(chCode) + ' Key Vocabulary">📖 Vocab</button>';
+
       return (
         '<article class="chapter-card">' +
           '<div class="chapter-top">' +
             '<div class="chapter-badges-left">' +
-              '<span class="ch-code-pill">' + escapeHtml(ch.chapter_code || ('Ch ' + ch.chapter_num)) + '</span>' +
+              '<span class="ch-code-pill">' + escapeHtml(chCode) + '</span>' +
               '<span class="engine-pill">' + escapeHtml(ch.engine_label || 'Interactive Lab') + '</span>' +
             '</div>' +
             '<div class="chapter-badges-right">' +
@@ -1007,6 +1054,8 @@
             '<span>•</span>' +
             '<span>' + studyTotal + ' Study Cards</span>' +
             '<span>•</span>' +
+            '<span>' + (Number(ch.vocab_count) || 0) + ' Vocab Terms</span>' +
+            '<span>•</span>' +
             '<span>' + (Number(ch.sim_mission_count) || 0) + ' Sim Missions</span>' +
           '</div>' +
           '<div class="chapter-progress">' +
@@ -1018,6 +1067,7 @@
           '</div>' +
           '<div class="chapter-footer">' +
             '<button type="button" class="btn-primary" data-nav-id="' + escapeHtml(ch.id) + '">Open Study &amp; Game →</button>' +
+            vocabQuickBtn +
             companionBtns +
             handoutBtn +
           '</div>' +
@@ -1026,12 +1076,308 @@
     }).join('');
   }
 
+  function renderVocabChapterSelect() {
+    if (!dom.vocabChapterSelect || !state.manifest) return;
+    const prevVal = state.vocab.chapterId || 'all';
+    const options = ['<option value="all">All Chapters (Ch 01–52)</option>'];
+    state.manifest.chapters.forEach(function (ch) {
+      const count = Number(ch.vocab_count) || (Array.isArray(ch.vocabulary) ? ch.vocabulary.length : 0);
+      const countSuffix = count > 0 ? (' (' + count + ')') : '';
+      options.push(
+        '<option value="' + escapeHtml(ch.id) + '">' +
+          escapeHtml((ch.chapter_code || ('Ch ' + ch.chapter_num)) + ' — ' + ch.title + countSuffix) +
+        '</option>'
+      );
+    });
+    dom.vocabChapterSelect.innerHTML = options.join('');
+    dom.vocabChapterSelect.value = state.moduleById.has(prevVal) ? prevVal : 'all';
+    state.vocab.chapterId = dom.vocabChapterSelect.value || 'all';
+  }
+
+  function syncVocabControlButtons() {
+    const isAz = state.vocab.sort === 'az';
+    if (dom.btnVocabSort) {
+      dom.btnVocabSort.textContent = isAz ? '🔤 A–Z Glossary' : '📑 Group by Chapter';
+      dom.btnVocabSort.classList.toggle('active', isAz);
+      dom.btnVocabSort.setAttribute('aria-pressed', String(isAz));
+    }
+    const selfCheck = Boolean(state.vocab.selfCheck);
+    if (dom.btnVocabSelfCheck) {
+      dom.btnVocabSelfCheck.textContent = selfCheck
+        ? '👁️ Self-Check: Definitions Hidden'
+        : '👁️ Self-Check: Hide Definitions';
+      dom.btnVocabSelfCheck.classList.toggle('active', selfCheck);
+      dom.btnVocabSelfCheck.setAttribute('aria-pressed', String(selfCheck));
+    }
+  }
+
+  function setCurriculumView(view) {
+    const isVocab = view === 'vocab';
+    state.curriculumView = isVocab ? 'vocab' : 'chapters';
+    if (dom.btnViewChapters) {
+      dom.btnViewChapters.classList.toggle('active', !isVocab);
+      dom.btnViewChapters.setAttribute('aria-pressed', String(!isVocab));
+    }
+    if (dom.btnViewVocab) {
+      dom.btnViewVocab.classList.toggle('active', isVocab);
+      dom.btnViewVocab.setAttribute('aria-pressed', String(isVocab));
+    }
+    if (dom.vocabExplorerPanel) {
+      dom.vocabExplorerPanel.classList.toggle('hidden', !isVocab);
+    }
+    if (isVocab) {
+      if (dom.chaptersGrid) dom.chaptersGrid.classList.add('hidden');
+      if (dom.chaptersEmpty) dom.chaptersEmpty.classList.add('hidden');
+      syncVocabControlButtons();
+      renderVocabExplorer();
+    } else {
+      renderChaptersGrid();
+    }
+  }
+
+  function renderVocabDefSlot(definition, chId, idx, key) {
+    if (!state.vocab.selfCheck) {
+      return '<p class="vocab-def">' + escapeHtml(definition || 'No definition available.') + '</p>';
+    }
+    const isRevealed = state.vocab.revealedKeys.has(key);
+    if (isRevealed) {
+      return (
+        '<p class="vocab-def">' + escapeHtml(definition || 'No definition available.') + '</p>' +
+        '<button type="button" class="vocab-reveal-btn is-revealed" data-vocab-reveal="' + escapeHtml(key) + '" data-vocab-ch="' + escapeHtml(chId) + '" data-vocab-idx="' + idx + '" aria-expanded="true">Hide Definition</button>'
+      );
+    }
+    return '<button type="button" class="vocab-reveal-btn" data-vocab-reveal="' + escapeHtml(key) + '" data-vocab-ch="' + escapeHtml(chId) + '" data-vocab-idx="' + idx + '" aria-expanded="false">👁️ Click to Reveal Definition</button>';
+  }
+
+  function renderVocabTermCard(item, showChapterJump) {
+    const ch = item.ch;
+    const v = item.v;
+    const chCode = ch.chapter_code || ('Ch ' + ch.chapter_num);
+    const secId = String(v.section_id || '').trim();
+    const secTitle = String(v.section_title || '').trim();
+    let secLabel = '';
+    if (showChapterJump) {
+      secLabel = secId ? (chCode + ' • Sec ' + secId) : chCode;
+    } else if (secId && secTitle) {
+      secLabel = 'Sec ' + secId + ' — ' + secTitle;
+    } else if (secId) {
+      secLabel = 'Sec ' + secId;
+    } else if (secTitle) {
+      secLabel = secTitle;
+    }
+
+    const metaPills = [];
+    if (secLabel) {
+      metaPills.push(
+        '<span class="vocab-sec-pill" title="' + escapeHtml(secTitle || secLabel) + '">' + escapeHtml(secLabel) + '</span>'
+      );
+    }
+    if (Number(v.page) > 0) {
+      metaPills.push('<span class="vocab-page-pill">p. ' + Number(v.page) + '</span>');
+    }
+    if (v.is_epa_608) {
+      metaPills.push('<span class="tag-608" title="EPA Section 608 tagged vocabulary">🛡️ 608</span>');
+    }
+    if (item.isMastered) {
+      metaPills.push('<span class="vocab-mastered-badge">✅ Mastered</span>');
+    }
+
+    const footerHtml = showChapterJump
+      ? '<div class="vocab-card-footer">' +
+          '<button type="button" class="btn-secondary vocab-jump-btn" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="subtab=vocab">Open in ' + escapeHtml(chCode) + ' →</button>' +
+        '</div>'
+      : '';
+
+    return (
+      '<article class="vocab-term-card' + (item.isMastered ? ' is-mastered' : '') + '">' +
+        '<div class="vocab-card-head">' +
+          '<h4 class="vocab-term-title">' + escapeHtml(v.term) + '</h4>' +
+        '</div>' +
+        (metaPills.length ? '<div class="vocab-card-meta">' + metaPills.join('') + '</div>' : '') +
+        '<div class="vocab-def-slot" data-vocab-slot="' + escapeHtml(item.key) + '">' +
+          renderVocabDefSlot(v.definition, ch.id, item.idx, item.key) +
+        '</div>' +
+        footerHtml +
+      '</article>'
+    );
+  }
+
+  function renderVocabExplorer() {
+    if (!dom.vocabExplorerList || !state.manifest) return;
+    const chapters = state.manifest.chapters;
+    const rawSearch = String(state.filters.search || '').trim().toLowerCase();
+    const searchTerms = rawSearch ? rawSearch.split(/\s+/).filter(Boolean) : [];
+
+    let totalVocabAll = 0;
+    const matched = [];
+
+    chapters.forEach(function (ch) {
+      const vocabList = Array.isArray(ch.vocabulary) ? ch.vocabulary : [];
+      totalVocabAll += vocabList.length;
+
+      if (state.vocab.chapterId !== 'all' && ch.id !== state.vocab.chapterId) return;
+      if (state.filters.unitId !== 'all' && ch.unit_id !== state.filters.unitId) return;
+
+      const prog = readModuleProgress(ch.storage_key);
+      const isInProgress = prog.bolts > 0 || prog.masteredIds.length > 0 || prog.masteredVocabIds.length > 0 || prog.totalXp > 0;
+      if (state.filters.inprogress && !isInProgress) return;
+
+      const masteredSet = new Set(prog.masteredVocabIds);
+      const chCode = ch.chapter_code || ('Ch ' + ch.chapter_num);
+      const chHaystackPrefix = [chCode, ch.title || '', 'ch' + ch.chapter_num].join(' ').toLowerCase();
+
+      vocabList.forEach(function (v, idx) {
+        if (!v || !v.term) return;
+        if (state.filters.epa608 && !v.is_epa_608) return;
+
+        if (searchTerms.length) {
+          const haystack = (
+            chHaystackPrefix + ' ' +
+            String(v.term || '') + ' ' +
+            String(v.definition || '') + ' ' +
+            String(v.section_title || '') + ' ' +
+            String(v.section_id || '') +
+            (v.is_epa_608 ? ' epa 608 epa608' : '')
+          ).toLowerCase();
+          const allHit = searchTerms.every(function (t) {
+            return haystack.indexOf(t) !== -1;
+          });
+          if (!allHit) return;
+        }
+
+        const key = ch.id + ':' + (v.id || ('idx' + idx));
+        matched.push({
+          ch: ch,
+          v: v,
+          idx: idx,
+          key: key,
+          isMastered: Boolean(v.id && masteredSet.has(v.id))
+        });
+      });
+    });
+
+    if (state.vocab.sort === 'az') {
+      matched.sort(function (a, b) {
+        const cmp = String(a.v.term || '').localeCompare(String(b.v.term || ''), undefined, { sensitivity: 'base' });
+        if (cmp !== 0) return cmp;
+        const chDiff = (Number(a.ch.chapter_num) || 0) - (Number(b.ch.chapter_num) || 0);
+        return chDiff !== 0 ? chDiff : (a.idx - b.idx);
+      });
+    }
+
+    const visible = matched.slice(0, state.vocab.showAllLimit);
+    const statusText = totalVocabAll === 0
+      ? '0 vocabulary terms loaded yet'
+      : (visible.length < matched.length
+        ? (matched.length.toLocaleString() + ' of ' + totalVocabAll.toLocaleString() + ' terms (showing ' + visible.length.toLocaleString() + ')')
+        : (matched.length.toLocaleString() + ' of ' + totalVocabAll.toLocaleString() + ' terms'));
+
+    if (dom.vocabMatchStatus) {
+      dom.vocabMatchStatus.textContent = statusText;
+    }
+    if (state.curriculumView === 'vocab' && dom.matchStatus) {
+      dom.matchStatus.textContent = matched.length.toLocaleString() + ' of ' + totalVocabAll.toLocaleString() + ' terms';
+    }
+
+    if (matched.length === 0) {
+      dom.vocabExplorerList.innerHTML = '';
+      if (dom.vocabEmpty) dom.vocabEmpty.classList.remove('hidden');
+      return;
+    }
+
+    if (dom.vocabEmpty) dom.vocabEmpty.classList.add('hidden');
+
+    const htmlChunks = [];
+    if (state.vocab.sort === 'az') {
+      htmlChunks.push(
+        '<div class="vocab-term-grid vocab-az-grid">' +
+          visible.map(function (item) {
+            return renderVocabTermCard(item, true);
+          }).join('') +
+        '</div>'
+      );
+    } else {
+      const grouped = [];
+      const groupMap = new Map();
+      visible.forEach(function (item) {
+        let group = groupMap.get(item.ch.id);
+        if (!group) {
+          group = { ch: item.ch, items: [] };
+          groupMap.set(item.ch.id, group);
+          grouped.push(group);
+        }
+        group.items.push(item);
+      });
+
+      grouped.forEach(function (group) {
+        const ch = group.ch;
+        const chCode = ch.chapter_code || ('Ch ' + ch.chapter_num);
+        const termCountLabel = group.items.length + (group.items.length === 1 ? ' term' : ' terms');
+        htmlChunks.push(
+          '<section class="vocab-chapter-group">' +
+            '<div class="vocab-chapter-head">' +
+              '<div class="vocab-chapter-head-left">' +
+                '<span class="ch-code-pill">' + escapeHtml(chCode) + '</span>' +
+                '<h3 class="vocab-chapter-title">' + escapeHtml(chCode + ' — ' + ch.title) + '</h3>' +
+                '<span class="vocab-chapter-count">' + escapeHtml(termCountLabel) + '</span>' +
+              '</div>' +
+              '<button type="button" class="btn-secondary" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="subtab=vocab">Open ' + escapeHtml(chCode) + ' Vocabulary Tab →</button>' +
+            '</div>' +
+            '<div class="vocab-term-grid">' +
+              group.items.map(function (item) {
+                return renderVocabTermCard(item, false);
+              }).join('') +
+            '</div>' +
+          '</section>'
+        );
+      });
+    }
+
+    if (matched.length > visible.length) {
+      const remaining = matched.length - visible.length;
+      htmlChunks.push(
+        '<div class="vocab-load-more">' +
+          '<button type="button" id="btn-vocab-show-all" class="btn-primary">Show All Matching Terms (' + remaining.toLocaleString() + ' more)</button>' +
+        '</div>'
+      );
+    }
+
+    dom.vocabExplorerList.innerHTML = htmlChunks.join('');
+  }
+
+  function resetAllCurriculumFilters() {
+    state.filters.search = '';
+    state.filters.unitId = 'all';
+    state.filters.epa608 = false;
+    state.filters.handout = false;
+    state.filters.inprogress = false;
+    state.vocab.chapterId = 'all';
+    state.vocab.showAllLimit = 240;
+    if (dom.searchInput) dom.searchInput.value = '';
+    if (dom.vocabChapterSelect) dom.vocabChapterSelect.value = 'all';
+    updateSearchClearState();
+    [dom.chipEpa, dom.chipHandout, dom.chipInProgress].forEach(function (chip) {
+      if (!chip) return;
+      chip.classList.remove('active');
+      chip.setAttribute('aria-pressed', 'false');
+    });
+    renderFeaturedLabs();
+    renderUnitTabs();
+    renderChaptersGrid();
+    renderVocabExplorer();
+  }
+
   function renderHubContent() {
     renderTelemetry();
     renderContinueBanner();
     renderFeaturedLabs();
     renderUnitTabs();
+    syncVocabControlButtons();
     renderChaptersGrid();
+    renderVocabExplorer();
+    if (dom.vocabExplorerPanel) {
+      dom.vocabExplorerPanel.classList.toggle('hidden', state.curriculumView !== 'vocab');
+    }
   }
 
   // =========================================================================
@@ -1162,9 +1508,26 @@
       handoutBtn.classList.toggle('is-handout-active', state.stage.handoutMode);
       handoutBtn.setAttribute('aria-pressed', String(state.stage.handoutMode));
     }
+
+    const activeEntry = state.stage.activeId ? state.moduleById.get(state.stage.activeId) : null;
+    const isChapter = Boolean(activeEntry && !activeEntry.isLab);
+    const activeParams = new URLSearchParams(state.stage.moduleQuery || '');
+    const activeSubtab = activeParams.get('subtab') || '';
+
     dom.stageContext.querySelectorAll('[data-preset-query]').forEach(function (btn) {
       const pq = btn.dataset.presetQuery || '';
-      const isMatch = pq === state.stage.moduleQuery;
+      let isMatch = false;
+      if (isChapter && (pq === 'subtab=notes' || pq === 'subtab=vocab')) {
+        if (!state.stage.handoutMode) {
+          if (pq === 'subtab=vocab') {
+            isMatch = activeSubtab === 'vocab';
+          } else {
+            isMatch = activeSubtab === 'notes' || !activeSubtab;
+          }
+        }
+      } else {
+        isMatch = pq === state.stage.moduleQuery;
+      }
       btn.classList.toggle('is-active', isMatch);
       btn.setAttribute('aria-pressed', String(isMatch));
     });
@@ -1173,6 +1536,15 @@
   function renderStageContextControls(entry) {
     if (!dom.stageContext) return;
     const chunks = [];
+
+    if (!entry.isLab && !state.stage.handoutMode && Number(entry.vocab_count) > 0) {
+      chunks.push(
+        '<button type="button" class="stage-btn" data-preset-query="subtab=notes" aria-pressed="false" title="Study Guide &amp; Notes">📝 Study Guide</button>'
+      );
+      chunks.push(
+        '<button type="button" class="stage-btn" data-preset-query="subtab=vocab" aria-pressed="false" title="Chapter Key Vocabulary">📖 Vocabulary (' + Number(entry.vocab_count) + ')</button>'
+      );
+    }
 
     if (!entry.isLab && Array.isArray(entry.companions) && entry.companions.length) {
       entry.companions.forEach(function (comp, idx) {
@@ -1255,8 +1627,15 @@
       }
     }
 
+    state.stage.primaryUrl = nextUrl;
     if (!handledViaPostMessage && dom.primaryFrame) {
-      state.stage.primaryUrl = nextUrl;
+      try {
+        if (dom.primaryFrame.contentWindow) {
+          state.stage.readyFrames.delete(dom.primaryFrame.contentWindow);
+        }
+      } catch (_err) {
+        // Ignore cross-origin window access error.
+      }
       dom.primaryFrame.src = nextUrl;
     }
 
@@ -1299,6 +1678,13 @@
     const nextUrl = buildModuleUrl(targetPath, targetVer, handoutMode ? '' : moduleQuery, state.prefs.theme);
 
     if (forceReload || state.stage.primaryUrl !== nextUrl) {
+      try {
+        if (dom.primaryFrame && dom.primaryFrame.contentWindow) {
+          state.stage.readyFrames.delete(dom.primaryFrame.contentWindow);
+        }
+      } catch (_err) {
+        // Ignore cross-origin window access error.
+      }
       state.stage.primaryUrl = nextUrl;
       if (dom.primaryFrame) dom.primaryFrame.src = nextUrl;
     }
@@ -1322,6 +1708,13 @@
     state.stage.handoutMode = false;
     state.stage.primaryUrl = '';
 
+    try {
+      if (dom.primaryFrame && dom.primaryFrame.contentWindow) {
+        state.stage.readyFrames.delete(dom.primaryFrame.contentWindow);
+      }
+    } catch (_err) {
+      // Ignore cross-origin window access error.
+    }
     if (dom.primaryFrame) dom.primaryFrame.src = 'about:blank';
     document.documentElement.classList.remove('module-active');
     document.body.classList.remove('module-active');
@@ -1365,9 +1758,11 @@
     if (dom.searchInput) {
       dom.searchInput.addEventListener('input', function () {
         state.filters.search = dom.searchInput.value || '';
+        state.vocab.showAllLimit = 240;
         updateSearchClearState();
         renderFeaturedLabs();
         renderChaptersGrid();
+        renderVocabExplorer();
       });
 
       dom.searchInput.addEventListener('keydown', function (e) {
@@ -1424,8 +1819,10 @@
         const btn = e.target.closest('[data-unit]');
         if (!btn) return;
         state.filters.unitId = btn.dataset.unit || 'all';
+        state.vocab.showAllLimit = 240;
         renderUnitTabs();
         renderChaptersGrid();
+        renderVocabExplorer();
       });
     }
 
@@ -1434,29 +1831,84 @@
       chip.addEventListener('click', function () {
         const key = chip.dataset.filter;
         state.filters[key] = !state.filters[key];
+        state.vocab.showAllLimit = 240;
         chip.classList.toggle('active', state.filters[key]);
         chip.setAttribute('aria-pressed', String(state.filters[key]));
         renderChaptersGrid();
+        renderVocabExplorer();
       });
     });
 
     if (dom.resetFiltersBtn) {
-      dom.resetFiltersBtn.addEventListener('click', function () {
-        state.filters.search = '';
-        state.filters.unitId = 'all';
-        state.filters.epa608 = false;
-        state.filters.handout = false;
-        state.filters.inprogress = false;
-        if (dom.searchInput) dom.searchInput.value = '';
-        updateSearchClearState();
-        [dom.chipEpa, dom.chipHandout, dom.chipInProgress].forEach(function (chip) {
-          if (!chip) return;
-          chip.classList.remove('active');
-          chip.setAttribute('aria-pressed', 'false');
-        });
-        renderFeaturedLabs();
-        renderUnitTabs();
-        renderChaptersGrid();
+      dom.resetFiltersBtn.addEventListener('click', resetAllCurriculumFilters);
+    }
+
+    if (dom.btnResetVocabFilters) {
+      dom.btnResetVocabFilters.addEventListener('click', resetAllCurriculumFilters);
+    }
+
+    if (dom.vocabViewSwitch) {
+      dom.vocabViewSwitch.addEventListener('click', function (e) {
+        const btn = e.target.closest('[data-curriculum-view]');
+        if (!btn) return;
+        setCurriculumView(btn.dataset.curriculumView || 'chapters');
+      });
+    }
+
+    if (dom.vocabChapterSelect) {
+      dom.vocabChapterSelect.addEventListener('change', function () {
+        state.vocab.chapterId = dom.vocabChapterSelect.value || 'all';
+        state.vocab.showAllLimit = 240;
+        renderVocabExplorer();
+      });
+    }
+
+    if (dom.btnVocabSort) {
+      dom.btnVocabSort.addEventListener('click', function () {
+        state.vocab.sort = state.vocab.sort === 'chapter' ? 'az' : 'chapter';
+        state.vocab.showAllLimit = 240;
+        syncVocabControlButtons();
+        renderVocabExplorer();
+      });
+    }
+
+    if (dom.btnVocabSelfCheck) {
+      dom.btnVocabSelfCheck.addEventListener('click', function () {
+        state.vocab.selfCheck = !state.vocab.selfCheck;
+        state.vocab.revealedKeys.clear();
+        syncVocabControlButtons();
+        renderVocabExplorer();
+      });
+    }
+
+    if (dom.vocabExplorerPanel) {
+      dom.vocabExplorerPanel.addEventListener('click', function (e) {
+        if (e.target.closest('#btn-vocab-show-all')) {
+          state.vocab.showAllLimit = Number.MAX_SAFE_INTEGER;
+          renderVocabExplorer();
+          return;
+        }
+
+        const revealBtn = e.target.closest('[data-vocab-reveal]');
+        if (revealBtn) {
+          const key = revealBtn.dataset.vocabReveal || '';
+          const chId = revealBtn.dataset.vocabCh || '';
+          const idx = Number(revealBtn.dataset.vocabIdx);
+          if (!key) return;
+          if (state.vocab.revealedKeys.has(key)) {
+            state.vocab.revealedKeys.delete(key);
+          } else {
+            state.vocab.revealedKeys.add(key);
+          }
+          const ch = state.moduleById.get(String(chId).toLowerCase());
+          const vocabItem = ch && Array.isArray(ch.vocabulary) ? ch.vocabulary[idx] : null;
+          const slot = revealBtn.closest('[data-vocab-slot]');
+          if (slot && vocabItem) {
+            slot.innerHTML = renderVocabDefSlot(vocabItem.definition, chId, idx, key);
+          } else {
+            renderVocabExplorer();
+          }
+        }
       });
     }
 
@@ -1589,6 +2041,7 @@
         renderTelemetry();
         renderFeaturedLabs();
         renderChaptersGrid();
+        renderVocabExplorer();
       }
     });
 
@@ -1597,6 +2050,7 @@
         renderTelemetry();
         renderFeaturedLabs();
         renderChaptersGrid();
+        renderVocabExplorer();
       }
     });
 
@@ -1617,6 +2071,7 @@
           renderTelemetry();
           renderFeaturedLabs();
           renderChaptersGrid();
+          renderVocabExplorer();
         }
       }
     });
@@ -1630,10 +2085,12 @@
 
   function clearSearch() {
     state.filters.search = '';
+    state.vocab.showAllLimit = 240;
     if (dom.searchInput) dom.searchInput.value = '';
     updateSearchClearState();
     renderFeaturedLabs();
     renderChaptersGrid();
+    renderVocabExplorer();
   }
 
   // =========================================================================
@@ -1651,6 +2108,7 @@
     }
 
     renderHubHeaderMeta();
+    renderVocabChapterSelect();
     renderStageModuleSelect();
     renderHubContent();
     handleRoute();
