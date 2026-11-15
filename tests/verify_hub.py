@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import functools
 import hashlib
+import html
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
 import os
@@ -17,7 +18,7 @@ import sys
 import tempfile
 import threading
 import time
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 import urllib.request
 
 HUB_DIR = Path(__file__).resolve().parent.parent
@@ -25,14 +26,24 @@ PROJECTS_DIR = HUB_DIR.parent
 ELEC_DIR = PROJECTS_DIR / "Electrical Display Board"
 CYCLE_DIR = PROJECTS_DIR / "animated refrigerant cycle"
 TRACKER_DIR = PROJECTS_DIR / "cte-program-tracker-standalone"
+CURRICULUM_DIR = TRACKER_DIR / "Curiculium data"
+
+MY_DRIVE_ROOT = Path.home() / "My Drive (dkalasz@gmail.com)"
+PERSONAL_CHAPTERS_DIR = MY_DRIVE_ROOT / "HVAC Class Chapters"
+SCHOOL_DRIVE_ROOT = Path("G:/My Drive")
+SCHOOL_CHAPTERS_DIR = SCHOOL_DRIVE_ROOT / "HVAC Class Chapters"
 
 MANIFEST_JSON_PATH = HUB_DIR / "manifest.json"
 MANIFEST_JS_PATH = HUB_DIR / "js" / "catalog_manifest.js"
 
 FORBIDDEN_FILENAME_RE = re.compile(r"(?i)(presentation|instructor|answer_key|answerkey)")
+FORBIDDEN_HANDOUT_RE = re.compile(r"(?i)(presentation|instructor|answer|teacher)")
+DRIVE_CHAPTER_DIR_RE = re.compile(r"(?i)^ch\s*0?(\d{1,2})\b")
+DRIVE_EPA_DIR_RE = re.compile(r"(?i)^608\s+study\s+mater")
 MIN_MODULE_SIZE_BYTES = 10 * 1024
 MAX_REPO_SIZE_BYTES = 150 * 1024 * 1024
 MAX_SINGLE_FILE_BYTES = 50 * 1024 * 1024
+MAX_SYNC_NOOP_SECONDS = 15.0
 
 MIN_TOTAL_VOCAB_TERMS = 1300
 MIN_CHAPTER_VOCAB_TERMS = 12
@@ -40,6 +51,7 @@ MIN_VOCAB_DEF_LEN = 20
 VOCAB_SPOTCHECK_CHAPTERS = ("ch01", "ch11", "ch24", "ch52")
 INLINE_JS_CHECK_HTMLS = (
     "modules/chapters/ch01.html",
+    "modules/chapters/ch11.html",
     "modules/chapters/ch52.html",
     "modules/epa608/index.html",
 )
@@ -73,12 +85,16 @@ def _configure_stdio() -> None:
                 pass
 
 
-def _sha256_prefix(path: Path, length: int = 10) -> str:
+def _sha256_hex(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as fh:
         for chunk in iter(lambda: fh.read(1024 * 1024), b""):
             h.update(chunk)
-    return h.hexdigest()[:length]
+    return h.hexdigest()
+
+
+def _sha256_prefix(path: Path, length: int = 10) -> str:
+    return _sha256_hex(path)[:length]
 
 
 def _resolve_hub_rel_path(rel_url_path: str) -> Path:
@@ -215,21 +231,26 @@ def check_module_files(manifest: Dict[str, Any]) -> None:
         print(f"       Handout {ch_id}: v={h_ver}, size={h_size:,} bytes ({h_size / 1024:.2f} KB)")
 
 
-def check_no_forbidden_filenames() -> None:
-    """Check 4: Walk Integrated Study Helper (excl. .git) and assert zero forbidden filenames."""
+def _find_hub_paths_matching(pattern: re.Pattern[str]) -> List[str]:
+    """Walk HUB_DIR (excluding .git) and return relative paths matching `pattern`."""
     matches: List[str] = []
     for root, dirs, files in os.walk(HUB_DIR):
         dirs[:] = [d for d in dirs if d != ".git"]
         rel_root = Path(root).relative_to(HUB_DIR)
         for dname in dirs:
             rel_dir = (rel_root / dname).as_posix()
-            if FORBIDDEN_FILENAME_RE.search(dname) or FORBIDDEN_FILENAME_RE.search(rel_dir):
+            if pattern.search(dname) or pattern.search(rel_dir):
                 matches.append(rel_dir)
         for fname in files:
             rel_file = (rel_root / fname).as_posix()
-            if FORBIDDEN_FILENAME_RE.search(fname) or FORBIDDEN_FILENAME_RE.search(rel_file):
+            if pattern.search(fname) or pattern.search(rel_file):
                 matches.append(rel_file)
+    return matches
 
+
+def check_no_forbidden_filenames() -> None:
+    """Check 4: Walk Integrated Study Helper (excl. .git) and assert zero forbidden filenames."""
+    matches = _find_hub_paths_matching(FORBIDDEN_FILENAME_RE)
     assert not matches, f"Forbidden instructor/presentation/answer files found: {matches}"
     print("[PASS] Check 4: Zero files/dirs match forbidden instructor/presentation/answer patterns.")
 
@@ -499,12 +520,185 @@ def check_vocabulary_integration(manifest: Dict[str, Any]) -> None:
         f"totals.total_vocab_terms ({total_vocab}) != sum of chapter vocab_count ({sum_vocab})"
     )
 
+def _assert_chapter_vocab_markers(ch_id: str, ch_html: str) -> None:
+    """Assert chapter HTML contains Study Guide embedded vocab, print toggle, and @media print CSS."""
+    for marker in (
+        'id="subtab-vocab"',
+        'data-subtab="subtab-vocab"',
+        "renderVocabulary",
+        'id="notes-embedded-vocab"',
+        'id="btn-notes-toggle-print-vocab"',
+        "hide-notes-vocab-print",
+    ):
+        assert marker in ch_html, f"{ch_id}.html missing required vocabulary marker {marker!r}"
+
+    print_media_match = re.search(r"@media\s+print\s*\{", ch_html)
+    assert print_media_match is not None, f"{ch_id}.html missing @media print CSS block"
+    print_css_tail = ch_html[print_media_match.start() :]
+    for rule in (
+        "body.hide-notes-vocab-print #notes-embedded-vocab",
+        "body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab",
+    ):
+        assert rule in print_css_tail, (
+            f"{ch_id}.html @media print CSS missing embedded vocab rule {rule!r}"
+        )
+
+
+def _verify_epa608_vocab_guard(epa_path: Path, epa_html: str) -> None:
+    """Assert EPA 608 has 0 vocab terms, hidden #btn-subtab-vocab, and empty buildEmbeddedNotesVocabHtml()."""
+    epa_editions = _extract_js_json_var(epa_html, "STUDY_EDITIONS")
+    assert isinstance(epa_editions, dict) and epa_editions, (
+        "modules/epa608/index.html missing parseable window.STUDY_EDITIONS"
+    )
+    for ed_key, ed_data in epa_editions.items():
+        assert isinstance(ed_data, dict), f"EPA 608 edition {ed_key!r} is not a dict"
+        ed_vocab = ed_data.get("vocabulary")
+        assert ed_vocab is None or (isinstance(ed_vocab, list) and len(ed_vocab) == 0), (
+            f"EPA 608 edition {ed_key!r} unexpectedly has {len(ed_vocab)} vocabulary items"
+        )
+
+    btn_match = re.search(
+        r'<button\b[^>]*\bid=["\']btn-subtab-vocab["\'][^>]*>',
+        epa_html,
+        re.IGNORECASE,
+    )
+    assert btn_match is not None, "modules/epa608/index.html missing #btn-subtab-vocab button"
+    btn_tag = btn_match.group(0)
+    class_match = re.search(r'\bclass=["\']([^"\']*)["\']', btn_tag, re.IGNORECASE)
+    class_tokens = class_match.group(1).split() if class_match else []
+    assert "hidden" in class_tokens, (
+        f"modules/epa608/index.html #btn-subtab-vocab missing 'hidden' class: {btn_tag}"
+    )
+    assert re.search(r"(?:^|\s)hidden(?:\s|>|=)", btn_tag, re.IGNORECASE), (
+        f"modules/epa608/index.html #btn-subtab-vocab missing hidden attribute: {btn_tag}"
+    )
+
+    node_bin = shutil.which("node") or "node"
+    node_script = r"""
+const fs = require("fs");
+const vm = require("vm");
+const htmlText = fs.readFileSync(process.argv[1], "utf8");
+const scriptRe = /<script(?![^>]*\bsrc\s*=)[^>]*>([\s\S]*?)<\/script>/gi;
+let fnSrc = null;
+let m;
+while ((m = scriptRe.exec(htmlText)) !== null) {
+  const src = m[1];
+  const idx = src.indexOf("function buildEmbeddedNotesVocabHtml");
+  if (idx === -1) continue;
+  const braceStart = src.indexOf("{", idx);
+  let depth = 0, inStr = null, escaped = false, inLine = false, inBlock = false, end = -1;
+  for (let i = braceStart; i < src.length; i++) {
+    const ch = src[i];
+    const next = src[i + 1];
+    if (inLine) { if (ch === "\n") inLine = false; continue; }
+    if (inBlock) { if (ch === "*" && next === "/") { inBlock = false; i++; } continue; }
+    if (inStr) {
+      if (escaped) { escaped = false; continue; }
+      if (ch === "\\") { escaped = true; continue; }
+      if (ch === inStr) inStr = null;
+      continue;
+    }
+    if (ch === "/" && next === "/") { inLine = true; i++; continue; }
+    if (ch === "/" && next === "*") { inBlock = true; i++; continue; }
+    if (ch === "'" || ch === '"' || ch === "`") { inStr = ch; continue; }
+    if (ch === "{") depth++;
+    else if (ch === "}") {
+      depth--;
+      if (depth === 0) { end = i + 1; break; }
+    }
+  }
+  if (end !== -1) {
+    fnSrc = src.slice(idx, end);
+    break;
+  }
+}
+if (!fnSrc) throw new Error("buildEmbeddedNotesVocabHtml() not found in EPA 608 inline script");
+const ctx = { vocabList: [] };
+vm.runInNewContext(fnSrc + "\nthis.__out = buildEmbeddedNotesVocabHtml();", ctx);
+if (ctx.__out !== "") {
+  throw new Error("Expected empty buildEmbeddedNotesVocabHtml() for empty vocabList, got: " + String(ctx.__out).slice(0, 120));
+}
+if (ctx.__out.includes("notes-embedded-vocab")) {
+  throw new Error("buildEmbeddedNotesVocabHtml() unexpectedly rendered notes-embedded-vocab");
+}
+"""
+    proc = subprocess.run(
+        [node_bin, "-e", node_script, str(epa_path)],
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    assert proc.returncode == 0, (
+        f"EPA 608 Node buildEmbeddedNotesVocabHtml() guard check failed (exit {proc.returncode}): "
+        f"{proc.stderr or proc.stdout}"
+    )
+
+
+def check_vocabulary_integration(manifest: Dict[str, Any]) -> None:
+    """Check 9: Verify Chapters 1-52 vocab, embedded Study Guide vocab, EPA 608 guard, inline JS, and hub UI."""
+    totals = manifest.get("totals", {})
+    total_vocab = totals.get("total_vocab_terms")
+    assert isinstance(total_vocab, int) and total_vocab >= MIN_TOTAL_VOCAB_TERMS, (
+        f"Expected total_vocab_terms >= {MIN_TOTAL_VOCAB_TERMS}, got {total_vocab!r}"
+    )
+
+    chapters = manifest.get("chapters", [])
+    sum_vocab = 0
+    min_vocab_ch = ("", 10**9)
+    max_vocab_ch = ("", -1)
+
+    for ch in chapters:
+        ch_id = str(ch.get("id") or "")
+        vocab_count = ch.get("vocab_count")
+        vocab_list = ch.get("vocabulary")
+        assert isinstance(vocab_count, int) and vocab_count >= MIN_CHAPTER_VOCAB_TERMS, (
+            f"{ch_id}: expected vocab_count >= {MIN_CHAPTER_VOCAB_TERMS}, got {vocab_count!r}"
+        )
+        assert isinstance(vocab_list, list) and len(vocab_list) == vocab_count, (
+            f"{ch_id}: len(vocabulary)={len(vocab_list) if isinstance(vocab_list, list) else type(vocab_list)} "
+            f"!= vocab_count={vocab_count}"
+        )
+        sum_vocab += vocab_count
+        if vocab_count < min_vocab_ch[1]:
+            min_vocab_ch = (ch_id, vocab_count)
+        if vocab_count > max_vocab_ch[1]:
+            max_vocab_ch = (ch_id, vocab_count)
+
+        for idx, entry in enumerate(vocab_list, start=1):
+            assert isinstance(entry, dict), f"{ch_id} vocab[{idx}] is not a dict"
+            vid = entry.get("id")
+            term = entry.get("term")
+            definition = entry.get("definition")
+            sec_id = entry.get("section_id")
+            sec_title = entry.get("section_title")
+
+            assert isinstance(vid, str) and vid.strip(), f"{ch_id} vocab[{idx}] missing id"
+            assert isinstance(term, str) and len(term.strip()) >= 2, (
+                f"{ch_id} vocab[{idx}] ({vid}) invalid term: {term!r}"
+            )
+            assert isinstance(definition, str) and len(definition.strip()) >= MIN_VOCAB_DEF_LEN, (
+                f"{ch_id} vocab[{idx}] ({vid}) definition too short (< {MIN_VOCAB_DEF_LEN}): {definition!r}"
+            )
+            assert "____" not in definition, (
+                f"{ch_id} vocab[{idx}] ({vid}) contains blank placeholder '____': {definition!r}"
+            )
+            assert isinstance(sec_id, str) and sec_id.strip(), (
+                f"{ch_id} vocab[{idx}] ({vid}) missing section_id"
+            )
+            assert isinstance(sec_title, str) and sec_title.strip(), (
+                f"{ch_id} vocab[{idx}] ({vid}) missing section_title"
+            )
+
+    assert total_vocab == sum_vocab, (
+        f"totals.total_vocab_terms ({total_vocab}) != sum of chapter vocab_count ({sum_vocab})"
+    )
+
     for ch_id in VOCAB_SPOTCHECK_CHAPTERS:
         ch_path = HUB_DIR / "modules" / "chapters" / f"{ch_id}.html"
         assert ch_path.is_file(), f"Missing chapter HTML: {ch_path}"
         ch_html = ch_path.read_text(encoding="utf-8", errors="replace")
-        for marker in ('id="subtab-vocab"', 'data-subtab="subtab-vocab"', "renderVocabulary"):
-            assert marker in ch_html, f"{ch_id}.html missing required vocabulary marker {marker!r}"
+        _assert_chapter_vocab_markers(ch_id, ch_html)
         ch_data = _extract_js_json_var(ch_html, "CHAPTER_DATA")
         assert isinstance(ch_data, dict), f"{ch_id}.html missing parseable window.CHAPTER_DATA"
         ch_vocab = ch_data.get("vocabulary")
@@ -515,19 +709,7 @@ def check_vocabulary_integration(manifest: Dict[str, Any]) -> None:
     epa_path = HUB_DIR / "modules" / "epa608" / "index.html"
     assert epa_path.is_file(), f"Missing EPA 608 module: {epa_path}"
     epa_html = epa_path.read_text(encoding="utf-8", errors="replace")
-    epa_editions = _extract_js_json_var(epa_html, "STUDY_EDITIONS")
-    assert isinstance(epa_editions, dict) and epa_editions, (
-        "modules/epa608/index.html missing parseable window.STUDY_EDITIONS"
-    )
-    for ed_key, ed_data in epa_editions.items():
-        assert isinstance(ed_data, dict), f"EPA 608 edition {ed_key!r} is not a dict"
-        ed_vocab = ed_data.get("vocabulary")
-        assert not ed_vocab, (
-            f"EPA 608 edition {ed_key!r} unexpectedly defines chapter-only vocabulary entries"
-        )
-    assert 'id="subtab-vocab"' not in epa_html, (
-        "modules/epa608/index.html unexpectedly includes chapter subtab-vocab"
-    )
+    _verify_epa608_vocab_guard(epa_path, epa_html)
 
     inline_blocks = _verify_inline_scripts_node_check(INLINE_JS_CHECK_HTMLS)
 
@@ -543,11 +725,184 @@ def check_vocabulary_integration(manifest: Dict[str, Any]) -> None:
         assert f'id="{elem_id}"' in index_html, f"index.html missing #{elem_id}"
 
     print(
-        f"[PASS] Check 9: Vocabulary verified across 52 chapters "
+        f"[PASS] Check 9: Vocabulary & embedded Study Guide verified across 52 chapters "
         f"(total={total_vocab} terms, min={min_vocab_ch[0]}:{min_vocab_ch[1]}, "
         f"max={max_vocab_ch[0]}:{max_vocab_ch[1]}), spotchecks={list(VOCAB_SPOTCHECK_CHAPTERS)}, "
-        f"EPA 608 clean, node --check passed on {inline_blocks} inline <script> blocks, "
-        f"and index.html vocabulary explorer controls present."
+        f"EPA 608 hidden/empty guard verified (Python + Node vm), node --check passed on {inline_blocks} "
+        f"inline <script> blocks across {list(INLINE_JS_CHECK_HTMLS)}, and index.html vocab explorer present."
+    )
+
+
+def _resolve_drive_chapter_dirs(root: Path) -> Tuple[Dict[int, Path], Optional[Path]]:
+    """Resolve Chapter 1..52 directories and EPA 608 directory inside a Drive chapters root."""
+    ch_dirs: Dict[int, Path] = {}
+    epa_dir: Optional[Path] = None
+    if not root.exists():
+        return ch_dirs, epa_dir
+    with os.scandir(root) as it:
+        entries = sorted(
+            (e for e in it if e.is_dir(follow_symlinks=False)),
+            key=lambda e: e.name.lower(),
+        )
+    for entry in entries:
+        name = entry.name
+        if name.startswith(("_", ".")):
+            continue
+        ch_match = DRIVE_CHAPTER_DIR_RE.match(name)
+        if ch_match:
+            ch_num = int(ch_match.group(1))
+            if 1 <= ch_num <= 52 and ch_num not in ch_dirs:
+                ch_dirs[ch_num] = Path(entry.path)
+            continue
+        if epa_dir is None and DRIVE_EPA_DIR_RE.match(name):
+            epa_dir = Path(entry.path)
+    return ch_dirs, epa_dir
+
+
+def _assert_group_sha256_parity(label: str, paths: List[Path]) -> str:
+    """Assert every path in `paths` exists and shares an identical full SHA-256 checksum."""
+    hashes: Dict[Path, str] = {}
+    for p in paths:
+        assert p.is_file(), f"{label}: missing expected synced file: {p}"
+        hashes[p] = _sha256_hex(p)
+    unique_hashes = set(hashes.values())
+    assert len(unique_hashes) == 1, (
+        f"{label}: SHA-256 mismatch across synced targets: "
+        + ", ".join(f"{p}={h[:12]}" for p, h in hashes.items())
+    )
+    return next(iter(unique_hashes))
+
+
+def check_bidirectional_sync_and_handouts(
+    manifest: Dict[str, Any],
+    *,
+    skip_live_hooks: bool,
+) -> None:
+    """Check 10: Verify Ch 11 handout vocab injection, 52+1 SHA-256 parity, safety, and no-op sync."""
+    personal_present = PERSONAL_CHAPTERS_DIR.exists()
+    school_present = SCHOOL_DRIVE_ROOT.exists() and SCHOOL_CHAPTERS_DIR.exists()
+
+    personal_ch_dirs, personal_epa_dir = _resolve_drive_chapter_dirs(PERSONAL_CHAPTERS_DIR)
+    school_ch_dirs, school_epa_dir = _resolve_drive_chapter_dirs(SCHOOL_CHAPTERS_DIR)
+
+    if personal_present:
+        assert len(personal_ch_dirs) == 52, (
+            f"Personal Drive expected 52 chapter dirs, found {len(personal_ch_dirs)}"
+        )
+        assert personal_epa_dir is not None, "Personal Drive missing 608 Study Material directory"
+    if school_present:
+        assert len(school_ch_dirs) == 52, (
+            f"School Drive expected 52 chapter dirs, found {len(school_ch_dirs)}"
+        )
+        assert school_epa_dir is not None, "School Drive missing 608 Study Materal directory"
+
+    # 1. Ch 11 Student Handout multi-target content + SHA-256 parity
+    ch11_entries = [c for c in manifest.get("chapters", []) if c.get("chapter_num") == 11]
+    assert len(ch11_entries) == 1, "Manifest missing chapter 11 entry"
+    ch11_vocab = ch11_entries[0].get("vocabulary") or []
+    assert len(ch11_vocab) >= 43, f"Expected >= 43 Ch 11 vocab terms, got {len(ch11_vocab)}"
+    ch11_terms = [str(v.get("term") or "").strip() for v in ch11_vocab if str(v.get("term") or "").strip()]
+
+    handout_filename = "Ch11_Exam_Study_Guide_Student_Handout.html"
+    handout_targets: List[Path] = [
+        HUB_DIR / "modules" / "handouts" / "ch11_handout.html",
+        CURRICULUM_DIR / "ch11" / handout_filename,
+    ]
+    if MY_DRIVE_ROOT.exists():
+        handout_targets.append(MY_DRIVE_ROOT / handout_filename)
+    if personal_present:
+        handout_targets.append(personal_ch_dirs[11] / handout_filename)
+    if school_present:
+        handout_targets.append(school_ch_dirs[11] / handout_filename)
+
+    handout_sha = _assert_group_sha256_parity("Ch11 Student Handout", handout_targets)
+    handout_text = handout_targets[0].read_text(encoding="utf-8", errors="replace")
+    for marker in (
+        "<!-- BEGIN AUTO-SYNCED VOCABULARY GUIDE -->",
+        'id="autoSyncedVocabSection"',
+        "Toggle Vocabulary",
+    ):
+        assert marker in handout_text, f"Ch 11 handout missing required marker {marker!r}"
+
+    sec_match = re.search(
+        r'<section[^>]*\bid=["\']autoSyncedVocabSection["\'][^>]*>.*?</section>',
+        handout_text,
+        re.DOTALL,
+    )
+    assert sec_match is not None, "Ch 11 handout missing <section id='autoSyncedVocabSection'> block"
+    sec_html = sec_match.group(0)
+    missing_terms = [t for t in ch11_terms if html.escape(t, quote=True) not in sec_html]
+    assert not missing_terms, f"Ch 11 handout missing vocab terms: {missing_terms}"
+
+    # 2. All 52 chapters + EPA 608 SHA-256 parity across Desktop, Hub, Personal Drive, School Drive
+    for ch_num in range(1, 53):
+        ch_filename = f"Ch {ch_num:02d} - Interactive Study & HVAC Game.html"
+        targets: List[Path] = [
+            CURRICULUM_DIR / f"ch{ch_num:02d}" / ch_filename,
+            HUB_DIR / "modules" / "chapters" / f"ch{ch_num:02d}.html",
+        ]
+        if personal_present:
+            targets.append(personal_ch_dirs[ch_num] / ch_filename)
+        if school_present:
+            targets.append(school_ch_dirs[ch_num] / ch_filename)
+        _assert_group_sha256_parity(f"Chapter {ch_num:02d}", targets)
+
+    epa_filename = "EPA 608 - Interactive Study & HVAC Game.html"
+    epa_targets: List[Path] = [
+        CURRICULUM_DIR / "608 Study Material" / epa_filename,
+        HUB_DIR / "modules" / "epa608" / "index.html",
+    ]
+    if personal_present and personal_epa_dir is not None:
+        epa_targets.append(personal_epa_dir / epa_filename)
+    if school_present and school_epa_dir is not None:
+        epa_targets.append(school_epa_dir / epa_filename)
+    epa_sha = _assert_group_sha256_parity("EPA 608", epa_targets)
+
+    # 3. Ensure zero instructor/presentation/answer/teacher handouts exist anywhere in HUB_DIR
+    forbidden_hits = _find_hub_paths_matching(FORBIDDEN_HANDOUT_RE)
+    assert not forbidden_hits, f"Forbidden handout/instructor files found in HUB_DIR: {forbidden_hits}"
+
+    # 4. Timed no-op pass of sync_and_publish.py --local-only
+    noop_summary = "no-op skipped (--skip-live-hooks)"
+    if not skip_live_hooks:
+        venv_py = TRACKER_DIR / ".venv" / "Scripts" / "python.exe"
+        py_bin = str(venv_py) if venv_py.is_file() else sys.executable
+        before_ts = _load_manifest_json().get("generated_at_utc")
+        t0 = time.perf_counter()
+        proc = subprocess.run(
+            [py_bin, str(HUB_DIR / "sync_and_publish.py"), "--local-only"],
+            cwd=str(HUB_DIR),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        elapsed = time.perf_counter() - t0
+        assert proc.returncode == 0, (
+            f"sync_and_publish.py --local-only failed (exit {proc.returncode}):\n"
+            f"STDOUT:\n{proc.stdout}\nSTDERR:\n{proc.stderr}"
+        )
+        assert "[OK] All 55 modules and manifest up to date (0 file(s) changed)." in proc.stdout, (
+            f"No-op sync_and_publish.py changed unexpected module files:\n{proc.stdout}"
+        )
+        if MY_DRIVE_ROOT.exists():
+            assert "(0 file(s) updated;" in proc.stdout, (
+                f"No-op sync_and_publish.py updated unexpected H: drive files:\n{proc.stdout}"
+            )
+        after_ts = _load_manifest_json().get("generated_at_utc")
+        assert after_ts == before_ts, (
+            f"No-op sync modified manifest generated_at_utc ({before_ts} -> {after_ts})"
+        )
+        assert elapsed < MAX_SYNC_NOOP_SECONDS, (
+            f"No-op sync took {elapsed:.2f}s (>= {MAX_SYNC_NOOP_SECONDS}s limit)"
+        )
+        noop_summary = f"no-op exit=0 in {elapsed:.2f}s (0 file(s) changed)"
+
+    print(
+        f"[PASS] Check 10: Bidirectional sync parity verified — Ch 11 handout ({len(handout_targets)} targets, "
+        f"{len(ch11_terms)} vocab terms, sha={handout_sha[:10]}), 52/52 chapters + 1/1 EPA 608 (sha={epa_sha[:10]}) "
+        f"identical across Desktop/Hub{'/Personal' if personal_present else ''}{'/School' if school_present else ''}, "
+        f"0 forbidden files, {noop_summary}."
     )
 
 
@@ -558,7 +913,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--skip-live-hooks",
         action="store_true",
-        help="Skip Check 6 live upstream auto-update hook execution.",
+        help="Skip Check 6 live upstream auto-update hook execution and Check 10 live sync no-op run.",
     )
     return parser
 
@@ -586,6 +941,7 @@ def main(argv: List[str] | None = None) -> int:
     check_http_routes()
     check_repo_size()
     check_vocabulary_integration(manifest)
+    check_bidirectional_sync_and_handouts(manifest, skip_live_hooks=args.skip_live_hooks)
 
     print("[SUCCESS] All Integrated Study Helper verification checks passed.")
     return 0
