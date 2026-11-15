@@ -209,6 +209,93 @@
         break-inside: avoid;
       }
     }
+    /* BEGIN AUTO-SYNCED VOCAB CSS */
+    .vocab-guide-section {
+      margin-top: 14px;
+    }
+    .vocab-guide-intro {
+      margin: 0 0 8px 0;
+      font-size: 9pt;
+      color: var(--muted, #4b5563);
+    }
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px 12px;
+    }
+    .vocab-item {
+      border: 1px solid var(--border, #d1d5db);
+      border-left: 3px solid var(--accent, #0f4c81);
+      border-radius: 4px;
+      padding: 6px 8px;
+      background: var(--bg-soft, #f8fafc);
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .vocab-item-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+    .vocab-term {
+      font-weight: 700;
+      color: #0f172a;
+      font-size: 9.5pt;
+    }
+    .vocab-meta-badge {
+      font-size: 7.5pt;
+      font-weight: 600;
+      color: var(--accent, #0f4c81);
+      background: #e0f2fe;
+      border-radius: 3px;
+      padding: 0 4px;
+    }
+    .vocab-epa-badge {
+      font-size: 7pt;
+      font-weight: 700;
+      color: #92400e;
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      border-radius: 3px;
+      padding: 0 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .vocab-def {
+      font-size: 8.6pt;
+      line-height: 1.4;
+      color: #1f2937;
+    }
+    @media (max-width: 680px) {
+      .vocab-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media print {
+      .vocab-guide-section {
+        margin-top: 10px;
+      }
+      .vocab-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px 10px;
+      }
+      .vocab-item {
+        background: #fff;
+        padding: 4px 6px;
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      .vocab-term {
+        font-size: 8.8pt;
+      }
+      .vocab-def {
+        font-size: 8pt;
+        line-height: 1.32;
+      }
+    }
+    /* END AUTO-SYNCED VOCAB CSS */
   </style>
 </head>
 <body>
@@ -220,6 +307,7 @@
     <div class="toolbar-actions">
       <button class="btn secondary" onclick="document.body.classList.toggle('show-key')">Toggle Answer Key</button>
       <button class="btn secondary" onclick="document.getElementById('wordBankBox').style.display = document.getElementById('wordBankBox').style.display === 'none' ? 'block' : 'none'">Toggle Word Bank</button>
+      <!-- BEGIN AUTO-SYNCED VOCAB BTN --><button type="button" class="btn secondary" onclick="var el=document.getElementById('autoSyncedVocabSection');if(el){el.style.display=el.style.display==='none'?'block':'none';}">Toggle Vocabulary</button><!-- END AUTO-SYNCED VOCAB BTN -->
       <button class="btn" onclick="window.print()">Print Student Handout</button>
     </div>
   </div>
@@ -364,6 +452,187 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- BEGIN AUTO-SYNCED VOCABULARY GUIDE -->
+    <section class="vocab-guide-section" id="autoSyncedVocabSection">
+      <h2>Key Vocabulary Study Guide: Ch. 11 — Equipment and Instruments for Refrigerant Handling and Service (43 Terms)</h2>
+      <p class="vocab-guide-intro"><strong>Textbook Key Terms (43):</strong> Review each term and definition alongside your study guide blanks. Terms marked <span class="vocab-epa-badge">EPA 608</span> also reinforce EPA Section 608 certification topics.</p>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Fusible plug</span><span class="vocab-meta-badge">§11.1 · p.188</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">A fusible plug is a plug made of a metal with a low melting point, which melts and releases a cylinder&#x27;s entire refrigerant charge if the cylinder begins to overheat.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Recovery cylinder</span><span class="vocab-meta-badge">§11.1 · p.189</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">Recovery cylinders are refrigerant cylinders specifically dedicated to storing refrigerant recovered from refrigeration systems.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Storage cylinder</span><span class="vocab-meta-badge">§11.1 · p.188</span></div>
+          <div class="vocab-def">Storage cylinders are fitted with a valve and a protective cap.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Bourdon tube</span><span class="vocab-meta-badge">§11.2 · p.190</span></div>
+          <div class="vocab-def">A Bourdon tube is a thin-walled tube of elastic metal bent into a circular shape that straightens as pressure inside it increases.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Compound gauge</span><span class="vocab-meta-badge">§11.2 · p.192</span></div>
+          <div class="vocab-def">A compound gauge measures pressure above atmospheric and vacuum.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">High-pressure gauge</span><span class="vocab-meta-badge">§11.2 · p.193</span></div>
+          <div class="vocab-def">High-pressure gauges are also known as high-side gauges.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Micron</span><span class="vocab-meta-badge">§11.2 · p.192</span></div>
+          <div class="vocab-def">A micron is the equivalent of 0.001 mm Hg.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Pressure gauge</span><span class="vocab-meta-badge">§11.2 · p.190</span></div>
+          <div class="vocab-def">Pressure gauges are instruments that measure and display the pressure of a fluid in a container.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Retarder</span><span class="vocab-meta-badge">§11.2 · p.191</span></div>
+          <div class="vocab-def">Some pressure gauges use a built-in retarder with the Bourdon tube to measure readings at higher pressures.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Vacuum gauge</span><span class="vocab-meta-badge">§11.2 · p.191</span></div>
+          <div class="vocab-def">A vacuum gauge measures lower-than-atmospheric pressure.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Access port</span><span class="vocab-meta-badge">§11.3 · p.200</span></div>
+          <div class="vocab-def">Access ports are installed in systems where the need for more convenient service outweighs the advantage of having a minimum number of connections.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Back seated</span><span class="vocab-meta-badge">§11.3 · p.197</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">When a service valve is back seated, it closes off its service port from the rest of the system, so no pressure readings or procedures can be performed.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Cracked open</span><span class="vocab-meta-badge">§11.3 · p.198</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">When a low-side service valve is cracked open only slightly off the back-seated position, a technician can take low-side pressure readings with a compound gauge during normal system operation.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Discharge service valve (DSV)</span><span class="vocab-meta-badge">§11.3 · p.198</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">A discharge service valve (DSV) is a high-side service valve that is mounted at a compressor&#x27;s discharge port, providing a shutoff between the compressor and the condenser.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Front seated</span><span class="vocab-meta-badge">§11.3 · p.197</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">When a service valve is front seated, it blocks the flow of refrigerant through the valve by closing off its regular passageway.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">King valve</span><span class="vocab-meta-badge">§11.3 · p.199</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">On the job, you may hear someone call a liquid receiver service valve a king valve or a receiver outlet valve.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Liquid line service valve</span><span class="vocab-meta-badge">§11.3 · p.199</span></div>
+          <div class="vocab-def">A liquid line service valve is a high-side service valve located in a refrigeration system&#x27;s condenser and liquid line.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Liquid receiver service valve (LRSV)</span><span class="vocab-meta-badge">§11.3 · p.199</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">A liquid receiver service valve (LRSV) is a high-side service valve connected to the outlet of a liquid receiver and the inlet of a liquid line.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Mid-position</span><span class="vocab-meta-badge">§11.3 · p.198</span></div>
+          <div class="vocab-def">Mid-position is used for system evacuation or standing pressure tests.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Piercing valve</span><span class="vocab-meta-badge">§11.3 · p.200</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">A piercing valve is a valve that is secured to a length of tubing and accesses the refrigeration system by piercing through the tubing.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Queen valve</span><span class="vocab-meta-badge">§11.3 · p.199</span></div>
+          <div class="vocab-def">King and queen valves are useful when pumping down systems for component isolation.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Schrader valve</span><span class="vocab-meta-badge">§11.3 · p.200</span></div>
+          <div class="vocab-def">A Schrader valve consists of an externally threaded, hollow tube with a spring-loaded, coaxially centered pin that blocks access through the tube.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Service valve</span><span class="vocab-meta-badge">§11.3 · p.196</span></div>
+          <div class="vocab-def">A service valve is a valve with a wrench-operated, movable valve stem that blocks or opens passage through the valve.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Suction line service valve</span><span class="vocab-meta-badge">§11.3 · p.197</span></div>
+          <div class="vocab-def">A suction line service valve is a low-side service valve connected to a refrigeration system&#x27;s suction line.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Suction service valve (SSV)</span><span class="vocab-meta-badge">§11.3 · p.197</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">A suction service valve (SSV) is a low-side service valve that connects to the suction line and directly onto the compressor at its inlet.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Valve core</span><span class="vocab-meta-badge">§11.3 · p.202</span></div>
+          <div class="vocab-def">The valve core should be removed from the valve to prevent damage to the seals during brazing.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Valve core remover</span><span class="vocab-meta-badge">§11.3 · p.200</span></div>
+          <div class="vocab-def">Technicians use a valve core remover that mounts on the access port.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Gauge manifold</span><span class="vocab-meta-badge">§11.4 · p.203</span></div>
+          <div class="vocab-def">A gauge manifold consists of a compound (low-side) gauge, a high-pressure (high-side) gauge, at least three ports that may be isolated from each other, and at least two hand valves.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Refrigeration system analyzer</span><span class="vocab-meta-badge">§11.4 · p.207</span></div>
+          <div class="vocab-def">Refrigeration system analyzers are used to measure system variables, such as pressures and temperatures, and help to determine whether operation is optimal.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Bubble solution</span><span class="vocab-meta-badge">§11.5 · p.208</span></div>
+          <div class="vocab-def">A bubble solution is a soap-water or patented solution that is brushed over an area of tubing that is suspected of leaking.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Electronic leak detection</span><span class="vocab-meta-badge">§11.5 · p.209</span></div>
+          <div class="vocab-def">Electronic leak detection uses electronic sensors to determine if a refrigerant is present.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Fluorescent dye leak detection</span><span class="vocab-meta-badge">§11.5 · p.208</span></div>
+          <div class="vocab-def">Fluorescent dye leak detection uses fluorescent dye and an ultraviolet light to detect leaks.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Halide torch leak detection</span><span class="vocab-meta-badge">§11.5 · p.209</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">Halide torch leak detection involves burning a fuel gas near a copper plate and using a rubber hose to siphon air from areas suspected of leaking refrigerant.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Refrigerant dye leak detection</span><span class="vocab-meta-badge">§11.5 · p.208</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">Refrigerant dye leak detection involves charging a dye into a refrigeration system and observing areas suspected of leaks during operation.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Ultrasonic leak detector</span><span class="vocab-meta-badge">§11.5 · p.210</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">Ultrasonic leak detectors detect the sound that a vapor makes as it is escaping from a pressurized system.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Free air displacement</span><span class="vocab-meta-badge">§11.6 · p.211</span></div>
+          <div class="vocab-def">Free air displacement is the speed at which gas may be pumped through a vacuum pump.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Ultimate vacuum</span><span class="vocab-meta-badge">§11.6 · p.211</span></div>
+          <div class="vocab-def">Ultimate vacuum is the highest vacuum that a vacuum pump can pull.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Vacuum pump</span><span class="vocab-meta-badge">§11.6 · p.210</span></div>
+          <div class="vocab-def">A vacuum pump is a vapor pump used to create vacuums for evacuating a refrigeration system of moisture and other contaminants before refrigerant is recharged into the system.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Digital charging scale</span><span class="vocab-meta-badge">§11.7 · p.215</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">A digital charging scale is an electronic refrigerant scale that monitors the weight of a refrigerant cylinder as refrigerant is being charged into or recovered from a system.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Reclaiming</span><span class="vocab-meta-badge">§11.7 · p.212</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">The term reclaiming refers to reprocessing a recovered refrigerant so that it is chemically pure.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Recovering</span><span class="vocab-meta-badge">§11.7 · p.212</span><span class="vocab-epa-badge">EPA 608</span></div>
+          <div class="vocab-def">The term recovering refers to removing refrigerant from a system and storing it in an external container, regardless of the condition of the removed refrigerant.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Recovery/recycling machine</span><span class="vocab-meta-badge">§11.7 · p.214</span></div>
+          <div class="vocab-def">Many recovery/recycling machines are designed to be versatile and easy to use.</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-item-head"><span class="vocab-term">Recycling</span><span class="vocab-meta-badge">§11.7 · p.212</span></div>
+          <div class="vocab-def">Recycling is generally done on a jobsite where the HVACR system is located or at a local service shop.</div>
+        </div>
+      </div>
+    </section>
+    <!-- END AUTO-SYNCED VOCABULARY GUIDE -->
 
     <div class="word-bank" id="wordBankBox">
       <div class="word-bank-title">Scrambled Word Bank (For Sections 1–7)</div>

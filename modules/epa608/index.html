@@ -1197,6 +1197,273 @@ button.note-blank.flash-wrong {
   color: #fda4af;
 }
 
+/* === KEY VOCABULARY SUBTAB === */
+.vocab-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+
+.vocab-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vocab-toolbar-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.vocab-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.vocab-search-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 220px;
+  flex: 1 1 240px;
+  max-width: 340px;
+}
+
+.vocab-search-input {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border-bright);
+  border-radius: 8px;
+  padding: 7px 11px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vocab-search-input::placeholder {
+  color: var(--muted);
+}
+
+.vocab-search-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+
+.vocab-notice-banner {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-left: 4px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13.5px;
+  color: var(--text);
+}
+
+.vocab-section-group {
+  margin-bottom: 18px;
+}
+
+.vocab-section-heading {
+  margin: 0 0 10px 0;
+  padding: 0 2px 7px 2px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.vocab-section-heading-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+.vocab-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.vocab-card:hover {
+  border-color: var(--border-bright);
+}
+
+.vocab-card.is-epa608 {
+  border-color: rgba(16, 185, 129, 0.55);
+  border-left: 4px solid var(--emerald);
+  background: linear-gradient(160deg, rgba(16, 185, 129, 0.1) 0%, var(--card) 100%);
+}
+
+.vocab-card.is-mastered {
+  border-color: rgba(16, 185, 129, 0.65);
+  background: linear-gradient(160deg, rgba(16, 185, 129, 0.14) 0%, var(--card) 100%);
+}
+
+.vocab-card-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.vocab-card-term {
+  margin: 0;
+  font-size: 16.5px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.vocab-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.vocab-def {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--text);
+  opacity: 0.92;
+}
+
+.vocab-reveal-btn {
+  width: 100%;
+  text-align: center;
+  background: var(--card-alt);
+  color: var(--cyan);
+  border: 1.5px dashed rgba(56, 189, 248, 0.5);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.vocab-reveal-btn:hover {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: var(--cyan);
+}
+
+.vocab-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+/* === EMBEDDED KEY VOCABULARY IN STUDY GUIDE === */
+.notes-embedded-vocab {
+  margin-top: 18px;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.notes-embedded-vocab-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.notes-embedded-vocab.is-collapsed .notes-embedded-vocab-head {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.notes-embedded-vocab-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.notes-embedded-vocab-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.notes-vocab-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.notes-vocab-body.is-collapsed {
+  display: none;
+}
+
+.notes-vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.notes-vocab-card {
+  background: var(--card-alt);
+  box-shadow: none;
+  padding: 12px 14px;
+}
+
+.notes-vocab-card.is-epa608 {
+  background: linear-gradient(160deg, rgba(16, 185, 129, 0.12) 0%, var(--card-alt) 100%);
+}
+
+.notes-vocab-card.is-mastered {
+  background: linear-gradient(160deg, rgba(16, 185, 129, 0.16) 0%, var(--card-alt) 100%);
+}
+
 /* === TERM MATCH-UP === */
 .match-toolbar {
   display: flex;
@@ -2097,6 +2364,16 @@ button.note-blank.flash-wrong {
   .crates-row {
     grid-template-columns: 1fr;
   }
+  .vocab-toolbar-actions {
+    justify-content: flex-start;
+  }
+  .vocab-search-wrap {
+    max-width: 100%;
+  }
+  .vocab-grid,
+  .notes-vocab-grid {
+    grid-template-columns: 1fr;
+  }
   .chapter-title {
     max-width: 260px;
   }
@@ -2133,6 +2410,12 @@ button.note-blank.flash-wrong {
   .filter-bar,
   .subtabs-bar,
   .notes-toolbar,
+  .vocab-toolbar,
+  #vocab-search-input,
+  .vocab-notice-banner,
+  .vocab-reveal-btn,
+  .vocab-master-btn,
+  .vocab-card-foot,
   #subtab-cards,
   #subtab-match,
   #subtab-labs,
@@ -2411,6 +2694,150 @@ button.note-blank.flash-wrong {
     border: 0.75pt solid #666666 !important;
     background: #ffffff !important;
     padding: 2pt !important;
+  }
+
+  body:not(.print-vocab-mode) #subtab-vocab {
+    display: none !important;
+  }
+
+  body.print-vocab-mode #subtab-notes {
+    display: none !important;
+  }
+
+  body.hide-notes-vocab-print #notes-embedded-vocab {
+    display: none !important;
+  }
+
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 14pt 0 0 0 !important;
+    padding: 10pt 0 0 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+    border-top: 1.5pt solid #000000 !important;
+    box-shadow: none !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .notes-embedded-vocab-head {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: space-between !important;
+    border-bottom: 1pt solid #000000 !important;
+    padding: 0 0 4pt 0 !important;
+    margin: 0 0 8pt 0 !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .notes-embedded-vocab-title {
+    font-size: 11.5pt !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    margin: 0 !important;
+  }
+
+  #notes-embedded-vocab .notes-vocab-actions,
+  #notes-embedded-vocab .vocab-reveal-btn,
+  #notes-embedded-vocab .vocab-master-btn,
+  #notes-embedded-vocab .vocab-card-foot {
+    display: none !important;
+  }
+
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .notes-vocab-body,
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .notes-vocab-body.is-collapsed {
+    display: block !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab .vocab-section-group {
+    margin-bottom: 10pt !important;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab .vocab-section-heading {
+    font-size: 11pt !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    border-bottom: 1pt solid #000000 !important;
+    padding: 0 0 3pt 0 !important;
+    margin: 10pt 0 6pt 0 !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab .vocab-grid,
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .notes-vocab-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 7pt !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab .vocab-card,
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .vocab-card {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3pt !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 0.75pt solid #333333 !important;
+    border-left: 0.75pt solid #333333 !important;
+    border-radius: 3pt !important;
+    padding: 6pt 8pt !important;
+    box-shadow: none !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab .vocab-card-term,
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .vocab-card-term {
+    font-size: 10pt !important;
+    font-weight: 800 !important;
+    color: #000000 !important;
+    margin: 0 !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab .vocab-meta-row,
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .vocab-meta-row {
+    display: flex !important;
+    gap: 4pt !important;
+    flex-wrap: wrap !important;
+    margin: 0 !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab .vocab-meta-row .badge,
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .vocab-meta-row .badge {
+    display: inline-block !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 0.5pt solid #555555 !important;
+    font-size: 7.5pt !important;
+    font-weight: 700 !important;
+    padding: 1pt 4pt !important;
+  }
+
+  body.print-vocab-mode #subtab-vocab .vocab-def,
+  body:not(.print-vocab-mode):not(.hide-notes-vocab-print) #notes-embedded-vocab .vocab-def {
+    display: block !important;
+    font-size: 9pt !important;
+    line-height: 1.38 !important;
+    color: #111111 !important;
+    opacity: 1 !important;
+    margin: 0 !important;
   }
 }
 
@@ -4964,12 +5391,14 @@ button.note-blank.flash-wrong {
 
       <div class="subtabs-bar" id="study-subtabs">
         <button type="button" class="subtab-btn active" data-subtab="subtab-notes">📝 Study Guide (Choose Words)</button>
+        <button type="button" class="subtab-btn hidden" data-subtab="subtab-vocab" id="btn-subtab-vocab" hidden>📖 Key Vocabulary</button>
         <button type="button" class="subtab-btn" data-subtab="subtab-cards">🃏 Quiz-Flip Cards</button>
         <button type="button" class="subtab-btn" data-subtab="subtab-match">🔗 Term Match-Up</button>
         <button type="button" class="subtab-btn" data-subtab="subtab-labs">🔧 Field Scenarios &amp; Shop Labs</button>
       </div>
 
       <div id="subtab-notes" class="subtab-panel active"></div>
+      <div id="subtab-vocab" class="subtab-panel"></div>
       <div id="subtab-cards" class="subtab-panel"></div>
       <div id="subtab-match" class="subtab-panel"></div>
       <div id="subtab-labs" class="subtab-panel"></div>
@@ -5077,6 +5506,7 @@ window.TOPIC_ENGINES = window.TOPIC_ENGINES || {};
     bolts: 0,
     totalXp: 0,
     masteredIds: [],
+    masteredVocabIds: [],
     needsPracticeIds: [],
     awardedIds: [],
     solvedBlankKeys: [],
@@ -5137,6 +5567,7 @@ window.TOPIC_ENGINES = window.TOPIC_ENGINES || {};
         bolts: Number(parsed.bolts) || 0,
         totalXp: Number(parsed.totalXp) || 0,
         masteredIds: Array.isArray(parsed.masteredIds) ? parsed.masteredIds : [],
+        masteredVocabIds: Array.isArray(parsed.masteredVocabIds) ? parsed.masteredVocabIds : [],
         needsPracticeIds: Array.isArray(parsed.needsPracticeIds) ? parsed.needsPracticeIds : [],
         awardedIds: Array.isArray(parsed.awardedIds) ? parsed.awardedIds : [],
         solvedBlankKeys: Array.isArray(parsed.solvedBlankKeys) ? parsed.solvedBlankKeys : [],
@@ -5160,6 +5591,11 @@ window.TOPIC_ENGINES = window.TOPIC_ENGINES || {};
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(st));
     } catch (e) {
       // Ignore storage quota / privacy mode failures cleanly.
+    }
+    if (window.parent && window.parent !== window) {
+      try {
+        window.parent.postMessage({ type: "hvacProgressUpdated", source: "chapter-study-guide" }, "*");
+      } catch (e) {}
     }
   }
 
@@ -15532,6 +15968,7 @@ window.ARENA_MODES = window.ARENA_MODES || {};
   let blankLookup = Object.create(null);
   let wordBankList = [];
   let matchPairs = [];
+  let vocabList = [];
   let criticalThinking = [];
   let labsList = [];
   let blitzQuestions = [];
@@ -16025,6 +16462,21 @@ window.ARENA_MODES = window.ARENA_MODES || {};
       };
     });
 
+    const rawVocab = Array.isArray(DATA.vocabulary) ? DATA.vocabulary : [];
+    vocabList = rawVocab.map(function (v, idx) {
+      return {
+        id: String(v && v.id != null ? v.id : ("v" + (idx + 1))),
+        term: String((v && (v.term || v.word || v.label)) || ("Term " + (idx + 1))),
+        definition: String((v && (v.definition || v.def || v.meaning || v.description)) || ""),
+        section_id: String((v && (v.section_id || v.section)) || ""),
+        section_title: String((v && v.section_title) || ""),
+        page: Number(v && v.page) || 0,
+        is_epa_608: Boolean(v && v.is_epa_608),
+        epa_608_category: String((v && v.epa_608_category) || ""),
+        epa_608_topic: String((v && v.epa_608_topic) || "")
+      };
+    });
+
     const rawCritical = Array.isArray(DATA.critical_thinking) ? DATA.critical_thinking : [];
     criticalThinking = rawCritical.map(function (ct, idx) {
       const numVal = Number(ct.num != null ? ct.num : (idx + 1));
@@ -16107,9 +16559,8 @@ window.ARENA_MODES = window.ARENA_MODES || {};
         epa_608_topic: String(q.epa_608_topic || "")
       };
     });
+    syncVocabSubTabVisibility();
   }
-
-  hydrateDataset(DATA);
 
   // === GLOBAL UI STATE ===
   const LOCKOUT_DURATION_MS = SHELL.LOCKOUT_DURATION_MS || 30000;
@@ -16135,6 +16586,18 @@ window.ARENA_MODES = window.ARENA_MODES || {};
   let lockoutTickerId = null;
   let printRestoreState = null;
   let topicGameMounted = false;
+  const vocabState = {
+    search: "",
+    sortMode: "section",
+    selfCheck: false,
+    revealedIds: Object.create(null)
+  };
+  let notesVocabCollapsed = false;
+  let notesVocabSelfCheck = false;
+  let notesVocabRevealed = Object.create(null);
+  let notesPrintVocab = true;
+
+  hydrateDataset(DATA);
 
   // === 2-STRIKE / 30s LOCKOUT HELPERS ===
   function stopLockoutTicker() {
@@ -16256,9 +16719,10 @@ window.ARENA_MODES = window.ARENA_MODES || {};
     if (!state.muted) window.playSound("click");
   });
 
-  function switchTopTab(tabId) {
+  function switchTopTab(tabId, silent) {
+    if (!tabId || !document.getElementById(tabId)) return;
     activeTopTab = tabId;
-    window.playSound("click");
+    if (!silent) window.playSound("click");
     document.querySelectorAll(".top-tab").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-tab") === tabId);
     });
@@ -16360,23 +16824,66 @@ window.ARENA_MODES = window.ARENA_MODES || {};
     });
   }
 
+  function syncNotesPrintVocabClass() {
+    const shouldHide = vocabList.length > 0 && !notesPrintVocab;
+    document.body.classList.toggle("hide-notes-vocab-print", shouldHide);
+  }
+
+  function syncVocabSubTabVisibility() {
+    const vocabBtn = document.getElementById("btn-subtab-vocab");
+    if (vocabList.length === 0) {
+      if (vocabBtn) {
+        vocabBtn.classList.add("hidden");
+        vocabBtn.hidden = true;
+        vocabBtn.style.display = "none";
+        vocabBtn.textContent = "📖 Key Vocabulary";
+      }
+      if (activeSubTab === "subtab-vocab") {
+        activateStudySubTab("subtab-notes", false);
+      }
+    } else {
+      if (vocabBtn) {
+        vocabBtn.classList.remove("hidden");
+        vocabBtn.hidden = false;
+        vocabBtn.style.display = "";
+        vocabBtn.textContent = "📖 Key Vocabulary (" + vocabList.length + ")";
+      }
+    }
+    syncNotesPrintVocabClass();
+  }
+
+  function activateStudySubTab(subtabId, renderNow) {
+    let targetId = String(subtabId || "subtab-notes");
+    if (targetId === "subtab-vocab" && vocabList.length === 0) {
+      targetId = "subtab-notes";
+    }
+    const targetPanel = document.getElementById(targetId);
+    if (!targetPanel || !targetPanel.classList.contains("subtab-panel")) {
+      targetId = "subtab-notes";
+    }
+    activeSubTab = targetId;
+    document.querySelectorAll("#study-subtabs .subtab-btn").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-subtab") === activeSubTab);
+    });
+    document.querySelectorAll("#tab-study .subtab-panel").forEach(function (panel) {
+      panel.classList.toggle("active", panel.id === activeSubTab);
+    });
+    if (renderNow) {
+      renderActiveStudySubTab();
+    }
+  }
+
   document.querySelectorAll("#study-subtabs .subtab-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
       window.playSound("click");
-      activeSubTab = btn.getAttribute("data-subtab");
-      document.querySelectorAll("#study-subtabs .subtab-btn").forEach(function (b) {
-        b.classList.toggle("active", b === btn);
-      });
-      document.querySelectorAll("#tab-study .subtab-panel").forEach(function (panel) {
-        panel.classList.toggle("active", panel.id === activeSubTab);
-      });
-      renderActiveStudySubTab();
+      activateStudySubTab(btn.getAttribute("data-subtab"), true);
     });
   });
 
   function renderActiveStudySubTab() {
     if (activeSubTab === "subtab-cards") renderFlipCards();
     else if (activeSubTab === "subtab-notes") renderGuidedNotes();
+    else if (activeSubTab === "subtab-vocab") renderVocabulary();
     else if (activeSubTab === "subtab-match") renderMatchUp();
     else if (activeSubTab === "subtab-labs") renderScenariosAndLabs();
   }
@@ -16878,6 +17385,7 @@ window.ARENA_MODES = window.ARENA_MODES || {};
   function renderGuidedNotes() {
     const host = document.getElementById("subtab-notes");
     if (!host) return;
+    syncNotesPrintVocabClass();
     const prevScrollY = window.scrollY;
     const existingBank = document.getElementById("word-bank-box");
     const prevBankScrollTop = existingBank ? existingBank.scrollTop : 0;
@@ -16953,6 +17461,11 @@ window.ARENA_MODES = window.ARENA_MODES || {};
     const figBtnHtml = validFigs.length > 0
       ? '<button type="button" class="btn sm" id="btn-open-figures">🖼️ Reference Figures (' + validFigs.length + ')</button>'
       : "";
+    const printVocabBtnHtml = vocabList.length > 0
+      ? ('<button type="button" class="btn sm' + (notesPrintVocab ? " primary" : "") + '" id="btn-notes-toggle-print-vocab" aria-pressed="' + (notesPrintVocab ? "true" : "false") + '">' +
+          (notesPrintVocab ? "📖 Print w/ Vocab: ON" : "📖 Print w/ Vocab: OFF") +
+        '</button>')
+      : "";
     const toolbarHtml =
       '<div class="notes-toolbar">' +
         '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">' +
@@ -16963,6 +17476,7 @@ window.ARENA_MODES = window.ARENA_MODES || {};
           figBtnHtml +
           '<button type="button" class="btn sm amber" id="btn-notes-rescramble">🔀 Re-Scramble List</button>' +
           '<button type="button" class="btn sm coral" id="btn-notes-reset">🔄 Reset My Answers</button>' +
+          printVocabBtnHtml +
           '<button type="button" class="btn sm emerald" id="btn-notes-print">🖨️ Print Blank Worksheet</button>' +
         '</div>' +
       '</div>';
@@ -17148,6 +17662,7 @@ window.ARENA_MODES = window.ARENA_MODES || {};
         sectionsHtml += '</ol></div>';
       });
     }
+    sectionsHtml += buildEmbeddedNotesVocabHtml();
     sectionsHtml += '</div>';
 
     const workspaceHtml = '<div class="study-notes-workspace' + (wordBankHtml ? "" : " single-col") + '">' + wordBankHtml + sectionsHtml + '</div>';
@@ -17209,6 +17724,20 @@ window.ARENA_MODES = window.ARENA_MODES || {};
       enterWorksheetPrintMode();
       window.print();
     });
+
+    const togglePrintVocabBtn = document.getElementById("btn-notes-toggle-print-vocab");
+    if (togglePrintVocabBtn) {
+      togglePrintVocabBtn.addEventListener("click", function () {
+        window.playSound("click");
+        notesPrintVocab = !notesPrintVocab;
+        syncNotesPrintVocabClass();
+        togglePrintVocabBtn.className = "btn sm" + (notesPrintVocab ? " primary" : "");
+        togglePrintVocabBtn.setAttribute("aria-pressed", notesPrintVocab ? "true" : "false");
+        togglePrintVocabBtn.textContent = notesPrintVocab ? "📖 Print w/ Vocab: ON" : "📖 Print w/ Vocab: OFF";
+      });
+    }
+
+    wireEmbeddedNotesVocabEvents();
 
     const openFiguresBtn = document.getElementById("btn-open-figures");
     if (openFiguresBtn) {
@@ -17343,6 +17872,514 @@ window.ARENA_MODES = window.ARENA_MODES || {};
         openContextQuoteModal(noteId, displayNum);
       });
     });
+  }
+
+  // === SUBTAB 1.2B: KEY VOCABULARY ===
+  function getVocabMasteryStats() {
+    const total = vocabList.length;
+    let mastered = 0;
+    for (let i = 0; i < total; i++) {
+      if (state.masteredVocabIds.indexOf(vocabList[i].id) !== -1) mastered++;
+    }
+    return { mastered: mastered, total: total };
+  }
+
+  function updateVocabMasteredBadge() {
+    const stats = getVocabMasteryStats();
+    const badgeCls = "badge " + (stats.total > 0 && stats.mastered === stats.total ? "emerald" : "cyan");
+    const badgeText = "✅ Mastered " + stats.mastered + " / " + stats.total + " Terms";
+    ["vocab-mastered-badge", "notes-vocab-mastered-badge"].forEach(function (badgeId) {
+      const badge = document.getElementById(badgeId);
+      if (!badge) return;
+      badge.className = badgeCls;
+      badge.textContent = badgeText;
+    });
+  }
+
+  function syncVocabMasteryUI(vId) {
+    updateVocabMasteredBadge();
+    if (!vId) return;
+    const isMastered = state.masteredVocabIds.indexOf(vId) !== -1;
+    const btnText = isMastered ? "✅ Mastered" : "✓ Mark Mastered (+5 ⚡)";
+    document.querySelectorAll("[data-vocab-card], [data-notes-vocab-card]").forEach(function (cardEl) {
+      const cardId = cardEl.getAttribute("data-vocab-card") || cardEl.getAttribute("data-notes-vocab-card");
+      if (cardId === vId) {
+        cardEl.classList.toggle("is-mastered", isMastered);
+      }
+    });
+    document.querySelectorAll("[data-vocab-master], [data-notes-vocab-master]").forEach(function (btnEl) {
+      const btnId = btnEl.getAttribute("data-vocab-master") || btnEl.getAttribute("data-notes-vocab-master");
+      if (btnId === vId) {
+        btnEl.classList.toggle("emerald", isMastered);
+        btnEl.setAttribute("aria-pressed", isMastered ? "true" : "false");
+        btnEl.textContent = btnText;
+      }
+    });
+  }
+
+  function toggleVocabMastered(vId) {
+    if (!vId) return false;
+    const existingIdx = state.masteredVocabIds.indexOf(vId);
+    const nowMastered = existingIdx === -1;
+    if (nowMastered) {
+      state.masteredVocabIds.push(vId);
+      window.playSound("correct");
+    } else {
+      state.masteredVocabIds.splice(existingIdx, 1);
+      window.playSound("click");
+    }
+    SHELL.save();
+    SHELL.refreshHUD();
+    if (nowMastered && SHELL.markAwarded("vocab_" + vId)) {
+      window.awardXP(5, "Vocabulary mastered");
+    }
+    syncVocabMasteryUI(vId);
+    return nowMastered;
+  }
+
+  function revealVocabCardDefinition(vId, revealedMap, bodyEl) {
+    if (!vId) return false;
+    revealedMap[vId] = true;
+    const item = vocabList.find(function (v) { return v.id === vId; });
+    if (bodyEl) {
+      bodyEl.innerHTML = '<p class="vocab-def">' + escHtml(item ? item.definition : "") + '</p>';
+    }
+    window.playSound("flip");
+    return true;
+  }
+
+  function buildVocabPrintBannerHtml() {
+    const chNum = DATA.chapter_num || DATA.chapter || "XX";
+    const chTitle = DATA.title || DATA.chapter_title || "Chapter Vocabulary";
+    const printEditionPrefix = (DATA.edition_label && String(DATA.edition_label).trim())
+      ? (escHtml(String(DATA.edition_label).trim()) + " &bull; ")
+      : "";
+    return '<div class="print-only-banner">' +
+      '<div class="print-title-row">' +
+        '<h2>Ch. ' + escHtml(chNum) + ' Vocabulary — ' + escHtml(chTitle) + '</h2>' +
+        '<span class="print-course-tag">' + printEditionPrefix + 'CTE HVAC/R &bull; CIP 47.0201</span>' +
+      '</div>' +
+      '<div class="print-student-grid">' +
+        '<div class="print-field"><span class="print-field-lbl">Name:</span><span class="print-field-line"></span></div>' +
+        '<div class="print-field"><span class="print-field-lbl">Period:</span><span class="print-field-line"></span></div>' +
+        '<div class="print-field"><span class="print-field-lbl">Date:</span><span class="print-field-line"></span></div>' +
+        '<div class="print-field"><span class="print-field-lbl">Terms:</span><span>' + escHtml(vocabList.length) + '</span></div>' +
+      '</div>' +
+      '<div class="print-directions"><strong>Directions:</strong> Review each key HVAC/R term, textbook section reference, and definition below to prepare for the chapter exam.</div>' +
+    '</div>';
+  }
+
+  function getFilteredVocabList() {
+    let list = vocabList;
+    if (activeFilter === "EPA608") {
+      list = list.filter(function (v) { return v.is_epa_608; });
+    } else if (activeFilter === "PRACTICE") {
+      list = list.filter(function (v) { return state.masteredVocabIds.indexOf(v.id) === -1; });
+    } else if (activeFilter !== "ALL" && activeFilter !== "TRAP") {
+      list = list.filter(function (v) { return v.section_id === activeFilter; });
+    }
+    const q = String(vocabState.search || "").trim().toLowerCase();
+    if (q) {
+      list = list.filter(function (v) {
+        return v.term.toLowerCase().indexOf(q) !== -1 ||
+          v.definition.toLowerCase().indexOf(q) !== -1 ||
+          v.section_id.toLowerCase().indexOf(q) !== -1 ||
+          v.section_title.toLowerCase().indexOf(q) !== -1 ||
+          v.epa_608_category.toLowerCase().indexOf(q) !== -1 ||
+          v.epa_608_topic.toLowerCase().indexOf(q) !== -1;
+      });
+    }
+    return list;
+  }
+
+  function renderVocabCardHtml(v, opts) {
+    const cfg = (opts && typeof opts === "object") ? opts : {};
+    const embedded = Boolean(cfg.embedded);
+    const isMastered = state.masteredVocabIds.indexOf(v.id) !== -1;
+    const isPrinting = embedded
+      ? Boolean(printRestoreState)
+      : document.body.classList.contains("print-vocab-mode");
+    const isMasked = embedded
+      ? (notesVocabSelfCheck && !isPrinting && !notesVocabRevealed[v.id])
+      : (vocabState.selfCheck && !isPrinting && !vocabState.revealedIds[v.id]);
+    const cardCls = "vocab-card" + (embedded ? " notes-vocab-card" : "") + (v.is_epa_608 ? " is-epa608" : "") + (isMastered ? " is-mastered" : "");
+    const secBadge = v.section_id
+      ? ('<span class="badge cyan">Section ' + escHtml(v.section_id) + '</span>')
+      : "";
+    const pageBadge = v.page > 0
+      ? ('<span class="badge muted">📖 p. ' + escHtml(v.page) + '</span>')
+      : "";
+    const epaBadge = v.is_epa_608 ? renderEpa608Badge(v) : "";
+    const revealAttr = embedded ? "data-notes-vocab-reveal" : "data-vocab-reveal";
+    const bodyAttr = embedded ? "data-notes-vocab-body" : "data-vocab-body";
+    const cardAttr = embedded ? "data-notes-vocab-card" : "data-vocab-card";
+    const masterAttr = embedded ? "data-notes-vocab-master" : "data-vocab-master";
+    const bodyHtml = isMasked
+      ? '<button type="button" class="vocab-reveal-btn" ' + revealAttr + '="' + escHtml(v.id) + '">🔒 Tap to reveal definition</button>'
+      : '<p class="vocab-def">' + escHtml(v.definition) + '</p>';
+    const masterBtnCls = "btn sm vocab-master-btn" + (isMastered ? " emerald" : "");
+    const masterBtnText = isMastered ? "✅ Mastered" : "✓ Mark Mastered (+5 ⚡)";
+    return '<article class="' + cardCls + '" ' + cardAttr + '="' + escHtml(v.id) + '">' +
+      '<div class="vocab-card-head">' +
+        '<h4 class="vocab-card-term">' + escHtml(v.term) + '</h4>' +
+        '<div class="vocab-meta-row">' + secBadge + pageBadge + epaBadge + '</div>' +
+      '</div>' +
+      '<div class="vocab-card-body" ' + bodyAttr + '="' + escHtml(v.id) + '">' + bodyHtml + '</div>' +
+      '<div class="vocab-card-foot">' +
+        '<button type="button" class="' + masterBtnCls + '" ' + masterAttr + '="' + escHtml(v.id) + '" aria-pressed="' + (isMastered ? "true" : "false") + '">' + masterBtnText + '</button>' +
+      '</div>' +
+    '</article>';
+  }
+
+  function getEmbeddedVocabAllRevealed() {
+    if (vocabList.length === 0) return false;
+    for (let i = 0; i < vocabList.length; i++) {
+      if (!notesVocabRevealed[vocabList[i].id]) return false;
+    }
+    return true;
+  }
+
+  function buildEmbeddedNotesVocabHtml() {
+    if (vocabList.length === 0) return "";
+    const stats = getVocabMasteryStats();
+    const isPrinting = Boolean(printRestoreState);
+    const isCollapsed = Boolean(notesVocabCollapsed) && !isPrinting;
+    const allRevealed = notesVocabSelfCheck ? getEmbeddedVocabAllRevealed() : false;
+    const revealAllBtnHtml = (notesVocabSelfCheck && !isPrinting)
+      ? ('<button type="button" class="btn sm" id="btn-notes-vocab-reveal-all" data-reveal-action="' + (allRevealed ? "hide" : "reveal") + '">' +
+          (allRevealed ? "🔒 Hide All" : "🔓 Reveal All") +
+        '</button>')
+      : "";
+    const selfCheckBtnCls = "btn sm" + (notesVocabSelfCheck ? " amber" : "");
+    const selfCheckBtnLabel = notesVocabSelfCheck ? "👁️ Self-Check: ON" : "👁️ Self-Check: Hide Definitions";
+    const collapseBtnLabel = isCollapsed ? "▼ Expand" : "▲ Collapse";
+    const masteredBadgeCls = "badge " + (stats.total > 0 && stats.mastered === stats.total ? "emerald" : "cyan");
+    const cardsHtml = vocabList.map(function (v) {
+      return renderVocabCardHtml(v, { embedded: true });
+    }).join("");
+
+    return '<section id="notes-embedded-vocab" class="notes-section-card notes-embedded-vocab' + (isCollapsed ? " is-collapsed" : "") + '">' +
+      '<div class="notes-embedded-vocab-head">' +
+        '<div class="notes-embedded-vocab-title-wrap">' +
+          '<h3 class="notes-embedded-vocab-title">📖 Chapter Key Vocabulary Study Guide<span class="print-only-inline"> (' + escHtml(vocabList.length) + ' Terms)</span></h3>' +
+          '<span class="badge muted" id="notes-vocab-count-badge">' + escHtml(vocabList.length) + ' ' + (vocabList.length === 1 ? "Term" : "Terms") + '</span>' +
+          '<span class="' + masteredBadgeCls + '" id="notes-vocab-mastered-badge">✅ Mastered ' + escHtml(stats.mastered) + ' / ' + escHtml(stats.total) + ' Terms</span>' +
+        '</div>' +
+        '<div class="notes-vocab-actions">' +
+          '<button type="button" class="btn sm" id="btn-notes-vocab-collapse" aria-expanded="' + (isCollapsed ? "false" : "true") + '">' + collapseBtnLabel + '</button>' +
+          '<button type="button" class="' + selfCheckBtnCls + '" id="btn-notes-vocab-selfcheck" aria-pressed="' + (notesVocabSelfCheck ? "true" : "false") + '">' + selfCheckBtnLabel + '</button>' +
+          revealAllBtnHtml +
+          '<button type="button" class="btn sm primary" id="btn-notes-vocab-open-tab">🔎 Search &amp; A–Z Glossary Tab &rarr;</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="notes-vocab-body' + (isCollapsed ? " is-collapsed" : "") + '" id="notes-vocab-body">' +
+        '<div class="notes-vocab-grid">' + cardsHtml + '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  function refreshEmbeddedNotesVocab() {
+    const existing = document.getElementById("notes-embedded-vocab");
+    if (!existing || !existing.parentNode) {
+      renderGuidedNotes();
+      return;
+    }
+    if (vocabList.length === 0) {
+      existing.parentNode.removeChild(existing);
+      return;
+    }
+    const tmp = document.createElement("div");
+    tmp.innerHTML = buildEmbeddedNotesVocabHtml();
+    const nextSection = tmp.firstElementChild;
+    if (nextSection) {
+      existing.parentNode.replaceChild(nextSection, existing);
+      wireEmbeddedNotesVocabEvents();
+    }
+  }
+
+  function wireEmbeddedNotesVocabEvents() {
+    const secEl = document.getElementById("notes-embedded-vocab");
+    if (!secEl) return;
+
+    const collapseBtn = document.getElementById("btn-notes-vocab-collapse");
+    if (collapseBtn) {
+      collapseBtn.addEventListener("click", function () {
+        window.playSound("click");
+        notesVocabCollapsed = !notesVocabCollapsed;
+        refreshEmbeddedNotesVocab();
+      });
+    }
+
+    const selfCheckBtn = document.getElementById("btn-notes-vocab-selfcheck");
+    if (selfCheckBtn) {
+      selfCheckBtn.addEventListener("click", function () {
+        window.playSound("flip");
+        notesVocabSelfCheck = !notesVocabSelfCheck;
+        notesVocabRevealed = Object.create(null);
+        if (notesVocabSelfCheck && notesVocabCollapsed) {
+          notesVocabCollapsed = false;
+        }
+        refreshEmbeddedNotesVocab();
+      });
+    }
+
+    const revealAllBtn = document.getElementById("btn-notes-vocab-reveal-all");
+    if (revealAllBtn) {
+      revealAllBtn.addEventListener("click", function () {
+        window.playSound("flip");
+        const action = revealAllBtn.getAttribute("data-reveal-action");
+        if (action === "hide") {
+          notesVocabRevealed = Object.create(null);
+        } else {
+          vocabList.forEach(function (v) {
+            notesVocabRevealed[v.id] = true;
+          });
+        }
+        refreshEmbeddedNotesVocab();
+      });
+    }
+
+    const openTabBtn = document.getElementById("btn-notes-vocab-open-tab");
+    if (openTabBtn) {
+      openTabBtn.addEventListener("click", function () {
+        window.playSound("click");
+        activateStudySubTab("subtab-vocab", true);
+        if (typeof window.scrollTo === "function") {
+          window.scrollTo(0, 0);
+        }
+      });
+    }
+
+    const bodyHost = document.getElementById("notes-vocab-body");
+    if (bodyHost) {
+      bodyHost.addEventListener("click", function (e) {
+        const rawTarget = e && e.target ? e.target : null;
+        const targetEl = rawTarget && rawTarget.nodeType === 1
+          ? rawTarget
+          : (rawTarget && rawTarget.parentElement ? rawTarget.parentElement : null);
+        if (!targetEl || typeof targetEl.closest !== "function") return;
+
+        const revealBtn = targetEl.closest("[data-notes-vocab-reveal]");
+        if (revealBtn) {
+          const vId = revealBtn.getAttribute("data-notes-vocab-reveal");
+          const bodyEl = revealBtn.closest("[data-notes-vocab-body]");
+          if (revealVocabCardDefinition(vId, notesVocabRevealed, bodyEl)) {
+            const raBtn = document.getElementById("btn-notes-vocab-reveal-all");
+            if (raBtn && getEmbeddedVocabAllRevealed()) {
+              raBtn.setAttribute("data-reveal-action", "hide");
+              raBtn.textContent = "🔒 Hide All";
+            }
+          }
+          return;
+        }
+
+        const masterBtn = targetEl.closest("[data-notes-vocab-master]");
+        if (masterBtn) {
+          toggleVocabMastered(masterBtn.getAttribute("data-notes-vocab-master"));
+        }
+      });
+    }
+  }
+
+  function syncVocabToolbarControls() {
+    updateVocabMasteredBadge();
+    const bannerHost = document.getElementById("vocab-print-banner-host");
+    if (bannerHost) {
+      bannerHost.innerHTML = buildVocabPrintBannerHtml();
+    }
+    const searchEl = document.getElementById("vocab-search-input");
+    if (searchEl && searchEl.value !== vocabState.search) {
+      searchEl.value = vocabState.search;
+    }
+    const sortBtn = document.getElementById("btn-vocab-sort");
+    if (sortBtn) {
+      const isAz = vocabState.sortMode === "az";
+      sortBtn.className = "btn sm" + (isAz ? " primary" : "");
+      sortBtn.textContent = isAz ? "🔤 A–Z" : "📑 By Section";
+      sortBtn.setAttribute("aria-pressed", isAz ? "true" : "false");
+    }
+    const checkBtn = document.getElementById("btn-vocab-selfcheck");
+    if (checkBtn) {
+      const isHide = Boolean(vocabState.selfCheck);
+      checkBtn.className = "btn sm" + (isHide ? " amber" : "");
+      checkBtn.textContent = isHide ? "👁️ Show All Definitions" : "👁️ Self-Check: Hide Definitions";
+      checkBtn.setAttribute("aria-pressed", isHide ? "true" : "false");
+    }
+  }
+
+  function renderVocabularyResults() {
+    const resultsHost = document.getElementById("vocab-results-host");
+    if (!resultsHost) return;
+    if (vocabList.length === 0) {
+      resultsHost.innerHTML = '<div class="empty-card">No key vocabulary terms found for this chapter.</div>';
+      return;
+    }
+
+    const filtered = getFilteredVocabList();
+    let htmlOut = "";
+    if (activeFilter === "TRAP") {
+      htmlOut +=
+        '<div class="vocab-notice-banner">' +
+          '<span><strong>⚠️ Exam Traps Notice:</strong> Exam Traps apply to Study Guide &amp; Flip Cards. Showing all chapter vocabulary below.</span>' +
+          '<button type="button" class="btn sm primary" id="btn-vocab-reset-filter">Show All Vocabulary</button>' +
+        '</div>';
+    }
+
+    if (filtered.length === 0) {
+      const qTrim = String(vocabState.search || "").trim();
+      if (qTrim) {
+        htmlOut += '<div class="empty-card"><p>No vocabulary terms match "' + escHtml(qTrim) + '".</p><button type="button" class="btn primary" id="btn-vocab-clear-search">Clear Search</button></div>';
+      } else if (activeFilter === "PRACTICE") {
+        htmlOut += '<div class="empty-card"><p>All chapter vocabulary terms are currently marked mastered! 🎉</p><button type="button" class="btn primary" id="btn-vocab-reset-filter">Show All Vocabulary</button></div>';
+      } else if (activeFilter === "EPA608") {
+        htmlOut += '<div class="empty-card"><p>No EPA 608 vocabulary terms in this chapter.</p><button type="button" class="btn primary" id="btn-vocab-reset-filter">Show All Vocabulary</button></div>';
+      } else {
+        htmlOut += '<div class="empty-card"><p>No vocabulary terms match the current section filter.</p><button type="button" class="btn primary" id="btn-vocab-reset-filter">Show All Vocabulary</button></div>';
+      }
+      resultsHost.innerHTML = htmlOut;
+      return;
+    }
+
+    if (vocabState.sortMode === "az") {
+      const sorted = filtered.slice().sort(function (a, b) {
+        const cmp = a.term.toLowerCase().localeCompare(b.term.toLowerCase());
+        return cmp !== 0 ? cmp : a.id.localeCompare(b.id);
+      });
+      htmlOut += '<div class="vocab-grid">' + sorted.map(function (v) { return renderVocabCardHtml(v); }).join("") + '</div>';
+    } else {
+      const orderedSectionIds = [];
+      sections.forEach(function (s) { orderedSectionIds.push(s.id); });
+      filtered.forEach(function (v) {
+        if (orderedSectionIds.indexOf(v.section_id) === -1) orderedSectionIds.push(v.section_id);
+      });
+      orderedSectionIds.forEach(function (secId) {
+        const items = filtered.filter(function (v) { return v.section_id === secId; });
+        if (items.length === 0) return;
+        const secMeta = sectionMap[secId];
+        const secTitle = (secMeta && secMeta.title) || items[0].section_title || (secId ? ("Section " + secId) : "Chapter Vocabulary");
+        const headingText = secId ? ("Section " + secId + " — " + secTitle) : secTitle;
+        htmlOut +=
+          '<section class="vocab-section-group">' +
+            '<h3 class="vocab-section-heading">' +
+              '<span class="vocab-section-heading-main">' + escHtml(headingText) + '</span>' +
+              '<span class="badge muted">' + items.length + ' ' + (items.length === 1 ? "term" : "terms") + '</span>' +
+            '</h3>' +
+            '<div class="vocab-grid">' + items.map(function (v) { return renderVocabCardHtml(v); }).join("") + '</div>' +
+          '</section>';
+      });
+    }
+
+    resultsHost.innerHTML = htmlOut;
+  }
+
+  function mountVocabShell(host) {
+    host.innerHTML =
+      '<div id="vocab-print-banner-host"></div>' +
+      '<div class="vocab-toolbar">' +
+        '<div class="vocab-toolbar-left">' +
+          '<strong class="vocab-toolbar-title">📖 Key Vocabulary</strong>' +
+          '<span class="badge cyan" id="vocab-mastered-badge">✅ Mastered 0 / 0 Terms</span>' +
+        '</div>' +
+        '<div class="vocab-toolbar-actions">' +
+          '<div class="vocab-search-wrap">' +
+            '<input type="search" id="vocab-search-input" class="vocab-search-input" placeholder="Search terms or definitions..." aria-label="Search chapter vocabulary" />' +
+          '</div>' +
+          '<button type="button" class="btn sm" id="btn-vocab-sort">📑 By Section</button>' +
+          '<button type="button" class="btn sm" id="btn-vocab-selfcheck">👁️ Self-Check: Hide Definitions</button>' +
+          '<button type="button" class="btn sm emerald" id="btn-vocab-print">🖨️ Print Vocabulary Sheet</button>' +
+        '</div>' +
+      '</div>' +
+      '<div id="vocab-results-host"></div>';
+
+    const searchInput = document.getElementById("vocab-search-input");
+    if (searchInput) {
+      searchInput.value = vocabState.search;
+      searchInput.addEventListener("input", function () {
+        vocabState.search = searchInput.value;
+        renderVocabularyResults();
+      });
+    }
+
+    const sortBtn = document.getElementById("btn-vocab-sort");
+    if (sortBtn) {
+      sortBtn.addEventListener("click", function () {
+        window.playSound("click");
+        vocabState.sortMode = (vocabState.sortMode === "az") ? "section" : "az";
+        syncVocabToolbarControls();
+        renderVocabularyResults();
+      });
+    }
+
+    const selfCheckBtn = document.getElementById("btn-vocab-selfcheck");
+    if (selfCheckBtn) {
+      selfCheckBtn.addEventListener("click", function () {
+        window.playSound("flip");
+        vocabState.selfCheck = !vocabState.selfCheck;
+        vocabState.revealedIds = Object.create(null);
+        syncVocabToolbarControls();
+        renderVocabularyResults();
+      });
+    }
+
+    const printBtn = document.getElementById("btn-vocab-print");
+    if (printBtn) {
+      printBtn.addEventListener("click", function () {
+        window.playSound("click");
+        enterVocabPrintMode();
+        window.print();
+      });
+    }
+
+    const resultsHost = document.getElementById("vocab-results-host");
+    if (resultsHost) {
+      resultsHost.addEventListener("click", function (e) {
+        const rawTarget = e && e.target ? e.target : null;
+        const targetEl = rawTarget && rawTarget.nodeType === 1
+          ? rawTarget
+          : (rawTarget && rawTarget.parentElement ? rawTarget.parentElement : null);
+        if (!targetEl || typeof targetEl.closest !== "function") return;
+
+        const revealBtn = targetEl.closest("[data-vocab-reveal]");
+        if (revealBtn) {
+          const vId = revealBtn.getAttribute("data-vocab-reveal");
+          const bodyEl = revealBtn.closest("[data-vocab-body]");
+          revealVocabCardDefinition(vId, vocabState.revealedIds, bodyEl);
+          return;
+        }
+
+        const masterBtn = targetEl.closest("[data-vocab-master]");
+        if (masterBtn) {
+          toggleVocabMastered(masterBtn.getAttribute("data-vocab-master"));
+          return;
+        }
+
+        if (targetEl.closest("#btn-vocab-reset-filter")) {
+          window.playSound("click");
+          activeFilter = "ALL";
+          renderFilterBar();
+          renderVocabulary();
+          return;
+        }
+
+        if (targetEl.closest("#btn-vocab-clear-search")) {
+          window.playSound("click");
+          vocabState.search = "";
+          const sInput = document.getElementById("vocab-search-input");
+          if (sInput) sInput.value = "";
+          renderVocabularyResults();
+        }
+      });
+    }
+  }
+
+  function renderVocabulary() {
+    const host = document.getElementById("subtab-vocab");
+    if (!host) return;
+    if (!document.getElementById("vocab-results-host") || !document.getElementById("vocab-search-input")) {
+      mountVocabShell(host);
+    }
+    syncVocabToolbarControls();
+    renderVocabularyResults();
   }
 
   // === SUBTAB 1.3: TERM MATCH-UP ===
@@ -18946,43 +19983,124 @@ window.ARENA_MODES = window.ARENA_MODES || {};
 
   // === PRINT HANDLERS ===
   function enterWorksheetPrintMode() {
+    document.body.classList.remove("print-vocab-mode");
     closeDiagramLightbox();
     closeContextQuoteModal();
     closeFiguresModal();
     stopAllCustomArenaModes();
     if (!printRestoreState) {
       printRestoreState = {
+        mode: "worksheet",
         topTab: activeTopTab,
         subTab: activeSubTab,
         filter: activeFilter,
         activeBlank: activeBlankKey,
         bankWord: selectedBankWord,
-        wrongAttempt: lastWrongAttempt
+        wrongAttempt: lastWrongAttempt,
+        notesVocabCollapsed: notesVocabCollapsed,
+        notesVocabSelfCheck: notesVocabSelfCheck
       };
     }
     activeFilter = "ALL";
     activeBlankKey = null;
     selectedBankWord = null;
     lastWrongAttempt = null;
+    notesVocabCollapsed = false;
+    notesVocabSelfCheck = false;
+    syncNotesPrintVocabClass();
     renderFilterBar();
     renderGuidedNotes();
   }
 
-  window.addEventListener("beforeprint", enterWorksheetPrintMode);
+  function enterVocabPrintMode() {
+    closeDiagramLightbox();
+    closeContextQuoteModal();
+    closeFiguresModal();
+    stopAllCustomArenaModes();
+    if (!printRestoreState) {
+      printRestoreState = {
+        mode: "vocab",
+        topTab: activeTopTab,
+        subTab: activeSubTab,
+        filter: activeFilter,
+        activeBlank: activeBlankKey,
+        bankWord: selectedBankWord,
+        wrongAttempt: lastWrongAttempt,
+        vocabSelfCheck: vocabState.selfCheck,
+        vocabSearch: vocabState.search
+      };
+    }
+    document.body.classList.add("print-vocab-mode");
+    activeFilter = "ALL";
+    vocabState.selfCheck = false;
+    vocabState.search = "";
+    renderFilterBar();
+    renderVocabulary();
+  }
 
-  window.addEventListener("afterprint", function () {
+  function handleBeforePrint() {
+    if ((activeTopTab === "tab-study" && activeSubTab === "subtab-vocab" && vocabList.length > 0) ||
+        document.body.classList.contains("print-vocab-mode")) {
+      enterVocabPrintMode();
+    } else {
+      enterWorksheetPrintMode();
+    }
+  }
+
+  function handleAfterPrint() {
+    document.body.classList.remove("print-vocab-mode");
     if (!printRestoreState) return;
+    const prevMode = printRestoreState.mode || "worksheet";
+    const prevTopTab = printRestoreState.topTab;
+    const prevSubTab = printRestoreState.subTab;
     activeFilter = printRestoreState.filter;
     activeBlankKey = printRestoreState.activeBlank;
     selectedBankWord = printRestoreState.bankWord;
     lastWrongAttempt = printRestoreState.wrongAttempt || null;
+    if (Object.prototype.hasOwnProperty.call(printRestoreState, "notesVocabCollapsed")) {
+      notesVocabCollapsed = Boolean(printRestoreState.notesVocabCollapsed);
+    }
+    if (Object.prototype.hasOwnProperty.call(printRestoreState, "notesVocabSelfCheck")) {
+      notesVocabSelfCheck = Boolean(printRestoreState.notesVocabSelfCheck);
+    }
+    if (Object.prototype.hasOwnProperty.call(printRestoreState, "vocabSelfCheck")) {
+      vocabState.selfCheck = Boolean(printRestoreState.vocabSelfCheck);
+    }
+    if (Object.prototype.hasOwnProperty.call(printRestoreState, "vocabSearch")) {
+      vocabState.search = String(printRestoreState.vocabSearch || "");
+    }
     printRestoreState = null;
+    if (prevMode === "vocab") {
+      if (prevTopTab && prevTopTab !== activeTopTab) {
+        switchTopTab(prevTopTab, true);
+      }
+      if (prevSubTab && prevSubTab !== activeSubTab) {
+        activateStudySubTab(prevSubTab, false);
+      }
+    }
     renderFilterBar();
     renderGuidedNotes();
     if (activeSubTab !== "subtab-notes") {
       renderActiveStudySubTab();
     }
-  });
+  }
+
+  window.addEventListener("beforeprint", handleBeforePrint);
+  window.addEventListener("afterprint", handleAfterPrint);
+  if (typeof window.matchMedia === "function") {
+    try {
+      const printMql = window.matchMedia("print");
+      if (printMql && typeof printMql.addEventListener === "function") {
+        printMql.addEventListener("change", function (evt) {
+          if (evt && evt.matches) {
+            handleBeforePrint();
+          } else {
+            handleAfterPrint();
+          }
+        });
+      }
+    } catch (e) {}
+  }
 
   // === MULTI-EDITION SWITCHER & HEADER CHROME ===
   function resetMatchState() {
@@ -19188,11 +20306,22 @@ window.ARENA_MODES = window.ARENA_MODES || {};
     clearObjectMap(wrongScenarioChoices);
     clearObjectMap(everWrongCardIds);
     clearObjectMap(everWrongScenarioIds);
+    vocabState.search = "";
+    vocabState.selfCheck = false;
+    vocabState.revealedIds = Object.create(null);
+    notesVocabCollapsed = false;
+    notesVocabSelfCheck = false;
+    notesVocabRevealed = Object.create(null);
+    notesPrintVocab = true;
+    syncNotesPrintVocabClass();
+    const vocabHost = document.getElementById("subtab-vocab");
+    if (vocabHost) vocabHost.innerHTML = "";
 
     hydrateDataset(DATA);
     ensureLockoutTicker();
     SHELL.refreshHUD();
     updateHeaderAndEditionChrome();
+    syncVocabSubTabVisibility();
     renderFilterBar();
     renderActiveStudySubTab();
     renderArenaStage();
@@ -19208,13 +20337,176 @@ window.ARENA_MODES = window.ARENA_MODES || {};
 
   window.switchStudyEdition = switchStudyEdition;
 
+  // === URL DEEP-LINKING & HUB POSTMESSAGE ===
+  const TOP_TAB_ALIASES = {
+    "study": "tab-study",
+    "tab-study": "tab-study",
+    "arena": "tab-arena",
+    "tab-arena": "tab-arena",
+    "game": "tab-game",
+    "tab-game": "tab-game"
+  };
+
+  const STUDY_SUBTAB_ALIASES = {
+    "notes": "subtab-notes",
+    "subtab-notes": "subtab-notes",
+    "vocab": "subtab-vocab",
+    "subtab-vocab": "subtab-vocab",
+    "cards": "subtab-cards",
+    "subtab-cards": "subtab-cards",
+    "match": "subtab-match",
+    "subtab-match": "subtab-match",
+    "labs": "subtab-labs",
+    "subtab-labs": "subtab-labs"
+  };
+
+  function normalizeDeepLinkParams(rawParams) {
+    if (typeof window.URLSearchParams === "function") {
+      if (rawParams instanceof window.URLSearchParams) return rawParams;
+      if (typeof rawParams === "string") {
+        return new window.URLSearchParams(rawParams.replace(/^\?/, ""));
+      }
+      const sp = new window.URLSearchParams();
+      if (rawParams && typeof rawParams === "object") {
+        Object.keys(rawParams).forEach(function (k) {
+          if (rawParams[k] != null) sp.set(k, String(rawParams[k]));
+        });
+      }
+      return sp;
+    }
+    return null;
+  }
+
+  function applyDeepLinkParams(rawParams, renderNow) {
+    const params = normalizeDeepLinkParams(rawParams);
+    if (!params) return;
+
+    let filterChanged = false;
+    let searchChanged = false;
+
+    if (params.has("section")) {
+      const secRaw = String(params.get("section") || "").trim();
+      const secUpper = secRaw.toUpperCase();
+      let resolvedFilter = null;
+      if (secUpper === "ALL" || secUpper === "EPA608" || secUpper === "TRAP" || secUpper === "PRACTICE") {
+        resolvedFilter = secUpper;
+      } else if (Object.prototype.hasOwnProperty.call(sectionMap, secRaw)) {
+        resolvedFilter = secRaw;
+      }
+      if (resolvedFilter && resolvedFilter !== activeFilter) {
+        activeFilter = resolvedFilter;
+        cardCursor = 0;
+        cardFlipped = false;
+        activeBlankKey = null;
+        selectedBankWord = null;
+        lastWrongAttempt = null;
+        draggedBankWord = null;
+        filterChanged = true;
+      }
+    }
+
+    if (params.has("q")) {
+      const nextQ = String(params.get("q") || "");
+      if (nextQ !== vocabState.search) {
+        vocabState.search = nextQ;
+        searchChanged = true;
+      }
+      const searchInput = document.getElementById("vocab-search-input");
+      if (searchInput && searchInput.value !== vocabState.search) {
+        searchInput.value = vocabState.search;
+      }
+    }
+
+    if (filterChanged) {
+      renderFilterBar();
+    }
+
+    let requestedTab = null;
+    if (params.has("tab")) {
+      const tKey = String(params.get("tab") || "").trim().toLowerCase();
+      if (Object.prototype.hasOwnProperty.call(TOP_TAB_ALIASES, tKey)) {
+        requestedTab = TOP_TAB_ALIASES[tKey];
+      }
+    }
+
+    let requestedSubTab = null;
+    if (params.has("subtab")) {
+      const sKey = String(params.get("subtab") || "").trim().toLowerCase();
+      if (Object.prototype.hasOwnProperty.call(STUDY_SUBTAB_ALIASES, sKey)) {
+        const mapped = STUDY_SUBTAB_ALIASES[sKey];
+        requestedSubTab = (mapped === "subtab-vocab" && vocabList.length === 0)
+          ? "subtab-notes"
+          : mapped;
+      }
+    }
+
+    if (requestedSubTab) {
+      activateStudySubTab(requestedSubTab, false);
+      if (renderNow) {
+        switchTopTab("tab-study", true);
+      } else {
+        activeTopTab = "tab-study";
+        document.querySelectorAll(".top-tab").forEach(function (b) {
+          b.classList.toggle("active", b.getAttribute("data-tab") === "tab-study");
+        });
+        document.querySelectorAll(".tab-panel").forEach(function (p) {
+          p.classList.toggle("active", p.id === "tab-study");
+        });
+      }
+      return;
+    }
+
+    if (requestedTab) {
+      if (renderNow) {
+        switchTopTab(requestedTab, true);
+      } else {
+        activeTopTab = requestedTab;
+      }
+      return;
+    }
+
+    if (renderNow && (filterChanged || searchChanged) && activeTopTab === "tab-study") {
+      renderActiveStudySubTab();
+    }
+  }
+
+  window.addEventListener("message", function (e) {
+    const data = e && e.data;
+    if (!data || typeof data !== "object") return;
+    if (data.type === "ish-preset") {
+      const presetSource = (typeof data.query === "string" && data.query.length > 0)
+        ? data.query
+        : (data.params && typeof data.params === "object" ? data.params : "");
+      applyDeepLinkParams(presetSource, true);
+      const replyTarget = e.source || (window.parent && window.parent !== window ? window.parent : null);
+      if (replyTarget && typeof replyTarget.postMessage === "function") {
+        try {
+          replyTarget.postMessage({ type: "ish-preset-ack", source: "chapter-study-guide" }, "*");
+        } catch (err) {}
+      }
+    }
+  });
+
   // === INITIAL BOOT ===
   ensureLockoutTicker();
   SHELL.refreshHUD();
   updateHeaderAndEditionChrome();
+  syncVocabSubTabVisibility();
   renderFilterBar();
-  renderActiveStudySubTab();
+  if (typeof window.URLSearchParams === "function") {
+    applyDeepLinkParams(new window.URLSearchParams(window.location.search), false);
+  }
+  if (activeTopTab !== "tab-study") {
+    switchTopTab(activeTopTab, true);
+  } else {
+    renderActiveStudySubTab();
+  }
   renderArenaStage();
+  if (window.parent && window.parent !== window) {
+    try {
+      window.parent.postMessage({ type: "ish-ready", source: "chapter-study-guide" }, "*");
+    } catch (e) {}
+  }
 })();
 
   </script>

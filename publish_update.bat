@@ -18,10 +18,13 @@ goto parse_args
 set "PY_EXE=..\cte-program-tracker-standalone\.venv\Scripts\python.exe"
 if not exist "%PY_EXE%" set "PY_EXE=python"
 
-echo ============================================================
-echo   Integrated Study Helper - Sync, Build Check ^& Publisher
-echo ============================================================
+echo ===========================================================================
+echo   Integrated Study Helper - Bidirectional Sync, Rebuild ^& Dual Publisher
+echo ===========================================================================
 echo Using Python: %PY_EXE%
+echo Targets: Desktop Projects, Ch 01-52 + EPA 608 + Vocab Handouts,
+echo          G: School Drive, H: Personal Drive ^& Projects\*,
+echo          GitHub Pages (integrated-study-helper + hvac-cycle-lab)
 echo.
 
 "%PY_EXE%" sync_and_publish.py --push%PASS_ARGS%
@@ -41,8 +44,9 @@ if errorlevel 1 (
 )
 
 echo.
-echo [SUCCESS] Integrated Study Helper pushed to GitHub Pages!
-echo           Live URL (refreshes in ~15-30 seconds):
-echo           https://lenir67.github.io/integrated-study-helper/
+echo [SUCCESS] Bidirectional sync ^& GitHub Pages publish complete!
+echo           Live Sites (refresh in ~15-30 seconds):
+echo             Hub:       https://lenir67.github.io/integrated-study-helper/
+echo             Cycle Lab: https://lenir67.github.io/hvac-cycle-lab/
 if "%NO_PAUSE%"=="0" pause
 exit /b 0

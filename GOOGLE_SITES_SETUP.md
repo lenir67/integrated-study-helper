@@ -1,6 +1,6 @@
 # Google Sites & GitHub Pages Setup Guide — Integrated Study Helper
 
-This guide covers publishing **Integrated Study Helper** to GitHub Pages (`https://lenir67.github.io/integrated-study-helper/`), embedding it cleanly inside Google Sites, using direct deep links, and keeping everything automatically synchronized whenever you edit any chapter game, EPA 608 study hub, simulator, or student handout.
+This guide covers publishing **Integrated Study Helper** to GitHub Pages (`https://lenir67.github.io/integrated-study-helper/`), embedding it cleanly inside Google Sites, using direct deep links, and keeping Desktop projects, Study Guides (Ch 01–52 + EPA 608 + Printable Student Handouts with embedded Vocabulary), `G:` School Drive, `H:` Personal Drive, and both GitHub Pages sites automatically synchronized.
 
 ---
 
@@ -20,18 +20,18 @@ This guide covers publishing **Integrated Study Helper** to GitHub Pages (`https
 Open PowerShell or Command Prompt inside `C:\Users\dkala\OneDrive\Desktop\Projects\Integrated Study Helper`:
 
 ```powershell
-# 1. Sync all modules, student handouts, manifests, and H: Drive copy
+# 1. Rebuild stale bundles/guides, sync all 52 chapters, EPA 608, handouts, Drives & H: Projects
 ..\cte-program-tracker-standalone\.venv\Scripts\python.exe sync_and_publish.py --local-only
 
-# 2. Initialize Git on branch 'main' and link your new GitHub repo
+# 2. Initialize Git on branch 'main' and link your new GitHub repo (first time only)
 git init -b main
 git remote add origin https://github.com/lenir67/integrated-study-helper.git
 
-# 3. Commit and push to GitHub
+# 3. Commit and push to GitHub Pages (Integrated Study Helper + hvac-cycle-lab)
 .\publish_update.bat
 ```
 
-> **Note:** On future updates, you only need to double-click `publish_update.bat` (or let the automatic build hooks handle it).
+> **Note:** On future updates, double-click `publish_update.bat` (or keep `watch_for_updates.bat` running while you work).
 
 ---
 
@@ -64,7 +64,22 @@ git remote add origin https://github.com/lenir67/integrated-study-helper.git
 
 ---
 
-## 5. Optional Deep Links (Unit / Topic / Lab-Specific Google Sites Pages)
+## 5. What Gets Embedded & Synced
+
+1. **Chapters 01–52 Interactive Study & HVAC Games:**
+   - Every chapter game (`Ch 01` through `Ch 52`) now includes an embedded **Vocabulary Study Guide** tab alongside Flip Cards, Practice Exams, Blitz, Tower Defense, and Podium Arena.
+   - `manifest.json` and `js/catalog_manifest.js` index all 52 chapter vocabularies so students can browse and search terms directly from the Hub's Vocabulary Explorer.
+2. **Printable Student Handouts (`*student_handout*.html`):**
+   - Student handouts (such as `Ch11_Exam_Study_Guide_Student_Handout.html`) automatically receive an embedded, printable 2-column **Key Vocabulary Study Guide** section (`#autoSyncedVocabSection`) and a **Toggle Vocabulary** toolbar button.
+   - Original filenames (`Ch11_Exam_Study_Guide_Student_Handout.html`) stay identical across `My Drive`, Desktop `Curiculium data\chXX\`, Personal Drive `HVAC Class Chapters\Ch XX...`, and School Drive `HVAC Class Chapters\Ch XX...`, while the Hub web stage serves `./modules/handouts/chXX_handout.html`.
+3. **EPA Section 608 Certification Hub (ESCO v10.1 / v9):**
+   - Kept **exam-clean with no chapter vocabulary section**, preserving focused EPA 608 Core / Type I / Type II / Type III / Universal test prep.
+4. **Interactive Simulators:**
+   - **Electrical Theory Display Board** (`#electrical-board`) and **Animated Refrigerant Cycle Lab** (`#refrigerant-cycle`, also deployed standalone at `https://lenir67.github.io/hvac-cycle-lab/`).
+
+---
+
+## 6. Optional Deep Links (Unit / Topic / Lab-Specific Google Sites Pages)
 
 You can embed or link directly to any module or pre-configured simulator state using URL hashes:
 
@@ -82,24 +97,26 @@ You can embed or link directly to any module or pre-configured simulator state u
 
 ---
 
-## 6. How Automatic Updates Work
+## 7. Bidirectional Multi-Target Sync Workflow
 
-Integrated Study Helper is wired to your individual upstream projects so edits flow into the hub automatically:
+`sync_and_publish.py` is a **bidirectional, idempotent, non-destructive** orchestrator:
 
-1. **MRAC 2025 Chapter Builders (`cte-program-tracker-standalone`):**
-   - Running `scripts/build_chapter_study_games.py` automatically invokes `sync_and_publish.py --auto-hook --source chapters` after building.
-   - Pass `--no-hub-sync` if you temporarily want to skip hub syncing.
-2. **EPA Section 608 Builder (`cte-program-tracker-standalone`):**
-   - Running `scripts/build_epa608_study_game.py` automatically invokes `sync_and_publish.py --auto-hook --source epa608` after building.
-   - Pass `--no-hub-sync` if you temporarily want to skip hub syncing.
-3. **Electrical Display Board (`Electrical Display Board`):**
-   - Running `node build_classroom_bundle.js` (or `publish_update.bat`) automatically invokes `sync_and_publish.py --auto-hook --source electrical-board` (unless `SKIP_HUB_SYNC=1`).
-4. **Animated Refrigerant Cycle Lab (`animated refrigerant cycle`):**
-   - Running `node build_classroom_bundle.js` (or `publish_update.bat`) automatically invokes `sync_and_publish.py --auto-hook --source refrigerant-cycle` (unless `SKIP_HUB_SYNC=1`).
-5. **Real-Time Watcher (`watch_for_updates.bat`):**
-   - Double-click `watch_for_updates.bat` while editing any project or exporting new Student Handouts. It polls upstream files every 2.5 seconds, rebuilds stale simulator bundles, regenerates `manifest.json` + `js/catalog_manifest.js`, mirrors to your `My Drive` `Projects\Integrated Study Helper` folder, and pushes updates if `origin/main` is configured.
-6. **Manual One-Click Sync & Publish (`publish_update.bat`):**
-   - Checks simulator source freshness (running unit tests + rebuilding if needed), copies only changed files atomically (SHA-256 checked), updates `manifest.json` & `js/catalog_manifest.js`, syncs safely to `My Drive`, commits, and pushes to GitHub Pages.
-   - Every module iframe URL appends `?v=<10-char-sha256>` from the manifest so student Chromebooks immediately load fresh code without browser cache issues.
+1. **Edit Anywhere — Upstream or Classroom Copy:**
+   - Edit source files in `cte-program-tracker-standalone` (`scripts/`, `.xlsx`, `.docx`), `Electrical Display Board`, `animated refrigerant cycle`, or `Integrated Study Helper`, **or** edit any synced HTML module / Student Handout directly on:
+     - Desktop `Curiculium data\chXX\` or `Curiculium data\608 Study Material\`
+     - Integrated Study Helper `modules\`
+     - **Personal Google Drive** (`H:\My Drive\HVAC Class Chapters\...` and `H:\My Drive\Projects\...`)
+     - **School Google Drive** (`G:\My Drive\HVAC Class Chapters\...`, including `608 Study Materal`)
+2. **Freshness Rebuilds (Authoritative Source Priority):**
+   - When Python study-game generators, chapter `.xlsx`/`.docx` files, or simulator `js/`/`css/`/`index.html` sources are newer than their rendered HTML bundles, `sync_and_publish.py` automatically runs unit tests / rebuilds only what is stale (pass `--skip-rebuild` to bypass rebuild checks).
+   - Otherwise, the newest `st_mtime` across Desktop, Hub, Personal Drive, and School Drive wins and propagates cleanly using SHA-256 + timestamp checks (`0` ping-pong on repeated runs).
+3. **Safe Drive & Project Mirroring (`H:\My Drive\Projects\*`):**
+   - Automatically syncs `Integrated Study Helper`, `cte-program-tracker-standalone`, `Electrical Display Board`, and `animated refrigerant cycle` non-destructively (excluding `.venv`, `node_modules`, `.git`, `__pycache__`, `.db-wal`, etc., and never deleting existing Drive files).
+   - School Drive `_Backup_*` folders and student `Block *` / `_Completed*` folders are never touched.
+4. **Live Watcher & One-Click Dual Publish:**
+   - **`watch_for_updates.bat`** (`sync_and_publish.py --watch`): Polls every 2.5 seconds (1.5s debounce), rebuilds stale bundles, injects/updates handout vocabulary, syncs `G:`, `H:`, `Projects\*`, and auto-pushes both `integrated-study-helper` and `hvac-cycle-lab`.
+   - **`publish_update.bat`** (`sync_and_publish.py --push`): One-click full sync, manifest rebuild, `H:` Projects mirror, and dual push to GitHub Pages (`integrated-study-helper` + `hvac-cycle-lab`).
+   - Individual project build scripts (`build_chapter_study_games.py`, `build_epa608_study_game.py`, and `build_classroom_bundle.js`) also trigger `sync_and_publish.py --auto-hook` unless `--no-hub-sync` / `SKIP_HUB_SYNC=1` is set.
+   - Every module iframe URL appends `?v=<10-char-sha256>` from the manifest so student Chromebooks immediately load fresh code without cache issues.
 
 > **Classroom Security Guardrail:** Only student-facing HTML modules and files matching `*student_handout*.html` are synced into the hub. Presentation decks, instructor guides, teacher editions, and answer keys are strictly blocked from copying.
