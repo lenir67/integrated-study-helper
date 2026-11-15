@@ -1,6 +1,6 @@
 window.INTEGRATED_STUDY_MANIFEST = {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-15T16:07:06Z",
+  "generated_at_utc": "2026-11-15T16:09:59Z",
   "hub_title": "Integrated HVAC/R Study Helper",
   "hub_subtitle": "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • Electrical Theory Board • Refrigerant Cycle Lab",
   "totals": {
@@ -171,7 +171,7 @@ window.INTEGRATED_STUDY_MANIFEST = {
       "subtitle": "Ohm's & Watt's Law, Series/Parallel Hopscotch, Circuit Builder & DMM, 3-Phase, Motors & NEC 430",
       "path": "./modules/electrical-board/index.html",
       "version": "7dbaa0cc14",
-      "updated_at_utc": "2026-11-15T15:18:12Z",
+      "updated_at_utc": "2026-11-15T16:09:58Z",
       "size_bytes": 249438,
       "storage_keys": [],
       "highlights": [
