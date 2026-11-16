@@ -252,6 +252,10 @@
       .replace(/'/g, '&#39;');
   }
 
+  function pad2(num) {
+    return String(Number(num) || 0).padStart(2, '0');
+  }
+
   function showToast(message, tone) {
     if (!dom.toastContainer) return;
     const el = document.createElement('div');
@@ -710,7 +714,7 @@
     }
     if (dom.embedBannerText) {
       dom.embedBannerText.textContent = state.embedFullTabDefault
-        ? 'Full Tab is the default in Google Sites — click any chapter, lab, or anywhere here to open in a full browser tab.'
+        ? 'Full Tab is the default in Google Sites — click any chapter, lab, or anywhere here to open in a full browser tab, or open Chromebook Single-HTMLs when github.io is filtered.'
         : 'Inline embed mode enabled — chapters and labs will open inside this embedded frame.';
     }
     if (dom.embedStayInlineBtn) {
@@ -1110,6 +1114,9 @@
         ? '<button type="button" class="icon-action-btn" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="handout=1" title="Open Printable Handout: ' + escapeHtml(ch.handout.title || 'Student Handout') + '" aria-label="Open Printable Handout">📄</button>'
         : '';
 
+      const chPad2 = pad2(ch.chapter_num);
+      const chromebookDownloadLink = '<a class="icon-action-btn" href="./google_sites_chapters/Ch_' + chPad2 + '_Google_Sites_Chromebook.html" download="Ch_' + chPad2 + '_Google_Sites_Chromebook.html" title="Download single-file Google Sites HTML for Chromebooks (works even when github.io is blocked)" aria-label="Download single-file Google Sites HTML for Chromebooks">🏫</a>';
+
       const chCode = ch.chapter_code || ('Ch ' + ch.chapter_num);
       const vocabQuickBtn = '<button type="button" class="btn-secondary btn-vocab-quick" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="subtab=vocab" title="Open ' + escapeHtml(chCode) + ' Key Vocabulary" aria-label="Open ' + escapeHtml(chCode) + ' Key Vocabulary">📖 Vocab</button>';
 
@@ -1152,6 +1159,7 @@
             vocabQuickBtn +
             companionBtns +
             handoutBtn +
+            chromebookDownloadLink +
           '</div>' +
         '</article>'
       );

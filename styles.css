@@ -301,6 +301,23 @@ html.theme-light .brand-mark {
   flex-wrap: wrap;
 }
 
+.header-actions a.btn-ghost {
+  text-decoration: none;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.embed-fulltab-banner a.btn-ghost {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
 .ctrl-btn {
   height: 38px;
   padding: 0 12px;
@@ -1065,6 +1082,7 @@ html.theme-light .btn-primary.tone-emerald {
   color: var(--text);
   font-size: 13px;
   font-weight: 700;
+  text-decoration: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -1854,10 +1872,15 @@ body.module-active.focus-mode .exit-focus-pill {
     gap: 6px;
   }
 
-  .header-btn-group .ctrl-btn {
+  .header-btn-group .ctrl-btn,
+  .header-btn-group a.btn-ghost {
     justify-content: center;
     padding: 0 8px;
     font-size: 12px;
+  }
+
+  .header-btn-group #btn-chromebook-chapters {
+    grid-column: 1 / -1;
   }
 
   .telemetry-card {

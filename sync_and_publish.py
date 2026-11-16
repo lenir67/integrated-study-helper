@@ -20,6 +20,11 @@ import time
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 HUB_DIR = Path(__file__).resolve().parent
+if str(HUB_DIR) not in sys.path:
+    sys.path.insert(0, str(HUB_DIR))
+
+from build_google_sites_chapters import build_all_google_sites_chapters
+
 PROJECTS_DIR = HUB_DIR.parent
 TRACKER_DIR = PROJECTS_DIR / "cte-program-tracker-standalone"
 CURRICULUM_DIR = TRACKER_DIR / "Curiculium data"
@@ -1894,6 +1899,42 @@ def sync_hub(
                 "companions": _build_chapter_companions(ch_num, epa_608_count),
             }
         )
+
+    # 2b. Build compact single-HTML Google Sites Chromebook chapters + copy dashboard, and sync targets
+    gs_result = build_all_google_sites_chapters(force=False)
+    gs_changed = int(gs_result.get("changed_count") or 0)
+    if gs_result.get("built"):
+        print(
+            f"[OK] Google Sites single-HTML chapters built: {len(gs_result['built'])} chapter(s) "
+            f"(max={gs_result.get('max_chars', 0):,} chars)."
+        )
+
+    gs_chapters_dir = HUB_DIR / "google_sites_chapters"
+    for ch_num in range(1, 53):
+        gs_src = gs_chapters_dir / f"Ch_{ch_num:02d}_Google_Sites_Chromebook.html"
+        if not gs_src.is_file():
+            continue
+        gs_dest_name = f"Ch {ch_num:02d} - Google Sites Chromebook.html"
+        ch_curric_dir = CURRICULUM_DIR / f"ch{ch_num:02d}"
+        if ch_curric_dir.is_dir() and fast_sync_file(gs_src, ch_curric_dir / gs_dest_name):
+            gs_changed += 1
+        if ch_num in personal_ch_dirs and fast_sync_file(gs_src, personal_ch_dirs[ch_num] / gs_dest_name):
+            gs_changed += 1
+        if ch_num in school_ch_dirs and fast_sync_file(gs_src, school_ch_dirs[ch_num] / gs_dest_name):
+            gs_changed += 1
+
+    gs_dash_src = HUB_DIR / "Google_Sites_Chromebook_Chapters.html"
+    if gs_dash_src.is_file():
+        if PERSONAL_CHAPTERS_DIR.exists() and fast_sync_file(
+            gs_dash_src, PERSONAL_CHAPTERS_DIR / "Google_Sites_Chromebook_Chapters.html"
+        ):
+            gs_changed += 1
+        if SCHOOL_CHAPTERS_DIR.exists() and fast_sync_file(
+            gs_dash_src, SCHOOL_CHAPTERS_DIR / "Google_Sites_Chromebook_Chapters.html"
+        ):
+            gs_changed += 1
+
+    changed_files += gs_changed
 
     # 3. Discover Student Handouts, inject/update chapter Vocabulary on newest, and sync bidirectionally
     handout_groups = _collect_handout_groups(personal_ch_dirs, school_ch_dirs)

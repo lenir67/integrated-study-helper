@@ -1,6 +1,8 @@
 # Google Sites & GitHub Pages Setup Guide — Integrated Study Helper
 
-This guide covers publishing **Integrated Study Helper** to GitHub Pages (`https://lenir67.github.io/integrated-study-helper/`), embedding it cleanly inside Google Sites, using direct deep links, and keeping Desktop projects, Study Guides (Ch 01–52 + EPA 608 + Printable Student Handouts with embedded Vocabulary), `G:` School Drive, `H:` Personal Drive, and both GitHub Pages sites automatically synchronized.
+This guide covers publishing **Integrated Study Helper** to GitHub Pages (`https://lenir67.github.io/integrated-study-helper/`), embedding **filter-proof single-HTML chapters** directly inside Google Sites for school Chromebooks (even when `github.io` is blocked — see **Section 4A**), using direct deep links, and keeping Desktop projects, Study Guides (Ch 01–52 + EPA 608 + Printable Student Handouts with embedded Vocabulary), `G:` School Drive, `H:` Personal Drive, and both GitHub Pages sites automatically synchronized.
+
+> **School Chromebook Quick Start (No `github.io` Required):** If your school network blocks `github.io`, open **`Google_Sites_Chromebook_Chapters.html`** (or click **🏫 Chromebook Single-HTMLs** in the Hub header) and paste any chapter's `< 195 KB` single-HTML file directly into Google Sites via **Pages → + → Full page embed → Add custom code**. See **Section 4A** below.
 
 ---
 
@@ -50,7 +52,26 @@ git remote add origin https://github.com/lenir67/integrated-study-helper.git
 
 ---
 
-## 4. Embed into Google Sites
+## 4A. School Chromebook Filter-Proof Setup (Single-HTML Custom Code per Chapter — No `github.io` Required)
+
+Some school Chromebook web filters block `github.io` embeds (`Insert → Embed → By URL`). Every MRAC chapter (`Ch 01` through `Ch 52`) is automatically packaged into a **zero-external-URL, single-HTML embed file under 195,000 characters** (Google Sites' custom code limit is 200,000 characters) that runs 100% inline from Google Sites itself:
+
+- **Copy/Download Dashboard:** `Google_Sites_Chromebook_Chapters.html` (also linked via **🏫 Chromebook Single-HTMLs** in the Study Hub header, and synced to Personal & School `HVAC Class Chapters` folders).
+- **Per-Chapter Files:**
+  - Hub: `google_sites_chapters/Ch_01_Google_Sites_Chromebook.html` .. `Ch_52_Google_Sites_Chromebook.html` (also downloadable via the **🏫** button on any chapter card).
+  - Drives & Desktop: `Ch XX - Google Sites Chromebook.html` inside each chapter folder.
+
+### Step-by-Step: Add a Single-HTML Chapter Page in Google Sites
+
+1. Open **`Google_Sites_Chromebook_Chapters.html`** in your browser (from the live Hub or local folder), find your chapter (e.g., `Ch 11`), and click **📋 Copy Embed HTML** (or click **⬇️ Download HTML**, open the `.html` file, press `Ctrl+A`, then `Ctrl+C`).
+2. Open your Google Site in edit mode.
+3. Choose **Pages → + → Full page embed** *(recommended for full-screen simulators & games)* — or on an existing page choose **Insert → Embed → Embed code**.
+4. Click **Add custom code** (or select the **Embed code** tab), paste the single-file HTML (`Ctrl+V`), and click **Next → Insert**.
+5. Click **Publish** in Google Sites. Students on school Chromebooks get the complete interactive Study Guide, Vocabulary, Flip Cards, Practice Exam, Blitz, Tower Defense, Podium Arena, Topic Simulator, and Reference Figures without any `github.io` network request.
+
+---
+
+## 4. Embed into Google Sites (Via GitHub Pages URL)
 
 1. Open your Google Site in edit mode and navigate to the target page (e.g., *HVAC/R Study Hub*).
 2. In the right sidebar, choose **Insert → Embed → By URL**.
