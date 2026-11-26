@@ -5673,17 +5673,21 @@ html.projector-light .dmm-live-warn {
       const qs = new URLSearchParams(window.location.search);
       handledByPreset = applyElectricalPresetPayload({
         tab: qs.get('tab'),
-        theme: qs.get('theme'),
+        theme: qs.get('theme') || 'light',
         walkthrough: qs.get('walkthrough')
       });
     } catch (_) {
-      // Ignore malformed URL query parameters
+      applyElectricalTheme('light');
     }
     if (!handledByPreset) {
       render(true);
     }
     window.addEventListener('message', (event) => {
       if (!event || !event.data || typeof event.data !== 'object') return;
+      if (event.data.type === 'ish-theme') {
+        applyElectricalTheme(event.data.theme);
+        return;
+      }
       if (event.data.type !== 'ish:setElectricalPreset') return;
       const didPresetRender = applyElectricalPresetPayload(event.data);
       if (!didPresetRender) {

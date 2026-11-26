@@ -3,20 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark light" />
+  <meta name="color-scheme" content="light dark" />
   <title>MRAC 2025 &amp; HVAC/R Integrated Study Helper</title>
   <script>
     (function () {
       try {
         var raw = window.localStorage.getItem('ish_hub_prefs_v1');
-        if (raw) {
-          var prefs = JSON.parse(raw);
-          if (prefs && prefs.theme === 'light') {
-            document.documentElement.classList.add('theme-light');
-          }
+        var prefs = raw ? JSON.parse(raw) : null;
+        if (!prefs || prefs.theme !== 'dark') {
+          document.documentElement.classList.add('theme-light');
         }
       } catch (_err) {
-        // Ignore storage errors inside cross-origin or restricted iframes.
+        document.documentElement.classList.add('theme-light');
       }
     })();
   </script>
@@ -84,14 +82,6 @@
                 type="button"
                 title="Open this Integrated Study Helper in a full browser tab"
               >↗ Full Tab</button>
-              <a
-                class="btn-ghost"
-                id="btn-chromebook-chapters"
-                href="./Google_Sites_Chromebook_Chapters.html"
-                target="_blank"
-                rel="noopener"
-                title="Copy or download filter-proof single-HTML Google Sites chapters for school Chromebooks"
-              >🏫 Chromebook Single-HTMLs</a>
             </div>
           </div>
         </div>
@@ -122,19 +112,6 @@
       </header>
 
       <main class="hub-main">
-        <!-- Embedded Full-Tab Default Banner -->
-        <section id="embed-fulltab-banner" class="embed-fulltab-banner hidden" aria-label="Full Tab Default Mode">
-          <div class="continue-copy">
-            <span class="continue-pill embed-pill">Embedded View</span>
-            <strong id="embed-banner-text" class="continue-title">Full Tab is the default in Google Sites — click any chapter, lab, or anywhere here to open in a full browser tab, or open Chromebook Single-HTMLs when github.io is filtered.</strong>
-          </div>
-          <div class="continue-actions">
-            <a id="btn-embed-launch-full" class="btn-primary" href="./" target="_blank" rel="noopener">↗ Open Full Tab Now</a>
-            <a id="btn-embed-chromebook" class="btn-ghost" href="./Google_Sites_Chromebook_Chapters.html" target="_blank" rel="noopener">🏫 Chromebook Single-HTMLs</a>
-            <button id="btn-embed-stay-inline" class="btn-ghost" type="button">Stay in Embed</button>
-          </div>
-        </section>
-
         <!-- Continue Studying Banner -->
         <section id="continue-banner" class="continue-banner hidden" aria-label="Continue studying">
           <div class="continue-copy">

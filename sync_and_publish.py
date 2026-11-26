@@ -23,9 +23,10 @@ HUB_DIR = Path(__file__).resolve().parent
 if str(HUB_DIR) not in sys.path:
     sys.path.insert(0, str(HUB_DIR))
 
-from build_google_sites_chapters import build_all_google_sites_chapters
-
 PROJECTS_DIR = HUB_DIR.parent
+PHYSICS_LIB_DIR = PROJECTS_DIR / "Physics Library"
+PHYSICS_DIST_DIR = PHYSICS_LIB_DIR / "web" / "dist"
+VENDOR_PHYSICS_DIR = HUB_DIR / "js" / "vendor"
 TRACKER_DIR = PROJECTS_DIR / "cte-program-tracker-standalone"
 CURRICULUM_DIR = TRACKER_DIR / "Curiculium data"
 ELEC_DIR = PROJECTS_DIR / "Electrical Display Board"
@@ -121,9 +122,11 @@ SIMULATOR_SPECS: List[Dict[str, Any]] = [
     {
         "id": "electrical-board",
         "dir": ELEC_DIR,
+        "vendor_bundle": "hvac-physics.electrical.bundle.js",
         "sources": [
             "index.html",
             "styles.css",
+            "js/vendor/hvac-physics.electrical.bundle.js",
             "js/theory_engine.js",
             "js/curriculum_data.js",
             "js/board_renderer.js",
@@ -137,9 +140,11 @@ SIMULATOR_SPECS: List[Dict[str, Any]] = [
     {
         "id": "electrical-simulator",
         "dir": ELEC_SIM_DIR,
+        "vendor_bundle": "hvac-physics.electrical.bundle.js",
         "sources": [
             "index.html",
             "css/styles.css",
+            "js/vendor/hvac-physics.electrical.bundle.js",
             "js/modules.js",
             "js/engine.js",
             "js/multimeter.js",
@@ -154,9 +159,11 @@ SIMULATOR_SPECS: List[Dict[str, Any]] = [
     {
         "id": "refrigerant-cycle",
         "dir": CYCLE_DIR,
+        "vendor_bundle": "hvac-physics.hub.bundle.js",
         "sources": [
             "index.html",
             "styles.css",
+            "js/vendor/hvac-physics.hub.bundle.js",
             "js/refrigerants.js",
             "js/physics.js",
             "js/ph_diagram.js",
@@ -688,6 +695,26 @@ def ensure_study_guides_fresh(
     return result
 
 
+def _sync_physics_vendor() -> int:
+    """Sync prebuilt HVACPhysicsLib IIFE bundles into Hub js/vendor/ and simulator js/vendor/."""
+    if not PHYSICS_DIST_DIR.is_dir():
+        return 0
+    changed = 0
+    for bundle_name in ("hvac-physics.hub.bundle.js", "hvac-physics.electrical.bundle.js"):
+        src = PHYSICS_DIST_DIR / bundle_name
+        if src.is_file() and fast_sync_file(src, VENDOR_PHYSICS_DIR / bundle_name):
+            changed += 1
+    for spec in SIMULATOR_SPECS:
+        vb = spec.get("vendor_bundle")
+        sim_dir: Path = spec["dir"]
+        if not vb or not sim_dir.is_dir():
+            continue
+        src = PHYSICS_DIST_DIR / vb
+        if src.is_file() and fast_sync_file(src, sim_dir / "js" / "vendor" / vb):
+            changed += 1
+    return changed
+
+
 def _sync_simulator_bundles(
     source_tag: Optional[str],
     force_rebuild: bool,
@@ -695,7 +722,7 @@ def _sync_simulator_bundles(
 ) -> Tuple[List[str], int]:
     """Verify/rebuild simulator bundles if source files are newer, then bidirectionally sync bundles."""
     rebuilt: List[str] = []
-    changed_count = 0
+    changed_count = _sync_physics_vendor()
     node_bin = shutil.which("node") or "node"
     child_env = os.environ.copy()
     child_env["SKIP_HUB_SYNC"] = "1"
@@ -1900,42 +1927,6 @@ def sync_hub(
             }
         )
 
-    # 2b. Build compact single-HTML Google Sites Chromebook chapters + copy dashboard, and sync targets
-    gs_result = build_all_google_sites_chapters(force=False)
-    gs_changed = int(gs_result.get("changed_count") or 0)
-    if gs_result.get("built"):
-        print(
-            f"[OK] Google Sites single-HTML chapters built: {len(gs_result['built'])} chapter(s) "
-            f"(max={gs_result.get('max_chars', 0):,} chars)."
-        )
-
-    gs_chapters_dir = HUB_DIR / "google_sites_chapters"
-    for ch_num in range(1, 53):
-        gs_src = gs_chapters_dir / f"Ch_{ch_num:02d}_Google_Sites_Chromebook.html"
-        if not gs_src.is_file():
-            continue
-        gs_dest_name = f"Ch {ch_num:02d} - Google Sites Chromebook.html"
-        ch_curric_dir = CURRICULUM_DIR / f"ch{ch_num:02d}"
-        if ch_curric_dir.is_dir() and fast_sync_file(gs_src, ch_curric_dir / gs_dest_name):
-            gs_changed += 1
-        if ch_num in personal_ch_dirs and fast_sync_file(gs_src, personal_ch_dirs[ch_num] / gs_dest_name):
-            gs_changed += 1
-        if ch_num in school_ch_dirs and fast_sync_file(gs_src, school_ch_dirs[ch_num] / gs_dest_name):
-            gs_changed += 1
-
-    gs_dash_src = HUB_DIR / "Google_Sites_Chromebook_Chapters.html"
-    if gs_dash_src.is_file():
-        if PERSONAL_CHAPTERS_DIR.exists() and fast_sync_file(
-            gs_dash_src, PERSONAL_CHAPTERS_DIR / "Google_Sites_Chromebook_Chapters.html"
-        ):
-            gs_changed += 1
-        if SCHOOL_CHAPTERS_DIR.exists() and fast_sync_file(
-            gs_dash_src, SCHOOL_CHAPTERS_DIR / "Google_Sites_Chromebook_Chapters.html"
-        ):
-            gs_changed += 1
-
-    changed_files += gs_changed
-
     # 3. Discover Student Handouts, inject/update chapter Vocabulary on newest, and sync bidirectionally
     handout_groups = _collect_handout_groups(personal_ch_dirs, school_ch_dirs)
     synced_handouts: Dict[int, Dict[str, str]] = {}
@@ -2199,7 +2190,7 @@ def publish_git_push(source_tag: Optional[str], custom_msg: Optional[str]) -> in
     if not (HUB_DIR / ".git").exists():
         print(
             f"[ERROR] No .git repository found in {HUB_DIR}.\n"
-            f"        Follow GOOGLE_SITES_SETUP.md to initialize git and create "
+            f"        Initialize git and create "
             f"https://github.com/new (repository name: integrated-study-helper).",
             file=sys.stderr,
         )
@@ -2292,7 +2283,10 @@ def _scan_source_mtimes() -> Dict[str, Tuple[float, int, bool]]:
         except OSError:
             pass
 
-    # 1. Simulators (sources, Desktop bundles, Hub copies, H: Drive copies)
+    # 1. Simulators & Physics Library dist bundles (sources, Desktop bundles, Hub copies, H: Drive copies)
+    for bundle_name in ("hvac-physics.hub.bundle.js", "hvac-physics.electrical.bundle.js"):
+        _record(PHYSICS_DIST_DIR / bundle_name)
+        _record(VENDOR_PHYSICS_DIR / bundle_name)
     h_drive_ok = MY_DRIVE_ROOT.exists()
     for spec in SIMULATOR_SPECS:
         sim_dir: Path = spec["dir"]

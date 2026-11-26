@@ -5651,13 +5651,14 @@ window.HVACLabs = (() => {
           lab: qs.get('lab'),
           prewire: qs.get('prewire'),
           fault: qs.get('fault'),
-          theme: qs.get('theme')
+          theme: qs.get('theme') || 'light'
         });
         handledByPreset = true;
       }
     } catch (e) { /* Ignore malformed URL query parameters */ }
 
     if (!handledByPreset) {
+      applyTrainerTheme('light');
       updateAll();
     }
 

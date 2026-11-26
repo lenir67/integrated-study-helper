@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ch 06 — Energy and Matter</title>
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    (function () {
+      try {
+        var qt = "";
+        try {
+          qt = new URLSearchParams(window.location.search).get("theme") || "";
+        } catch (_q) {}
+        var saved = "";
+        try {
+          saved = window.localStorage.getItem("ish_chapter_theme_v1") || "";
+        } catch (_s) {}
+        var pref = qt === "dark" || qt === "light" ? qt : (saved === "dark" ? "dark" : "light");
+        if (pref !== "dark") {
+          document.documentElement.classList.add("theme-light");
+        }
+      } catch (_e) {
+        document.documentElement.classList.add("theme-light");
+      }
+    })();
+  </script>
   <style>
 
 :root {
@@ -3009,6 +3030,214 @@ button.note-blank.flash-wrong {
   }
 }
 
+/* === CTEHVAC LIGHT CLASSROOM THEME === */
+html.theme-light {
+  --bg: #f1f5f9;
+  --bg-deep: #e2e8f0;
+  --card: #ffffff;
+  --card-alt: #f8fafc;
+  --border: #cbd5e1;
+  --border-bright: #94a3b8;
+  --text: #0f172a;
+  --muted: #475569;
+  --cyan: #0284c7;
+  --amber: #b45309;
+  --emerald: #047857;
+  --coral: #be123c;
+  --shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+  color-scheme: light;
+}
+html.theme-light .app-header {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border-bottom-color: var(--border);
+}
+html.theme-light .chapter-title,
+html.theme-light .section-heading,
+html.theme-light .notes-section-title,
+html.theme-light .flip-prompt,
+html.theme-light .figure-ref-title,
+html.theme-light .arena-game-picker-head h3,
+html.theme-light .arena-game-card-title,
+html.theme-light .shop-item-info strong,
+html.theme-light .quiz-q-text,
+html.theme-light .host-q-text,
+html.theme-light .context-quote-title,
+html.theme-light .edition-scope-banner strong,
+html.theme-light .tg1-heading,
+html.theme-light .tg1-metric-val,
+html.theme-light .tg1-mission-title,
+html.theme-light .tg2-title,
+html.theme-light .tg2-mission-title,
+html.theme-light .tg2-incoming-v,
+html.theme-light .tg2-bin-label,
+html.theme-light .atd-title,
+html.theme-light .atd-map-name,
+html.theme-light .atd-turret-mini strong,
+html.theme-light .atd-inspector-title,
+html.theme-light .atd-intel-box strong,
+html.theme-light .atd-stat-val {
+  color: #0f172a;
+}
+html.theme-light .note-item,
+html.theme-light .scenario-prompt,
+html.theme-light .lab-list,
+html.theme-light .arena-game-card-stats,
+html.theme-light .tg1-mission-prompt,
+html.theme-light .tg2-mission-desc,
+html.theme-light .tg2-overlay-stats,
+html.theme-light .atd-howto-list,
+html.theme-light .atd-turret-desc {
+  color: #334155;
+}
+html.theme-light .top-tabs {
+  background: #e2e8f0;
+  border-bottom-color: var(--border);
+}
+html.theme-light .top-tab {
+  color: #334155;
+}
+html.theme-light .top-tab.active {
+  background: #ffffff;
+  color: #0369a1;
+  border-color: #0284c7;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.14);
+}
+html.theme-light .edition-btn.active {
+  background: rgba(2, 132, 199, 0.14);
+  color: #0369a1;
+  border-color: #0284c7;
+}
+html.theme-light .edition-scope-banner {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.08), rgba(5, 150, 105, 0.08));
+}
+html.theme-light .edition-scope-banner code {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: var(--border);
+}
+html.theme-light .readiness-meter,
+html.theme-light .flip-progress-track,
+html.theme-light .badge.muted {
+  background: #e2e8f0;
+  color: #334155;
+}
+html.theme-light .btn {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: var(--border);
+}
+html.theme-light .btn:hover:not(:disabled),
+html.theme-light .card-choice-btn:hover:not(:disabled),
+html.theme-light .scenario-choice-btn:hover:not(:disabled) {
+  background: #e0f2fe;
+  border-color: #0284c7;
+  color: #0c4a6e;
+}
+html.theme-light .btn.primary,
+html.theme-light .btn-primary,
+html.theme-light .btn.primary:hover:not(:disabled),
+html.theme-light .btn-primary:hover:not(:disabled) {
+  background: #0284c7;
+  border-color: #0369a1;
+  color: #ffffff;
+}
+html.theme-light .flip-face.back {
+  background: linear-gradient(160deg, #ffffff 0%, #f0f9ff 100%);
+  border-color: #059669;
+}
+html.theme-light .flip-card.is-epa608 .flip-face {
+  background: linear-gradient(160deg, #ecfdf5 0%, #ffffff 100%);
+}
+html.theme-light .flip-card.is-epa608 .flip-face.back {
+  background: linear-gradient(160deg, #d1fae5 0%, #ffffff 100%);
+}
+html.theme-light .flip-img,
+html.theme-light .note-diagram-img,
+html.theme-light .quiz-q-img {
+  background: #ffffff;
+  border-color: var(--border);
+}
+html.theme-light .note-blank.is-unsolved:hover:not(:disabled):not(.is-locked),
+html.theme-light .note-blank.is-unsolved.is-active,
+html.theme-light .wb-chip.armed {
+  background: #bae6fd;
+  color: #0c4a6e;
+  border-color: #0284c7;
+}
+html.theme-light .note-blank.is-solved,
+html.theme-light .match-card.matched {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #10b981;
+}
+html.theme-light .pill.epa608,
+html.theme-light .badge.emerald,
+html.theme-light .badge.epa608-badge,
+html.theme-light .note-context-btn.is-epa608 {
+  background: #d1fae5;
+  color: #065f46;
+  border-color: #10b981;
+}
+html.theme-light .wb-chip.used,
+html.theme-light .wb-chip:disabled {
+  color: #065f46;
+  background: #ecfdf5;
+}
+html.theme-light .figures-modal-dialog,
+html.theme-light .context-quote-dialog,
+html.theme-light .modal-card,
+html.theme-light .diagram-lightbox-dialog,
+html.theme-light .scenario-choice-grid,
+html.theme-light .crate-btn,
+html.theme-light .crate-result-box,
+html.theme-light .team-name-input,
+html.theme-light .sandbox-modal-textarea {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: var(--border);
+}
+html.theme-light .context-quote-excerpt,
+html.theme-light .context-quote-figure {
+  background: #f8fafc;
+  color: #0f172a;
+}
+html.theme-light .tg1-select,
+html.theme-light .tg1-btn,
+html.theme-light .tg1-coach-tip,
+html.theme-light .tg2-btn,
+html.theme-light .tg2-select,
+html.theme-light .tg2-mission-tab,
+html.theme-light .tg2-choice,
+html.theme-light .tg2-coach-box,
+html.theme-light .tg2-bin-btn,
+html.theme-light .atd-map-chip {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: var(--border);
+}
+html.theme-light .tg1-btn:hover:not(:disabled),
+html.theme-light .tg2-mission-tab.is-active {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #0284c7;
+}
+html.theme-light .tg1-btn.tg1-btn-active,
+html.theme-light .tg2-btn.is-selected {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #0369a1;
+}
+html.theme-light .tg2-alert-bar.is-ok,
+html.theme-light .tg2-sorter-feedback.is-good {
+  background: #d1fae5;
+  color: #065f46;
+}
+html.theme-light .tg2-alert-bar.is-warn {
+  background: #fef3c7;
+  color: #92400e;
+}
+/* === END CTEHVAC LIGHT CLASSROOM THEME === */
+
 /* === INTERACTIVE TOPIC GAME CSS === */
 
 /* === CTE HVACR Topic Game Engines Part 1 (.tg1- scoped) === */
@@ -5585,7 +5814,8 @@ button.note-blank.flash-wrong {
         <span id="hud-readiness-text">Readiness 0%</span>
         <span class="readiness-meter"><span class="readiness-fill" id="hud-readiness-bar"></span></span>
       </div>
-      <button type="button" class="btn sm audio-toggle" id="btn-save-load-progress" title="Save or load a progress code for Chromebooks &amp; Google Sites">💾 Save/Load</button>
+      <button type="button" class="btn sm audio-toggle" id="btn-save-load-progress" title="Save or load a progress code for Chromebooks">💾 Save/Load</button>
+      <button type="button" class="btn sm audio-toggle" id="btn-chapter-theme" title="Switch between Light Classroom and Dark Lab mode">🌙 Dark</button>
       <button type="button" class="btn audio-toggle" id="btn-audio-toggle">🔊 SFX On</button>
     </div>
   </header>
@@ -16835,6 +17065,51 @@ window.ARENA_MODES = window.ARENA_MODES || {};
   }
 })();
 
+  </script>
+  <script>
+/* === CTEHVAC THEME CONTROLLER === */
+(function () {
+  var THEME_KEY = "ish_chapter_theme_v1";
+  function applyChapterTheme(theme, persist) {
+    if (theme !== "light" && theme !== "dark") return;
+    var isLight = theme === "light";
+    document.documentElement.classList.toggle("theme-light", isLight);
+    var btn = document.getElementById("btn-chapter-theme");
+    if (btn) {
+      btn.textContent = isLight ? "🌙 Dark" : "☀️ Light";
+      btn.setAttribute("aria-pressed", String(isLight));
+    }
+    if (persist) {
+      try {
+        window.localStorage.setItem(THEME_KEY, theme);
+      } catch (_e) {}
+    }
+  }
+  function syncThemeBtn() {
+    var isLight = document.documentElement.classList.contains("theme-light");
+    var btn = document.getElementById("btn-chapter-theme");
+    if (btn) {
+      btn.textContent = isLight ? "🌙 Dark" : "☀️ Light";
+      btn.setAttribute("aria-pressed", String(isLight));
+    }
+  }
+  var btn = document.getElementById("btn-chapter-theme");
+  if (btn) {
+    btn.addEventListener("click", function () {
+      var next = document.documentElement.classList.contains("theme-light") ? "dark" : "light";
+      applyChapterTheme(next, true);
+    });
+  }
+  window.addEventListener("message", function (e) {
+    var data = e && e.data;
+    if (!data || typeof data !== "object") return;
+    if (data.type === "ish-theme" && (data.theme === "light" || data.theme === "dark")) {
+      applyChapterTheme(data.theme, false);
+    }
+  });
+  syncThemeBtn();
+})();
+/* === END CTEHVAC THEME CONTROLLER === */
   </script>
 </body>
 </html>

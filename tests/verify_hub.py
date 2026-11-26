@@ -67,6 +67,8 @@ HTTP_CHECK_ROUTES = [
     "/manifest.json",
     "/js/app.js",
     "/js/catalog_manifest.js",
+    "/js/vendor/hvac-physics.hub.bundle.js",
+    "/js/vendor/hvac-physics.electrical.bundle.js",
     "/modules/epa608/index.html",
     "/modules/electrical-board/index.html",
     "/modules/electrical-simulator/index.html",
@@ -258,9 +260,18 @@ def check_no_forbidden_filenames() -> None:
 
 
 def check_js_syntax() -> None:
-    """Check 5: Validate JS syntax for js/app.js and js/catalog_manifest.js via node --check."""
+    """Check 5: Validate JS syntax for Hub scripts and vendored HVACPhysicsLib bundles via node --check."""
     node_bin = shutil.which("node") or "node"
-    for rel in ("js/app.js", "js/catalog_manifest.js"):
+    for rel in (
+        "js/app.js",
+        "js/catalog_manifest.js",
+        "js/vendor/hvac-physics.hub.bundle.js",
+        "js/vendor/hvac-physics.electrical.bundle.js",
+    ):
+        target = HUB_DIR / rel
+        assert target.is_file() and target.stat().st_size > MIN_MODULE_SIZE_BYTES, (
+            f"Missing or undersized JS asset: {target}"
+        )
         proc = subprocess.run(
             [node_bin, "--check", rel],
             cwd=str(HUB_DIR),
@@ -272,7 +283,7 @@ def check_js_syntax() -> None:
         assert proc.returncode == 0, (
             f"node --check {rel} failed (exit {proc.returncode}): {proc.stderr or proc.stdout}"
         )
-    print("[PASS] Check 5: node --check passed for js/app.js and js/catalog_manifest.js.")
+    print("[PASS] Check 5: node --check passed for js/app.js, catalog_manifest.js, and HVACPhysicsLib vendor bundles.")
 
 
 def _run_hook_and_assert_manifest_updated(

@@ -65,7 +65,7 @@
 
   function loadPrefs() {
     const base = {
-      theme: 'dark',
+      theme: 'light',
       lastModuleId: null,
       lastModuleQuery: '',
       bannerDismissed: false
@@ -73,7 +73,7 @@
     const parsed = safeParseJson(safeGetItem(HUB_PREFS_KEY), null);
     if (!parsed) return base;
     return {
-      theme: parsed.theme === 'light' ? 'light' : 'dark',
+      theme: parsed.theme === 'dark' ? 'dark' : 'light',
       lastModuleId: typeof parsed.lastModuleId === 'string' && parsed.lastModuleId ? parsed.lastModuleId : null,
       lastModuleQuery: typeof parsed.lastModuleQuery === 'string' ? parsed.lastModuleQuery : '',
       bannerDismissed: Boolean(parsed.bannerDismissed)
@@ -128,7 +128,7 @@
     orderedModules: [],
     unitById: new Map(),
     isEmbedded: detectEmbeddedIframe(),
-    embedFullTabDefault: true,
+    embedFullTabDefault: false,
     embedAutoPopAttempted: false,
     filters: {
       search: '',
@@ -676,8 +676,8 @@
       });
     }
 
-    if (theme === 'light' && !params.has('theme')) {
-      params.set('theme', 'light');
+    if ((theme === 'light' || theme === 'dark') && !params.has('theme')) {
+      params.set('theme', theme);
     }
     if (version) {
       params.set('v', String(version));
@@ -704,24 +704,7 @@
 
   function renderEmbedBanner() {
     if (!dom.embedBanner) return;
-    if (!state.isEmbedded) {
-      dom.embedBanner.classList.add('hidden');
-      return;
-    }
-    dom.embedBanner.classList.remove('hidden');
-    if (dom.embedLaunchFullBtn) {
-      dom.embedLaunchFullBtn.href = window.location.href;
-    }
-    if (dom.embedBannerText) {
-      dom.embedBannerText.textContent = state.embedFullTabDefault
-        ? 'Full Tab is the default in Google Sites — click any chapter, lab, or anywhere here to open in a full browser tab, or open Chromebook Single-HTMLs when github.io is filtered.'
-        : 'Inline embed mode enabled — chapters and labs will open inside this embedded frame.';
-    }
-    if (dom.embedStayInlineBtn) {
-      dom.embedStayInlineBtn.textContent = state.embedFullTabDefault
-        ? 'Stay in Embed'
-        : 'Use Full Tab Default';
-    }
+    dom.embedBanner.classList.add('hidden');
   }
 
   function navigateToModule(id, rawQuery) {
@@ -1114,9 +1097,6 @@
         ? '<button type="button" class="icon-action-btn" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="handout=1" title="Open Printable Handout: ' + escapeHtml(ch.handout.title || 'Student Handout') + '" aria-label="Open Printable Handout">📄</button>'
         : '';
 
-      const chPad2 = pad2(ch.chapter_num);
-      const chromebookDownloadLink = '<a class="icon-action-btn" href="./google_sites_chapters/Ch_' + chPad2 + '_Google_Sites_Chromebook.html" download="Ch_' + chPad2 + '_Google_Sites_Chromebook.html" title="Download single-file Google Sites HTML for Chromebooks (works even when github.io is blocked)" aria-label="Download single-file Google Sites HTML for Chromebooks">🏫</a>';
-
       const chCode = ch.chapter_code || ('Ch ' + ch.chapter_num);
       const vocabQuickBtn = '<button type="button" class="btn-secondary btn-vocab-quick" data-nav-id="' + escapeHtml(ch.id) + '" data-nav-query="subtab=vocab" title="Open ' + escapeHtml(chCode) + ' Key Vocabulary" aria-label="Open ' + escapeHtml(chCode) + ' Key Vocabulary">📖 Vocab</button>';
 
@@ -1159,7 +1139,6 @@
             vocabQuickBtn +
             companionBtns +
             handoutBtn +
-            chromebookDownloadLink +
           '</div>' +
         '</article>'
       );
@@ -2180,9 +2159,9 @@
       if (!data || typeof data !== 'object') return;
       if (data.type === 'ish-ready' || data.type === 'ish-preset-ack') {
         if (e.source) state.stage.readyFrames.add(e.source);
-        if (data.type === 'ish-ready' && e.source && state.prefs.theme === 'light') {
+        if (data.type === 'ish-ready' && e.source && (state.prefs.theme === 'light' || state.prefs.theme === 'dark')) {
           try {
-            e.source.postMessage({ type: 'ish-theme', source: 'integrated-study-helper', theme: 'light' }, '*');
+            e.source.postMessage({ type: 'ish-theme', source: 'integrated-study-helper', theme: state.prefs.theme }, '*');
           } catch (_err) {
             // Ignore postMessage restriction.
           }
