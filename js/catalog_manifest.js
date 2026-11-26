@@ -1,6 +1,6 @@
 window.INTEGRATED_STUDY_MANIFEST = {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T02:21:01Z",
+  "generated_at_utc": "2026-11-26T02:32:14Z",
   "hub_title": "Integrated HVAC/R Study Helper",
   "hub_subtitle": "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • Electrical Theory Board • Electrical Wiring Trainer • Refrigerant Cycle Lab",
   "totals": {
@@ -316,9 +316,9 @@ window.INTEGRATED_STUDY_MANIFEST = {
       "title": "HVAC/R Interactive Refrigerant Cycle Lab",
       "subtitle": "Live Subcooling & Superheat Physics, P-h Enthalpy Diagram, TXV/FXO/EEV Metering & Fault Lab",
       "path": "./modules/refrigerant-cycle/index.html",
-      "version": "cb5eccd550",
-      "updated_at_utc": "2026-11-26T02:21:00Z",
-      "size_bytes": 1496773,
+      "version": "c3624bca10",
+      "updated_at_utc": "2026-11-26T02:32:12Z",
+      "size_bytes": 1496852,
       "storage_keys": [],
       "highlights": [
         "6 Refrigerants (A2L/A1)",
