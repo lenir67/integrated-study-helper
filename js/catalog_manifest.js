@@ -1,6 +1,6 @@
 window.INTEGRATED_STUDY_MANIFEST = {
   "schema_version": 1,
-  "generated_at_utc": "2026-11-26T01:43:03Z",
+  "generated_at_utc": "2026-11-26T01:43:11Z",
   "hub_title": "Integrated HVAC/R Study Helper",
   "hub_subtitle": "MRAC 2025 Chapters 01–52 • EPA Section 608 (v10 / v9) • Electrical Theory Board • Electrical Wiring Trainer • Refrigerant Cycle Lab",
   "totals": {
@@ -3659,7 +3659,7 @@ window.INTEGRATED_STUDY_MANIFEST = {
       "engine_label": "Manifold & Refrigerant Sim",
       "path": "./modules/chapters/ch11.html",
       "version": "8a63cfee1e",
-      "updated_at_utc": "2026-11-26T01:40:20Z",
+      "updated_at_utc": "2026-11-26T01:43:10Z",
       "size_bytes": 716499,
       "storage_key": "mrac_study_ch11_v1",
       "exam_question_count": 30,
